@@ -1,16 +1,14 @@
 import React from "react";
 import Onboarding from "./Onboarding";
-import Startup from "./Startup";
-import Navigation from "./Navigation";
 import Pantry from "./Pantry";
 import Account from "./Account";
 import Search from "./Search";
-import { screenMode } from "../fakeApi";
+import { useSelector } from "react-redux";
 
 const Interface = () => {
+  const screenMode = useSelector((state) => state.screenMode);
   return (
     <>
-      <Startup />
       {screenMode === 0 && <Onboarding />}
       {screenMode === 1 && <Pantry />}
       {screenMode === 2 && <Search />}

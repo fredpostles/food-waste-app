@@ -6,7 +6,7 @@ export const joiValidation = (schema, payload) => {
   const r = j.validate(payload, { abortEarly: false });
 
   if (r.error) {
-    return reverseJoiErrorObject(r.error.details);
+    return reverseJoiErrorObject(r.error);
   }
 
   return true;

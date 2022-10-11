@@ -1,10 +1,10 @@
 import React from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { SET_SCREEN_MODE } from "../redux/types";
 
 const Navigation = () => {
   const dispatch = useDispatch();
-  const screenMode = useSelector((state) => state.screenMode);
+
   return (
     <>
       <nav>

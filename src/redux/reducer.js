@@ -26,7 +26,7 @@ export function reducer(state = getItem("store") || initialState, action) {
     case ADD_USER: {
       const user = {
         id: generateRandomID(64),
-        username: action.payload.username,
+        ...action.payload,
       };
 
       const newState = { ...state, user, screenmode: 4 };
@@ -92,6 +92,6 @@ export function reducer(state = getItem("store") || initialState, action) {
       break;
 
     default:
-      break;
+      return state;
   }
 }

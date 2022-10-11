@@ -3,27 +3,29 @@
 import { generateRandomID } from "../utils";
 
 export const user = {
-  // id: 0,
-  // username: "",
-  // image: "",
-  // signUpDate: 12345678910,
-  // dietaryPreferences: {
-  //   isVegan: false,
-  //   isVegetarian: true,
-  //   isGlutenFree: false,
-  // },
+  id: 0,
+  username: "fredp",
+  firstName: "Fred",
+  secondName: "Postles",
+  image: "",
+  signupDate: Date.now(),
+  dietaryPreferences: {
+    isVegan: false,
+    isVegetarian: true,
+    isGlutenFree: false,
+  },
 };
 
 export const data = {
   pantryItems: [
-    { id: generateRandomID(12), itemName: "carrots" },
-    { id: generateRandomID(12), itemName: "oats" },
-    { id: generateRandomID(12), itemName: "soya milk" },
-    { id: generateRandomID(12), itemName: "pasta" },
-    { id: generateRandomID(12), itemName: "rice" },
-    { id: generateRandomID(12), itemName: "kale" },
-    { id: generateRandomID(12), itemName: "oranges" },
-    { id: generateRandomID(12), itemName: "apples" },
+    { id: generateRandomID(12), itemName: "Carrots", quantity: "500g" },
+    { id: generateRandomID(12), itemName: "Oats", quantity: "1kg" },
+    { id: generateRandomID(12), itemName: "Soya milk", quantity: "500ml" },
+    { id: generateRandomID(12), itemName: "Pasta", quantity: "1.5kg" },
+    { id: generateRandomID(12), itemName: "Rice", quantity: "5kg" },
+    { id: generateRandomID(12), itemName: "Kale", quantity: "400g" },
+    { id: generateRandomID(12), itemName: "Oranges", quantity: 6 },
+    { id: generateRandomID(12), itemName: "Apples", quantity: 12 },
   ],
   savedRecipes: [],
 };

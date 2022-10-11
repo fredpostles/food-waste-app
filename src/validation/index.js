@@ -6,14 +6,15 @@ export const validate = (type, payload) => {
   // payload is whatever data is to be validated
 
   switch (type) {
-    case 1: // onboarding
+    case 0: // onboarding
       return joiValidation(onboarding, payload);
 
-    case 2:
+    case 1:
       return joiValidation(data, payload);
 
-    case 3:
-    // validate recipe search
+    case 2:
+      // validate recipe search
+      break;
 
     default:
       console.log("Invalid type sent in!");
