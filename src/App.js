@@ -11,7 +11,8 @@ const App = () => {
   const dispatch = useDispatch();
 
   const setInterface = () => {
-    const payload = user.id ? 1 : 0;
+    const payload =
+      user.id && user.preferences ? 1 : user.id && !user.preferences ? 0.5 : 0;
     dispatch({ type: SET_SCREEN_MODE, payload });
     setLoading(false);
   };
@@ -26,7 +27,6 @@ const App = () => {
     <>
       <button onClick={() => localStorage.clear()}>Clear localStorage</button>
       {loading ? <Startup /> : <Interface />}
-      <button onClick={setInterface}>Continue</button>
     </>
   );
 };

@@ -1,15 +1,26 @@
 import React from "react";
-import finalPropsSelectorFactory from "react-redux/es/connect/selectorFactory";
-import { getItem } from "../../localStorage";
+import { capitalizeFirstLetter } from "../../validation/utils";
 
-const SearchResult = ({ addInventoryItem, item }) => {
+const SearchResults = ({ addPantryItem, item }) => {
+  const ingredientImage = `https://spoonacular.com/cdn/ingredients_100x100/${item.image}`;
+
+  const formattedName = capitalizeFirstLetter(item.name);
+
   return (
     <>
-      <ul>
-        <li onClick={() => addInventoryItem(item)}>{item.name}</li>
-      </ul>
+      <div className="singleIngredient__container">
+        <p>{formattedName}</p>
+        <img src={ingredientImage} alt={formattedName} />
+        <button
+          onClick={() => {
+            addPantryItem(item);
+          }}
+        >
+          Add item to Pantry
+        </button>
+      </div>
     </>
   );
 };
 
-export default SearchResult;
+export default SearchResults;

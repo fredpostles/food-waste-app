@@ -2,10 +2,15 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { ADD_USER } from "../redux/types";
 import { validate } from "../validation";
-import Navigation from "./Navigation";
+import SignUpForm from "./Onboarding/SignUpForm";
 
 const Onboarding = () => {
-  const [userInput, setUserInput] = useState({ username: "", password: "" });
+  const [userInput, setUserInput] = useState({
+    username: "",
+    password: "",
+    name: "",
+    surname: "",
+  });
   const [errors, setErrors] = useState();
   const dispatch = useDispatch();
 
@@ -35,22 +40,8 @@ const Onboarding = () => {
 
   return (
     <>
-      <Navigation />
       <h1>Sign up</h1>
-      <input
-        type="text"
-        name="username"
-        placeholder="Username"
-        onInput={onInput}
-      ></input>
-      <p>{errors && errors.username}</p>
-      <input
-        type="password"
-        name="password"
-        placeholder="Password"
-        onInput={onInput}
-      ></input>
-      <p>{errors && errors.password}</p>
+      <SignUpForm onInput={onInput} errors={errors} />
       <button onClick={onSubmit}>Sign Up</button>
     </>
   );

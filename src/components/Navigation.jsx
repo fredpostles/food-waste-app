@@ -12,9 +12,12 @@ const Navigation = () => {
           Pantry
         </button>
         <button onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 2 })}>
-          Search
+          Recipe Search
         </button>
         <button onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 3 })}>
+          Saved Recipes
+        </button>
+        <button onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 4 })}>
           Account
         </button>
       </nav>

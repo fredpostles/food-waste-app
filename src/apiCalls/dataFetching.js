@@ -11,12 +11,24 @@ export const getIngredients = async (searchTerm) => {
 
     const result = await axios.get(url);
 
-    console.log(result);
+    storeItem("store", result.data);
+
+    return result.data;
+  } catch (error) {
+    console.log("API error", error.details);
+  }
+};
+
+export const getRecipeByIngredient = async (searchTerm) => {
+  try {
+    const url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${searchTerm}&ranking=2&apiKey=97d9014fa12e44a4be62b6f3c8fc2a0e`;
+
+    const result = await axios.get(url);
 
     storeItem("store", result.data);
 
     return result.data;
   } catch (error) {
-    console.log(error.details);
+    console.log("API error", error.details);
   }
 };

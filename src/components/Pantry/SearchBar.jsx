@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { getIngredients } from "../../api/dataFetching";
+import { getIngredients } from "../../apiCalls/dataFetching";
 import { SET_SEARCH_TERM } from "../../redux/types";
 
 const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
@@ -8,13 +8,17 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
 
   const onInput = (e) => {
     setSearchterm(e.target.value);
-    console.log(e.target.value);
   };
 
   const onSubmitSearch = async () => {
     dispatch({ type: SET_SEARCH_TERM, payload: searchTerm });
     const result = await getIngredients(searchTerm);
     setSuggestions(result);
+    setSearchterm("");
+  };
+
+  const onClick = () => {
+    setSuggestions();
     setSearchterm("");
   };
 
@@ -29,6 +33,7 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
           onInput={onInput}
         ></input>
         <button onClick={onSubmitSearch}>Search</button>
+        <button onClick={onClick}>Clear suggestions</button>
       </div>
     </>
   );

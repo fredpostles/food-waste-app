@@ -2,7 +2,9 @@ import React from "react";
 import Onboarding from "./Onboarding";
 import Pantry from "./Pantry";
 import Account from "./Account";
-import Search from "./Search";
+import RecipeSearch from "./RecipeSearch";
+import SavedRecipes from "./SavedRecipes";
+import DietaryInfo from "./Onboarding/DietaryInfo";
 import { useSelector } from "react-redux";
 
 const Interface = () => {
@@ -10,9 +12,11 @@ const Interface = () => {
   return (
     <>
       {screenMode === 0 && <Onboarding />}
+      {screenMode === 0.5 && <DietaryInfo />}
       {screenMode === 1 && <Pantry />}
-      {screenMode === 2 && <Search />}
-      {screenMode === 3 && <Account />}
+      {screenMode === 2 && <RecipeSearch />}
+      {screenMode === 3 && <SavedRecipes />}
+      {screenMode === 4 && <Account />}
     </>
   );
 };

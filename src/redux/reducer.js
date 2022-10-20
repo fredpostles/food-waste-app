@@ -10,7 +10,8 @@ import {
   UPDATE_PANTRY_ITEM,
   DELETE_PANTRY_ITEM,
   SAVE_RECIPE,
-  UNSAVE_RECIPE,
+  DELETE_RECIPE,
+  ADD_PREFERENCES,
 } from "./types";
 import { storeItem, getItem } from "../localStorage";
 
@@ -29,16 +30,14 @@ export function reducer(state = getItem("store") || initialState, action) {
         ...action.payload,
       };
 
-      const newState = { ...state, user, screenmode: 4 };
+      const newState = { ...state, user, screenMode: 0.5 };
 
       storeItem("store", newState);
 
       return newState;
     }
     case UPDATE_USER: {
-      const user = { ...state.user };
-
-      user.username = action.payload.username;
+      const user = { ...state.user, ...action.payload };
 
       const newState = { ...state, user };
 
@@ -55,15 +54,30 @@ export function reducer(state = getItem("store") || initialState, action) {
       return newState;
     }
 
+    case ADD_PREFERENCES: {
+      const newState = {
+        ...state,
+        user: { ...state.user, preferences: { ...action.payload } },
+      };
+
+      storeItem("store", newState);
+
+      return newState;
+    }
+
     case ADD_PANTRY_ITEM: {
-      const newState = { ...state.data };
+      const pantryItems = [...state.pantryItems];
 
       const item = {
         id: generateRandomID(12),
-        itemName: action.payload,
+        itemName: action.payload.name,
+        image: action.payload.image,
+        dateAdded: Date.now(),
       };
 
-      newState.data.pantryItems.push(item);
+      pantryItems.push(item);
+
+      const newState = { ...state, pantryItems };
 
       storeItem("store", newState);
 
@@ -74,9 +88,21 @@ export function reducer(state = getItem("store") || initialState, action) {
       // logic to update pantry item
       break;
 
-    case DELETE_PANTRY_ITEM:
-      // logic to delete item from pantry
-      break;
+    case DELETE_PANTRY_ITEM: {
+      const pantryItems = [...state.pantryItems];
+
+      const indexOfItem = pantryItems.findIndex(
+        (item) => item.id === action.payload
+      );
+
+      pantryItems.splice(indexOfItem, 1);
+
+      const newState = { ...state, pantryItems };
+
+      storeItem("store", newState);
+
+      return newState;
+    }
 
     case SET_SEARCH_TERM: {
       const newState = { ...state, searchTerm: action.payload };
@@ -84,12 +110,46 @@ export function reducer(state = getItem("store") || initialState, action) {
     }
 
     case SAVE_RECIPE:
-      //logic to add recipe to favourites // save
-      break;
+      const savedRecipes = [...state.savedRecipes];
 
-    case UNSAVE_RECIPE:
-      // logic to remove recipe from favourites // unsave
-      break;
+      const recipe = {
+        id: action.payload.id,
+        name: action.payload.title,
+        image: action.payload.image,
+        likes: action.payload.likes,
+      };
+
+      const indexOfRecipe = savedRecipes.findIndex((recipe) => {
+        return recipe.id === action.payload.id;
+      });
+
+      if (indexOfRecipe > -1) {
+        return state;
+      } else {
+        savedRecipes.push(recipe);
+      }
+
+      const newState = { ...state, savedRecipes };
+
+      storeItem("store", newState);
+
+      return newState;
+
+    case DELETE_RECIPE: {
+      const savedRecipes = [...state.savedRecipes];
+
+      const indexOfRecipe = savedRecipes.findIndex(
+        (item) => item.id === action.payload
+      );
+
+      savedRecipes.splice(indexOfRecipe, 1);
+
+      const newState = { ...state, savedRecipes };
+
+      storeItem("store", newState);
+
+      return newState;
+    }
 
     default:
       return state;

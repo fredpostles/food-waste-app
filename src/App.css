@@ -8,20 +8,25 @@ body {
   padding: 2.5px 5px;
   background-color: #336b83;
   border-radius: 10px;
+  text-align: center;
+  margin: 10px 5px;
 }
 
 .pantryItems__container {
-  display: flex;
-  flex-direction: column;
   background-color: bisque;
   border-radius: 10px;
   margin: 10px 0;
   padding: 10px;
 }
 
+.itemsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
 .pantryItem__container {
   display: block;
-  background-color: #33bbb3;
+  background-color: white;
   border-radius: 10px;
   margin: 5px auto;
   padding: 15px;
@@ -29,4 +34,45 @@ body {
 
 .searchInput {
   border-radius: 5px;
+  width: 60%;
+}
+
+.appLogo {
+  width: 350px;
+  margin: auto;
+}
+
+.recipeSearch__container {
+  background-color: #336b83;
+  border-radius: 10px;
+  margin: 10px 5px;
+  padding: 10px 10px 20px 10px;
+}
+
+.recipeSearchResults__list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.savedRecipeSection__container {
+  margin: 10px 5px;
+  padding: 10px;
+  background-color: bisque;
+  border-radius: 10px;
+}
+
+.savedRecipes__container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.singleRecipe__container {
+  background-color: white;
+  border-radius: 5px;
+  margin: 5px;
+  width: fit-content;
+}
+
+.singleRecipe__container img {
+  width: 50%;
 }
