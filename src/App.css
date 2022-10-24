@@ -1,78 +1,401 @@
 body {
-  font-size: 16px;
-  padding: 20px;
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 2rem;
   text-align: center;
+  font-size: 1.2rem;
 }
 
-.pantry__container {
-  padding: 2.5px 5px;
-  background-color: #336b83;
-  border-radius: 10px;
-  text-align: center;
-  margin: 10px 5px;
+h1 {
+  font-size: 2rem;
 }
 
-.pantryItems__container {
-  background-color: bisque;
-  border-radius: 10px;
-  margin: 10px 0;
-  padding: 10px;
+h2 {
+  font-size: 1.8rem;
 }
 
-.itemsGrid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
+h3 {
+  font-size: 1.4rem;
 }
 
-.pantryItem__container {
-  display: block;
-  background-color: white;
-  border-radius: 10px;
-  margin: 5px auto;
-  padding: 15px;
-}
-
-.searchInput {
-  border-radius: 5px;
-  width: 60%;
+.app__container {
+  border: 0.1rem solid #aaa;
+  border-radius: 0.5rem;
 }
 
 .appLogo {
-  width: 350px;
+  width: 40rem;
   margin: auto;
 }
 
+.startup__container {
+  border: 5rem solid #588157;
+  border-radius: 0.25rem;
+  padding: 2rem;
+  color: #588157;
+}
+
+.onboarding__container,
+.dietaryInfo__container {
+  border: 0.5rem solid #588157;
+  border-radius: 0.25rem;
+  padding: 2rem;
+  filter: drop-shadow(0.025rem 0.025rem 0.05rem black);
+}
+
+.pantry__section__container {
+  padding: 0.5rem;
+  background-color: #588157;
+  text-align: center;
+}
+
+.myPantry__container {
+  margin: 1rem 0;
+  padding: 1rem;
+}
+
+.pantryItems__container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.pantryItem__container {
+  background-color: #a3b18a;
+  border-radius: 1rem;
+  padding: 1.5rem;
+  box-shadow: 0.1em 0.1em 0.5rem;
+}
+
+.image__container.pantryItem {
+  background-color: white;
+  width: max-content;
+  margin: 0 auto;
+  padding: 1rem;
+  border-radius: 0.5rem;
+}
+
+.searchInput {
+  border-radius: 0.5rem;
+  width: 80%;
+}
+
+.recipeSearch__container .searchInput {
+  width: 60%;
+}
+
+.pantrySearchBar {
+  height: fit-content;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 0 auto;
+}
+
+.pantrySearch__container {
+  width: 80%;
+  margin: 0 auto;
+}
+
+.searchResults__container {
+  margin: 0.5rem auto;
+}
+
+.singleIngredient__container {
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.singleIngredient__container img {
+  width: 5rem;
+}
+
+.suggestionItem p {
+  display: inline;
+}
+
+.pantrySearch__container h1,
+.pantrySearch__container h2,
+.myPantry__container h1 {
+  margin-bottom: 0.5rem;
+  color: #faffff;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
+}
+
+.myPantry__container h1 {
+  margin-bottom: 1rem;
+}
+
 .recipeSearch__container {
-  background-color: #336b83;
-  border-radius: 10px;
-  margin: 10px 5px;
-  padding: 10px 10px 20px 10px;
+  background-color: #588157;
+  padding: 1rem 1rem 2rem 1rem;
+}
+
+.recipeSearchBar__container h1,
+.recipeSearchBar__container h2 {
+  margin-bottom: 0.5rem;
+  color: #faffff;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
+}
+
+.recipeSearch__container h3 {
+  margin-bottom: 0.25rem;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem white);
+}
+
+.recipeSearchBar__container {
+  background-color: #a3b18a;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+}
+
+.recipeSearchBar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  margin: 0 auto;
 }
 
 .recipeSearchResults__list {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
+}
+
+p.sub-heading {
+  text-decoration: underline;
 }
 
 .savedRecipeSection__container {
-  margin: 10px 5px;
-  padding: 10px;
-  background-color: bisque;
-  border-radius: 10px;
+  padding: 1rem;
+  background-color: #588157;
+}
+
+.savedRecipeSection__container h1 {
+  margin-bottom: 0.5rem;
 }
 
 .savedRecipes__container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: 1fr;
 }
 
 .singleRecipe__container {
-  background-color: white;
-  border-radius: 5px;
-  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background-color: #a3b18a;
+  border-radius: 0.5rem;
+  margin: 0.5rem auto;
   width: fit-content;
+  padding: 1rem;
+  box-shadow: 0.1em 0.1em 0.5rem;
+}
+
+.singleRecipe__container h4 {
+  margin-bottom: 1rem;
+}
+
+.singleRecipe__container button {
+  margin: 0.5rem auto;
 }
 
 .singleRecipe__container img {
-  width: 50%;
+  border-radius: 0.5rem;
+}
+
+.recipeImage {
+  width: 100%;
+  border-radius: 0.4rem;
+}
+
+button {
+  margin: 0.25rem;
+  font-size: 1rem;
+}
+
+.additionalIngredients__list {
+  padding: 0.75rem;
+  background-color: #bbb;
+  border-radius: 0.5rem;
+  box-shadow: 0.1rem 0.1rem 0.1rem;
+}
+
+.additionalIngredients__list p,
+.additionalIngredients__list li {
+  margin: 0;
+  font-size: 1.2rem;
+}
+
+.recipeItem.text_section {
+  display: flex;
+  flex-direction: column;
+  margin-top: 0.5rem;
+}
+
+.recipeLikes {
+  margin: 0.5rem auto;
+}
+
+.account__container {
+  background-color: #a3b18a;
+  padding: 1rem 1rem 2rem 1rem;
+}
+
+.account__container h1 {
+  margin-bottom: 0.5rem;
+}
+
+.account__container h2 {
+  margin-bottom: 1rem;
+}
+
+.accountInfo__container {
+  background-color: #dedede;
+  border-radius: 1rem;
+  box-shadow: 0.25rem 0.25rem 0.5rem;
+  padding: 1.5rem 2.5rem;
+  width: fit-content;
+  margin: auto;
+  margin-bottom: 2rem;
+}
+
+.account__dietaryInfo__container {
+  background-color: #dedede;
+  border-radius: 1rem;
+  box-shadow: 0.25rem 0.25rem 0.5rem;
+  padding: 1.5rem 3rem;
+  width: fit-content;
+  margin: auto;
+}
+
+.mainNav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background-color: #bbb;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  color: white;
+}
+
+.mainNav a {
+  border-left: solid 0.1rem black;
+  font-weight: 400;
+  font-size: 1.4rem;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+.mainNav a:first-of-type {
+  border-left: none;
+}
+
+.mainNav a:hover {
+  color: #333;
+  cursor: pointer;
+  background-color: #aaa;
+}
+
+@media screen and (min-width: 540px) {
+  .pantryItems__container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .recipeSearchResults__list {
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0;
+    gap: 1rem;
+  }
+  .savedRecipes__container {
+    grid-template-columns: repeat(2, 1fr);
+    margin: 0;
+    gap: 1rem;
+  }
+  .mainNav a {
+    font-size: 1.8rem;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-around;
+  }
+  body {
+    font-size: 1.5rem;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+  }
+
+  h2 {
+    font-size: 1.9rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+  }
+  button {
+    font-size: 1.2rem;
+  }
+}
+
+@media screen and (min-width: 720px) {
+  .pantryItems__container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .recipeSearchResults__list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .savedRecipes__container {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .mainNav a {
+    font-size: 2rem;
+  }
+
+  body {
+    font-size: 1.6rem;
+  }
+
+  h1 {
+    font-size: 2.4rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
+  h3 {
+    font-size: 1.6rem;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .pantryItems__container {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .recipeSearchResults__list {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .savedRecipes__container {
+    grid-template-columns: repeat(4, 1fr);
+  }
+  .mainNav a {
+    font-size: 2.5rem;
+  }
+}
+
+@media screen and (min-width: 1140px) {
+  .pantryItems__container {
+    grid-template-columns: repeat(6, 1fr);
+  }
+  .recipeSearchResults__list {
+    grid-template-columns: repeat(5, 1fr);
+  }
+  .savedRecipes__container {
+    grid-template-columns: repeat(5, 1fr);
+  }
 }

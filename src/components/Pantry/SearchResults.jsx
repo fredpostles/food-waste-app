@@ -9,8 +9,12 @@ const SearchResults = ({ addPantryItem, item }) => {
   return (
     <>
       <div className="singleIngredient__container">
+        {item.image === "no.jpg" ? (
+          <p>No image :-/</p>
+        ) : (
+          <img src={ingredientImage} alt={formattedName} />
+        )}
         <p>{formattedName}</p>
-        <img src={ingredientImage} alt={formattedName} />
         <button
           onClick={() => {
             addPantryItem(item);

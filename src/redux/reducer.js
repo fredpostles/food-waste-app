@@ -12,6 +12,8 @@ import {
   SAVE_RECIPE,
   DELETE_RECIPE,
   ADD_PREFERENCES,
+  UPDATE_PREFERENCES,
+  SET_INGREDIENT_SEARCH,
 } from "./types";
 import { storeItem, getItem } from "../localStorage";
 
@@ -58,6 +60,21 @@ export function reducer(state = getItem("store") || initialState, action) {
       const newState = {
         ...state,
         user: { ...state.user, preferences: { ...action.payload } },
+        screenMode: 1,
+      };
+
+      storeItem("store", newState);
+
+      return newState;
+    }
+
+    case UPDATE_PREFERENCES: {
+      const newState = {
+        ...state,
+        user: {
+          ...state.user,
+          preferences: { ...state.user.preferences, ...action.payload },
+        },
       };
 
       storeItem("store", newState);
@@ -85,7 +102,7 @@ export function reducer(state = getItem("store") || initialState, action) {
     }
 
     case UPDATE_PANTRY_ITEM:
-      // logic to update pantry item
+      // logic to update pantry item e.g. add quantity
       break;
 
     case DELETE_PANTRY_ITEM: {
@@ -145,6 +162,16 @@ export function reducer(state = getItem("store") || initialState, action) {
       savedRecipes.splice(indexOfRecipe, 1);
 
       const newState = { ...state, savedRecipes };
+
+      storeItem("store", newState);
+
+      return newState;
+    }
+
+    case SET_INGREDIENT_SEARCH: {
+      const ingredientSearch = [...action.payload];
+
+      const newState = { ...state, ingredientSearch };
 
       storeItem("store", newState);
 

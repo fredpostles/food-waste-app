@@ -3,16 +3,25 @@ import Startup from "./components/Startup";
 import Interface from "./components/Interface";
 import { useSelector, useDispatch } from "react-redux";
 import { SET_SCREEN_MODE } from "./redux/types";
+import "./css/generics.css";
 import "./App.css";
 
 const App = () => {
   const [loading, setLoading] = useState(true);
   const user = useSelector((state) => state.user);
+  const screenMode = useSelector((state) => state.screenMode);
   const dispatch = useDispatch();
 
   const setInterface = () => {
-    const payload =
-      user.id && user.preferences ? 1 : user.id && !user.preferences ? 0.5 : 0;
+    console.log(screenMode);
+    let payload;
+    if (screenMode === 0) {
+      payload = !user.id ? 0 : 1;
+    } else {
+      payload = screenMode ? screenMode : 1;
+    }
+    // const payload = !user.id ? 0 : screenMode ? screenMode : 1;
+    console.log(payload);
     dispatch({ type: SET_SCREEN_MODE, payload });
     setLoading(false);
   };
@@ -26,7 +35,9 @@ const App = () => {
   return (
     <>
       <button onClick={() => localStorage.clear()}>Clear localStorage</button>
-      {loading ? <Startup /> : <Interface />}
+      <div className="app__container">
+        {loading ? <Startup /> : <Interface />}
+      </div>
     </>
   );
 };

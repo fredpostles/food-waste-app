@@ -13,19 +13,29 @@ const SearchResults = ({ recipe }) => {
 
   return (
     <>
-      <p>{recipe.title}</p>
-      <img src={recipe.image} alt={recipe.title} />
-      <button className="recipeLikes">{recipe.likes}</button>
-      <p>Additional ingredients needed:</p>
-      <div className="additionalIngredients__list">
-        {recipe.missedIngredients &&
-          recipe.missedIngredients.map((missedIngredient) => {
-            const formattedIngredient = capitalizeFirstLetter(
-              missedIngredient.name
-            );
-            return <li key={generateRandomID(12)}>{formattedIngredient}</li>;
-          })}
-        <button onClick={onSaveRecipe}>Save recipe</button>
+      <h4>{recipe.title}</h4>
+      <div className="recipeSearch imageContainer">
+        <img src={recipe.image} alt={recipe.title} className="recipeImage" />
+      </div>
+      <div className="recipeItem text_section">
+        <div className="additionalIngredients__list">
+          <p className="sub-heading">Additional ingredients needed:</p>
+          <ul className="typographic">
+            {recipe.missedIngredients &&
+              recipe.missedIngredients.map((missedIngredient) => {
+                const formattedIngredient = capitalizeFirstLetter(
+                  missedIngredient.name
+                );
+                return (
+                  <li key={generateRandomID(12)}>{formattedIngredient}</li>
+                );
+              })}
+          </ul>
+        </div>
+        <div className="recipeButtons">
+          <button className="recipeLikes">Likes: {recipe.likes}</button>
+          <button onClick={onSaveRecipe}>Save recipe</button>
+        </div>
       </div>
     </>
   );

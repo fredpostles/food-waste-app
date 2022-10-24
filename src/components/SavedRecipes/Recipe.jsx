@@ -14,8 +14,10 @@ const Recipe = ({ savedRecipe }) => {
     <div className="singleRecipe__container">
       <h4>{recipe.name}</h4>
       <img src={recipe.image} alt={recipe.name} />
-      <button className="recipeLikes">Likes: {recipe.likes}</button>
-      <button onClick={onDelete}>Delete recipe</button>
+      <div className="savedRecipe__buttons">
+        <button className="recipeLikes">Likes: {recipe.likes}</button>
+        <button onClick={onDelete}>Delete recipe</button>
+      </div>
     </div>
   );
 };

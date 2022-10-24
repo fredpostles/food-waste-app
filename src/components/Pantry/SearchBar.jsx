@@ -22,18 +22,25 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
     setSearchterm("");
   };
 
+  const onEnter = (e) => {
+    if (e.key === "Enter") {
+      onSubmitSearch();
+    }
+  };
+
   return (
     <>
-      <div className="pantrySearch">
+      <div className="pantrySearchBar">
         <input
           className="searchInput"
           type="text"
-          placeholder="Search for pantry items"
+          placeholder="Add items to your pantry"
           value={searchTerm}
           onInput={onInput}
+          onKeyUp={onEnter}
         ></input>
         <button onClick={onSubmitSearch}>Search</button>
-        <button onClick={onClick}>Clear suggestions</button>
+        {/* <button onClick={onClick}>Clear suggestions</button> */}
       </div>
     </>
   );

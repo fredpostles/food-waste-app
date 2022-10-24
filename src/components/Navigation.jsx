@@ -7,19 +7,19 @@ const Navigation = () => {
 
   return (
     <>
-      <nav>
-        <button onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 1 })}>
+      <nav className="mainNav">
+        <a onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 1 })}>
           Pantry
-        </button>
-        <button onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 2 })}>
+        </a>
+        <a onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 2 })}>
           Recipe Search
-        </button>
-        <button onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 3 })}>
+        </a>
+        <a onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 3 })}>
           Saved Recipes
-        </button>
-        <button onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 4 })}>
+        </a>
+        <a onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 4 })}>
           Account
-        </button>
+        </a>
       </nav>
     </>
   );

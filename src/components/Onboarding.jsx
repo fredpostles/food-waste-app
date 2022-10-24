@@ -40,9 +40,11 @@ const Onboarding = () => {
 
   return (
     <>
-      <h1>Sign up</h1>
-      <SignUpForm onInput={onInput} errors={errors} />
-      <button onClick={onSubmit}>Sign Up</button>
+      <div className="onboarding__container">
+        <h1>Sign up</h1>
+        <SignUpForm onInput={onInput} errors={errors} />
+        <button onClick={onSubmit}>Sign Up</button>
+      </div>
     </>
   );
 };
