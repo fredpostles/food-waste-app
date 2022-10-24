@@ -15,3 +15,4 @@ Still a work in progress. Back-end to follow.
 - :point_right: Add logic to only return recipes that match user's dietary preferences/avoid intolerances.
 - :point_right: Add animation at startup.
 - :point_right: Add icons for search, user account, delete etc.
+- :point_right: Make the app PWA-compliant.
