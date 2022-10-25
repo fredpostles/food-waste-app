@@ -9,6 +9,7 @@ Still a work in progress. Back-end to follow.
 ### To do:
 
 - :point_right: Fix known bugs :bug: :ant:
+- :point_right: Clean up code, tidy up components and break into smaller sub-components where required.
 - :point_right: Finish styling and re-factoring CSS to SASS.
 - :point_right: Add API call(s) to get recipe methods/source.
 - :point_right: Add ability to input ingredient quantities in pantry (incl. various measurements).
