@@ -176,6 +176,8 @@ p.sub-heading {
 
 .savedRecipeSection__container h1 {
   margin-bottom: 0.5rem;
+  color: white;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
 }
 
 .savedRecipes__container {
@@ -247,10 +249,14 @@ button {
 
 .account__container h1 {
   margin-bottom: 0.5rem;
+  color: white;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
 }
 
 .account__container h2 {
   margin-bottom: 1rem;
+  color: white;
+  filter: drop-shadow(0.1rem 0.1rem 0.5rem black);
 }
 
 .accountInfo__container {
@@ -285,6 +291,7 @@ button {
 
 .mainNav a {
   border-left: solid 0.1rem black;
+  border-bottom: solid 0.1rem black;
   font-weight: 400;
   font-size: 1.4rem;
   padding: 1rem;

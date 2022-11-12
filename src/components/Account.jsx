@@ -46,7 +46,7 @@ const Account = () => {
         <h1>Your Account</h1>
         <h2>Hi, {formattedName}!</h2>
         <div className="accountInfo__container">
-          <h3>Here is your account info:</h3>
+          <h2>Here is your account info:</h2>
           <AccountInfo onInput={onInput} errors={errors} user={user} />
           <button onClick={onUpdate}>Update</button>
         </div>

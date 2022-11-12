@@ -30,7 +30,7 @@ const App = () => {
     setTimeout(() => {
       setInterface();
     }, 2000);
-  });
+  }, []);
 
   return (
     <>
