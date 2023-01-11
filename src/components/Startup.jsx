@@ -11,7 +11,7 @@ const Startup = () => {
           alt="Chopped vegetables scattered in the air"
         />
         <h2>Loading...</h2>
-        <small>&copy; Fred Postles 2022</small>
+        <small>&copy; Fred Postles {new Date().getFullYear()}</small>
       </div>
     </>
   );

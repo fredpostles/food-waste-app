@@ -1,11 +1,12 @@
 import React from "react";
 
-const SignUpForm = ({ onInput, errors, user }) => {
+const AccountInfo = ({ onInput, errors, user }) => {
   return (
     <>
       <label htmlFor="email">
         Email:{" "}
         <input
+          id="email"
           type="email"
           name="email"
           placeholder="Email"
@@ -51,4 +52,4 @@ const SignUpForm = ({ onInput, errors, user }) => {
   );
 };
 
-export default SignUpForm;
+export default AccountInfo;

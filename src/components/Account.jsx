@@ -11,7 +11,7 @@ const Account = () => {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const [userInput, setUserInput] = useState({
-    username: user.username,
+    email: user.email,
     password: user.password,
     name: user.name,
     surname: user.surname,
@@ -37,14 +37,12 @@ const Account = () => {
     dispatch({ type: UPDATE_USER, payload: userInput });
   };
 
-  const formattedName = capitalizeFirstLetter(user.name);
-
   return (
     <>
       <Navigation />
       <div className="account__container">
         <h1>Your Account</h1>
-        <h2>Hi, {formattedName}!</h2>
+        <h2>Hi, {capitalizeFirstLetter(user.name)}</h2>
         <div className="accountInfo__container">
           <h2>Here is your account info:</h2>
           <AccountInfo onInput={onInput} errors={errors} user={user} />

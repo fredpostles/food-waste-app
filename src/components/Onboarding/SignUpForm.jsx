@@ -1,12 +1,14 @@
 import React from "react";
 
 const SignUpForm = ({ onInput, errors }) => {
+  console.log("Errors in signup form", errors);
   return (
     <>
       <div className="signUp__container">
         <label htmlFor="email">
           Email:{" "}
           <input
+            id="email"
             type="email"
             name="email"
             placeholder="Email"
@@ -17,6 +19,7 @@ const SignUpForm = ({ onInput, errors }) => {
         <label htmlFor="password">
           Password:{" "}
           <input
+            id="password"
             type="password"
             name="password"
             placeholder="Password"
@@ -27,6 +30,7 @@ const SignUpForm = ({ onInput, errors }) => {
         <label htmlFor="name">
           Name:{" "}
           <input
+            id="name"
             type="text"
             name="name"
             placeholder="First name"
@@ -37,6 +41,7 @@ const SignUpForm = ({ onInput, errors }) => {
         <label htmlFor="surname">
           Surname:{" "}
           <input
+            id="surname"
             type="text"
             name="surname"
             placeholder="Surname"
