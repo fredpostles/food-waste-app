@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { SAVE_RECIPE } from "../../redux/types";
 import { generateRandomID } from "../../utils";
-import { capitalizeFirstLetter } from "../../validation/utils";
+import { capitalizeFirstLetter } from "../../utils";
 
 const SearchResults = ({ recipe }) => {
   const dispatch = useDispatch();

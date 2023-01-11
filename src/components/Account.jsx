@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { validate } from "../validation";
-import { capitalizeFirstLetter } from "../validation/utils";
+import { capitalizeFirstLetter } from "../utils";
 import Navigation from "./Navigation";
 import AccountInfo from "./Account/AccountInfo";
 import { UPDATE_USER } from "../redux/types";

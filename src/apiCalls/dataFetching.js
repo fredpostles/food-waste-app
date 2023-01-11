@@ -57,6 +57,6 @@ export const getRecipeInformationBulk = async (ids) => {
 
     return result.data;
   } catch (error) {
-    console.log("Incorrect ID sent or API error:", error.details);
+    console.log("Incorrect IDs sent or API error:", error.details);
   }
 };

@@ -6,7 +6,7 @@ import SignUpForm from "./Onboarding/SignUpForm";
 
 const Onboarding = () => {
   const [userInput, setUserInput] = useState({
-    username: "",
+    email: "",
     password: "",
     name: "",
     surname: "",

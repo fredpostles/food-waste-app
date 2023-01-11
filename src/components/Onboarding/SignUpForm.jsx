@@ -4,16 +4,16 @@ const SignUpForm = ({ onInput, errors }) => {
   return (
     <>
       <div className="signUp__container">
-        <label htmlFor="username">
-          Username:{" "}
+        <label htmlFor="email">
+          Email:{" "}
           <input
-            type="text"
-            name="username"
-            placeholder="Username"
+            type="email"
+            name="email"
+            placeholder="Email"
             onInput={onInput}
           />
         </label>
-        <p>{errors && errors.username}</p>
+        <p>{errors && errors.email}</p>
         <label htmlFor="password">
           Password:{" "}
           <input

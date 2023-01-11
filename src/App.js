@@ -20,22 +20,21 @@ const App = () => {
     } else {
       payload = screenMode ? screenMode : 1;
     }
-    // const payload = !user.id ? 0 : screenMode ? screenMode : 1;
     console.log(payload);
     dispatch({ type: SET_SCREEN_MODE, payload });
     setLoading(false);
   };
 
   useEffect(() => {
-    setTimeout(() => {
-      setInterface();
-    }, 2000);
+    // setTimeout(() => {
+    setInterface();
+    // }, 2000);
   }, []);
 
   return (
     <>
       <button onClick={() => localStorage.clear()}>Clear localStorage</button>
-      <div className="app__container">
+      <div className="appContainer">
         {loading ? <Startup /> : <Interface />}
       </div>
     </>

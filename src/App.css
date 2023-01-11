@@ -17,7 +17,7 @@ h3 {
   font-size: 1.4rem;
 }
 
-.app__container {
+.appContainer {
   border: 0.1rem solid #aaa;
   border-radius: 0.5rem;
 }
@@ -75,6 +75,10 @@ h3 {
   border-radius: 0.5rem;
 }
 
+.image__container.pantryItem img {
+  width: 10vw;
+}
+
 .searchInput {
   border-radius: 0.5rem;
   width: 80%;
@@ -87,7 +91,7 @@ h3 {
 .pantrySearchBar {
   height: fit-content;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: center;
   align-items: center;
   margin: 0 auto;
 }
@@ -95,6 +99,10 @@ h3 {
 .pantrySearch__container {
   width: 80%;
   margin: 0 auto;
+}
+
+.innerPantrySearch {
+  width: 100%;
 }
 
 .searchResults__container {
@@ -115,6 +123,19 @@ h3 {
 
 .suggestionItem p {
   display: inline;
+}
+
+.clearBtn {
+  border: none;
+  background-color: inherit;
+  margin: -2.8rem;
+  cursor: pointer;
+  transition: all 0.15s ease-in-out;
+  font-size: large;
+}
+
+.clearBtn:hover {
+  opacity: 0.5;
 }
 
 .pantrySearch__container h1,
@@ -296,6 +317,7 @@ button {
   font-size: 1.4rem;
   padding: 1rem;
   width: 100%;
+  min-width: fit-content;
   height: 100%;
 }
 

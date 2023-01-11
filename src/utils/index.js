@@ -9,3 +9,7 @@ export function generateRandomID(length = 64) {
   }
   return uniqueId + Date.now();
 }
+
+export function capitalizeFirstLetter(str) {
+  return str.charAt(0).toUpperCase() + str.slice(1);
+}

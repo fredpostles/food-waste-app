@@ -34,7 +34,6 @@ const Pantry = () => {
 
       case "zaSort":
         sortedData.reverse();
-
         break;
 
       case "sortDateAsc":
@@ -49,7 +48,6 @@ const Pantry = () => {
           return a.dateAdded - b.dateAdded;
         });
         console.log("after", sortedData);
-
         break;
 
       default:
@@ -99,9 +97,9 @@ const Pantry = () => {
         {pantryItems.length > 0 && (
           <div className="myPantry__container">
             <h1>My Pantry Items:</h1>
-            {pantryItems.length > 0 && (
+            {pantryItems.length > 1 && (
               <label htmlFor="sortPantryItems">
-                Sort by:{" "}
+                Sort by:
                 <select
                   name="sortPantryItems"
                   id="sortPantryItems"

@@ -31,16 +31,20 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
   return (
     <>
       <div className="pantrySearchBar">
-        <input
-          className="searchInput"
-          type="text"
-          placeholder="Add items to your pantry"
-          value={searchTerm}
-          onInput={onInput}
-          onKeyUp={onEnter}
-        ></input>
+        <div className="innerPantrySearch">
+          <input
+            className="searchInput"
+            type="text"
+            placeholder="Add items to your pantry"
+            value={searchTerm}
+            onInput={onInput}
+            onKeyUp={onEnter}
+          ></input>
+          <button onClick={onClick} className="clearBtn">
+            X
+          </button>
+        </div>
         <button onClick={onSubmitSearch}>Search</button>
-        {/* <button onClick={onClick}>Clear suggestions</button> */}
       </div>
     </>
   );
