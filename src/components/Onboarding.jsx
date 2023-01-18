@@ -19,6 +19,11 @@ const Onboarding = () => {
     if (!errors) {
       dispatch({ type: ADD_USER, payload: userInput });
       setUserInput({});
+    } else {
+      alert(
+        "Sign up failed. Please double check the info you entered and look out for any errors below."
+      );
+      setErrors(errors);
     }
   };
 
@@ -28,8 +33,6 @@ const Onboarding = () => {
     setUserInput(newInput);
 
     const result = validate(0, newInput);
-    console.log("Result", result);
-    console.log(e.target.name);
 
     if (result === true) {
       // no error to display
@@ -39,25 +42,25 @@ const Onboarding = () => {
       switch (e.target.name) {
         case "email":
           e.target.value && e.target.value.length > 0
-            ? setErrors({ email: result.email })
-            : setErrors(undefined);
+            ? setErrors({ ...result, email: result.email })
+            : setErrors({ ...result });
           break;
 
         case "password":
           e.target.value && e.target.value.length > 0
-            ? setErrors({ password: result.password })
-            : setErrors(undefined);
+            ? setErrors({ ...result, password: result.password })
+            : setErrors({ ...result });
           break;
         case "name":
           e.target.value
-            ? setErrors({ name: result.name })
-            : setErrors(undefined);
+            ? setErrors({ ...result, name: result.name })
+            : setErrors({ ...result });
           break;
 
         case "surname":
           e.target.value && e.target.value.length
-            ? setErrors({ surname: result.surname })
-            : setErrors(undefined);
+            ? setErrors({ ...result, surname: result.surname })
+            : setErrors({ ...result });
           break;
 
         default:
@@ -71,7 +74,9 @@ const Onboarding = () => {
       <div className="onboarding__container">
         <h1>Sign up</h1>
         <SignUpForm onInput={onInput} errors={errors} />
-        <button onClick={onSubmit}>Sign Up</button>
+        <button className="signUp__button" onClick={onSubmit}>
+          Sign Up
+        </button>
       </div>
     </>
   );

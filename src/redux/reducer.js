@@ -14,6 +14,7 @@ import {
   ADD_PREFERENCES,
   UPDATE_PREFERENCES,
   SET_INGREDIENT_SEARCH,
+  SET_RECIPE_INSTRUCTIONS,
 } from "./types";
 import { storeItem, getItem } from "../localStorage";
 
@@ -92,7 +93,13 @@ export function reducer(state = getItem("store") || initialState, action) {
         dateAdded: Date.now(),
       };
 
-      pantryItems.push(item);
+      if (
+        pantryItems.some((element) => element.itemName === action.payload.name)
+      ) {
+        return state;
+      } else {
+        pantryItems.push(item);
+      }
 
       const newState = { ...state, pantryItems };
 
@@ -123,6 +130,8 @@ export function reducer(state = getItem("store") || initialState, action) {
 
     case SET_SEARCH_TERM: {
       const newState = { ...state, searchTerm: action.payload };
+      storeItem("store", newState);
+
       return newState;
     }
 
@@ -172,6 +181,16 @@ export function reducer(state = getItem("store") || initialState, action) {
       const ingredientSearch = [...action.payload];
 
       const newState = { ...state, ingredientSearch };
+
+      storeItem("store", newState);
+
+      return newState;
+    }
+
+    case SET_RECIPE_INSTRUCTIONS: {
+      const recipeInstructions = [...action.payload];
+
+      const newState = { ...state, recipeInstructions };
 
       storeItem("store", newState);
 

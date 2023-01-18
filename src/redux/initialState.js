@@ -1,4 +1,4 @@
-import { user, pantryItems, savedRecipes, screenMode } from "../fakeApi/index";
+import { user, pantryItems, savedRecipes } from "../fakeApi/index";
 
 export const initialState = {
   user,

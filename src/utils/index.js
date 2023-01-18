@@ -11,5 +11,7 @@ export function generateRandomID(length = 64) {
 }
 
 export function capitalizeFirstLetter(str) {
-  return str.charAt(0).toUpperCase() + str.slice(1);
+  if (typeof str !== "string") {
+    return null;
+  } else return str.charAt(0).toUpperCase() + str.slice(1);
 }

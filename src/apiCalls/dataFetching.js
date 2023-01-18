@@ -11,7 +11,7 @@ export const getIngredients = async (searchTerm) => {
 
     const result = await axios.get(url);
 
-    storeItem("store", result.data);
+    // storeItem("store", result.data);
 
     return result.data;
   } catch (error) {
@@ -25,7 +25,7 @@ export const getRecipeByIngredient = async (searchTerm) => {
 
     const result = await axios.get(url);
 
-    storeItem("store", result.data);
+    // storeItem("store", result.data);
 
     return result.data;
   } catch (error) {
@@ -39,7 +39,7 @@ export const getRecipeSummary = async (id) => {
 
     const result = await axios.get(url);
 
-    storeItem("store", result.data);
+    // storeItem("store", result.data);
 
     return result.data;
   } catch (error) {
@@ -53,7 +53,7 @@ export const getRecipeInformationBulk = async (ids) => {
 
     const result = await axios.get(url);
 
-    storeItem("store", result.data);
+    // storeItem("store", result.data);
 
     return result.data;
   } catch (error) {

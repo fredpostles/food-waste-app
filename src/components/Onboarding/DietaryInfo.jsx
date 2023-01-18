@@ -125,7 +125,9 @@ const DietaryInfo = () => {
             </li>
           </ul>
         </div>
-        <button onClick={onSubmit}>Submit</button>
+        <button onClick={onSubmit} className="signUp__button">
+          Submit
+        </button>
       </div>
     </>
   );

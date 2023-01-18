@@ -35,17 +35,33 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
         <h2>Got items in your pantry you need to use up?</h2>
         <h3>Search for recipes by ingredient below:</h3>
         <div className="recipeSearchBar">
-          <input
-            name="search"
-            type="text"
-            placeholder="Enter ingredients"
-            className="searchInput"
-            value={searchTerm}
-            onInput={onInput}
-            onKeyUp={onEnter}
-          ></input>
-          <button onClick={onSubmitSearch}>Search</button>
-          <button onClick={onClick}>Clear suggestions</button>
+          <div className="innerRecipeSearch">
+            <input
+              name="search"
+              type="text"
+              placeholder="Enter ingredients"
+              className="searchInput"
+              value={searchTerm}
+              onInput={onInput}
+              onKeyUp={onEnter}
+            ></input>
+            <div className="searchBar__icons">
+              <button onClick={onClick} className="clearBtn">
+                <img
+                  className="icons"
+                  src="/assets/icons/cross.svg"
+                  alt="Cross icon"
+                />
+              </button>
+              <button className="searchBtn" onClick={onSubmitSearch}>
+                <img
+                  className="icons"
+                  src="/assets/icons/search.svg"
+                  alt="Loupe icon"
+                />
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </>

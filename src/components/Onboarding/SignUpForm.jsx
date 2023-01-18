@@ -1,12 +1,11 @@
 import React from "react";
 
 const SignUpForm = ({ onInput, errors }) => {
-  console.log("Errors in signup form", errors);
   return (
     <>
       <div className="signUp__container">
-        <label htmlFor="email">
-          Email:{" "}
+        <div className="signUp email">
+          <label htmlFor="email">Email:</label>
           <input
             id="email"
             type="email"
@@ -14,10 +13,10 @@ const SignUpForm = ({ onInput, errors }) => {
             placeholder="Email"
             onInput={onInput}
           />
-        </label>
-        <p>{errors && errors.email}</p>
-        <label htmlFor="password">
-          Password:{" "}
+        </div>
+        <p>{errors && errors.email ? errors.email : null}</p>
+        <div className="signUp password">
+          <label htmlFor="password">Password:</label>
           <input
             id="password"
             type="password"
@@ -25,10 +24,10 @@ const SignUpForm = ({ onInput, errors }) => {
             placeholder="Password"
             onInput={onInput}
           />
-        </label>
-        <p>{errors && errors.password}</p>
-        <label htmlFor="name">
-          Name:{" "}
+        </div>
+        <p>{errors && errors.password ? errors.password : null}</p>
+        <div className="signUp name">
+          <label htmlFor="name">Name:</label>
           <input
             id="name"
             type="text"
@@ -36,10 +35,10 @@ const SignUpForm = ({ onInput, errors }) => {
             placeholder="First name"
             onInput={onInput}
           />
-        </label>
-        <p>{errors && errors.name}</p>
-        <label htmlFor="surname">
-          Surname:{" "}
+        </div>
+        <p>{errors && errors.name ? errors.name : null}</p>
+        <div className="signUp surname">
+          <label htmlFor="surname">Surname:</label>
           <input
             id="surname"
             type="text"
@@ -47,8 +46,8 @@ const SignUpForm = ({ onInput, errors }) => {
             placeholder="Surname"
             onInput={onInput}
           />
-        </label>
-        <p>{errors && errors.surname}</p>
+        </div>
+        <p>{errors && errors.surname ? errors.surname : null}</p>
       </div>
     </>
   );

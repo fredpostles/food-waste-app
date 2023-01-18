@@ -13,14 +13,12 @@ const App = () => {
   const dispatch = useDispatch();
 
   const setInterface = () => {
-    console.log(screenMode);
     let payload;
     if (screenMode === 0) {
       payload = !user.id ? 0 : 1;
     } else {
       payload = screenMode ? screenMode : 1;
     }
-    console.log(payload);
     dispatch({ type: SET_SCREEN_MODE, payload });
     setLoading(false);
   };
@@ -34,9 +32,7 @@ const App = () => {
   return (
     <>
       <button onClick={() => localStorage.clear()}>Clear localStorage</button>
-      <div className="appContainer">
-        {loading ? <Startup /> : <Interface />}
-      </div>
+      {loading ? <Startup /> : <Interface />}
     </>
   );
 };

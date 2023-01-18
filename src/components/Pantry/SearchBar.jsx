@@ -40,11 +40,23 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
             onInput={onInput}
             onKeyUp={onEnter}
           ></input>
-          <button onClick={onClick} className="clearBtn">
-            X
-          </button>
+          <div className="searchBar__icons">
+            <button onClick={onClick} className="clearBtn">
+              <img
+                className="icons"
+                src="/assets/icons/cross.svg"
+                alt="Cross icon"
+              />
+            </button>
+            <button className="searchBtn" onClick={onSubmitSearch}>
+              <img
+                className="icons"
+                src="/assets/icons/search.svg"
+                alt="Loupe icon"
+              />
+            </button>
+          </div>
         </div>
-        <button onClick={onSubmitSearch}>Search</button>
       </div>
     </>
   );

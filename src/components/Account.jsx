@@ -42,9 +42,9 @@ const Account = () => {
       <Navigation />
       <div className="account__container">
         <h1>Your Account</h1>
-        <h2>Hi, {capitalizeFirstLetter(user.name)}</h2>
         <div className="accountInfo__container">
-          <h2>Here is your account info:</h2>
+          <h2>Hi {capitalizeFirstLetter(user.name)}!</h2>
+          <h3>Here is your account info:</h3>
           <AccountInfo onInput={onInput} errors={errors} user={user} />
           <button onClick={onUpdate}>Update</button>
         </div>

@@ -19,7 +19,7 @@ const SearchResults = ({ addPantryItem, item }) => {
             addPantryItem(item);
           }}
         >
-          Add item to Pantry
+          Add to pantry
         </button>
       </div>
     </>
