@@ -10,14 +10,16 @@ const PantrySearch = (props) => {
         <h1>Pantry</h1>
         <h2>Search for items to add to your pantry:</h2>
       </div>
-      <SearchBar
-        searchTerm={searchTerm}
-        setSearchterm={setSearchterm}
-        setSuggestions={props.setSuggestions}
-      />
-      {props.suggestions && (
-        <SearchSuggestions suggestions={props.suggestions} />
-      )}
+      <div className="innerPantrySearch">
+        <SearchBar
+          searchTerm={searchTerm}
+          setSearchterm={setSearchterm}
+          setSuggestions={props.setSuggestions}
+        />
+        {props.suggestions && (
+          <SearchSuggestions suggestions={props.suggestions} />
+        )}
+      </div>
     </div>
   );
 };

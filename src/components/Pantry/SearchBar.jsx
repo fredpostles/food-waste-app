@@ -14,7 +14,6 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
     dispatch({ type: SET_SEARCH_TERM, payload: searchTerm });
     const result = await getIngredients(searchTerm);
     setSuggestions(result);
-    setSearchterm("");
   };
 
   const onClick = () => {
@@ -31,31 +30,29 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
   return (
     <>
       <div className="pantrySearchBar">
-        <div className="innerPantrySearch">
-          <input
-            className="searchInput"
-            type="text"
-            placeholder="Add items to your pantry"
-            value={searchTerm}
-            onInput={onInput}
-            onKeyUp={onEnter}
-          ></input>
-          <div className="searchBar__icons">
-            <button onClick={onClick} className="clearBtn">
-              <img
-                className="icons"
-                src="/assets/icons/cross.svg"
-                alt="Cross icon"
-              />
-            </button>
-            <button className="searchBtn" onClick={onSubmitSearch}>
-              <img
-                className="icons"
-                src="/assets/icons/search.svg"
-                alt="Loupe icon"
-              />
-            </button>
-          </div>
+        <input
+          className="searchInput"
+          type="text"
+          placeholder="Add items to your pantry"
+          value={searchTerm}
+          onInput={onInput}
+          onKeyUp={onEnter}
+        ></input>
+        <div className="searchBar__icons__container">
+          <button onClick={onClick} className="clearBtn">
+            <img
+              className="icons"
+              src="/assets/icons/cross.svg"
+              alt="Cross icon"
+            />
+          </button>
+          <button className="searchBtn" onClick={onSubmitSearch}>
+            <img
+              className="icons"
+              src="/assets/icons/search.svg"
+              alt="Loupe icon"
+            />
+          </button>
         </div>
       </div>
     </>

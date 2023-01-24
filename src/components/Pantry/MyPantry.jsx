@@ -60,8 +60,8 @@ const MyPantry = (setSuggestions) => {
             <option value="default">Default</option>
             <option value="azSort">A-Z</option>
             <option value="zaSort">Z-A</option>
-            <option value="sortDateDesc">Newest first</option>
-            <option value="sortDateAsc">Oldest first</option>
+            <option value="sortDateAsc">Newest first</option>
+            <option value="sortDateDesc">Oldest first</option>
           </select>
         </label>
       )}

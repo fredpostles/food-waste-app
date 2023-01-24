@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { getRecipeByIngredient } from "../../apiCalls/dataFetching";
-import { SET_SEARCH_TERM } from "../../redux/types";
+import { CLEAR_INGREDIENT_SEARCH, SET_SEARCH_TERM } from "../../redux/types";
 
 const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
   const dispatch = useDispatch();
@@ -14,12 +14,14 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
     dispatch({ type: SET_SEARCH_TERM, payload: searchTerm });
     const result = await getRecipeByIngredient(searchTerm);
     setSuggestions(result);
-    setSearchterm("");
+    console.log(result);
+    dispatch({ type: CLEAR_INGREDIENT_SEARCH, payload: null });
   };
 
   const onClick = () => {
     setSuggestions();
     setSearchterm("");
+    dispatch({ type: CLEAR_INGREDIENT_SEARCH, payload: null });
   };
 
   const onEnter = (e) => {
@@ -45,7 +47,7 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
               onInput={onInput}
               onKeyUp={onEnter}
             ></input>
-            <div className="searchBar__icons">
+            <div className="searchBar__icons__container">
               <button onClick={onClick} className="clearBtn">
                 <img
                   className="icons"

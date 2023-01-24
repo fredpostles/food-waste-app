@@ -14,16 +14,8 @@ body {
   font-size: 1.2rem;
 }
 
-h1 {
-  font-size: 2rem;
-}
-
-h2 {
-  font-size: 1.8rem;
-}
-
-h3 {
-  font-size: 1.4rem;
+li {
+  font-size: 1.2rem;
 }
 
 .show {
@@ -32,6 +24,10 @@ h3 {
 
 .hide {
   visibility: none;
+}
+
+.italic {
+  font-style: italic;
 }
 
 .appLogo {
@@ -54,7 +50,7 @@ h3 {
   margin: auto;
   border-radius: 2.5rem;
   padding: 2.5rem;
-  filter: drop-shadow(0.5rem 0.5rem 0.4rem black);
+  filter: drop-shadow(0.2rem 0.2rem 0.5rem black);
 }
 
 .onboarding__container h1 {
@@ -109,6 +105,20 @@ h3 {
   font-size: 1.4rem;
 }
 
+.dietaryInfo__container h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.dietaryInfo__container h2 {
+  font-size: 1.6rem;
+  margin-bottom: 0.5rem;
+}
+
+.dietaryInfo__container p {
+  margin-bottom: 0.5rem;
+}
+
 .pantry__section__container {
   padding: 0.5rem;
   background-color: #436436;
@@ -128,6 +138,10 @@ h3 {
 }
 
 .pantryItem__container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   background-color: #efbb00;
   border-radius: 1rem;
   padding: 1.5rem;
@@ -154,14 +168,13 @@ h3 {
 
 .image__container.pantryItem {
   background-color: white;
-  width: max-content;
-  margin: 0 auto 1rem;
-  padding: 1rem;
+  text-align: center;
+  min-width: 10rem;
+  width: auto;
+  min-height: 10rem;
+  height: auto;
+  margin: 1rem;
   border-radius: 0.5rem;
-}
-
-.image__container.pantryItem img {
-  width: 10vw;
 }
 
 .card__body,
@@ -198,12 +211,15 @@ h3 {
 }
 
 .innerPantrySearch {
+  position: relative;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  align-items: center;
   width: 100%;
 }
 
-.searchBar__icons {
+.searchBar__icons__container {
   background-color: white;
   border: 0.5rem solid transparent;
   border-left: none;
@@ -215,7 +231,9 @@ h3 {
 }
 
 .icons {
-  width: 2rem;
+  width: 1.5rem;
+  height: 1.2rem;
+  opacity: 0.5;
 }
 
 .searchBtn {
@@ -223,54 +241,110 @@ h3 {
   border: none;
   cursor: pointer;
   padding: 0;
+  padding-right: 0.2rem;
 }
 
 .searchBtn:hover .icons {
-  opacity: 0.5;
+  opacity: 1;
 }
 
 .clearBtn {
   border: none;
   background-color: inherit;
   cursor: pointer;
-  transition: all 0.15s ease-in-out;
-  padding: 0.5rem;
+  padding: 0.4rem;
 }
 
 .clearBtn .icons {
-  width: 1.6rem;
+  width: 1.2rem;
+  height: 1rem;
 }
 
-.clearBtn:hover {
-  opacity: 0.5;
+.clearBtn:hover .icons {
+  opacity: 1;
 }
 
-.searchResults__container {
+.suggestions__container {
+  position: absolute;
+  top: 4rem;
+  z-index: 99;
   margin: 0 auto;
   margin-top: -0.75rem;
-  width: 70%;
+  width: 90%;
+  max-width: 56.4rem;
+  height: fit-content;
+  max-height: 75vh;
   background-color: white;
+  border-radius: 0 0 1rem 1rem;
+  filter: drop-shadow(0 0.1rem 0.2rem black);
+  overflow: scroll;
 }
 
 .suggestions__list {
+  cursor: pointer;
+  overflow: scroll;
   margin: 0 auto;
-  padding: 0 1rem;
+  transition: all 0.1s ease-in-out;
+}
+
+.suggestionItem {
+  vertical-align: middle;
+  padding: 2rem;
+}
+
+.suggestionItem:hover,
+.suggestionItem:hover .plusBtn {
+  background-color: #ddd;
+}
+
+.suggestionItem:last-child {
+  border-radius: 0 0 1rem 1rem;
 }
 
 .suggestionItem p {
   display: inline;
+  margin: 0;
 }
 
 .singleIngredient__container {
-  padding-top: 1rem;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: 25% 50% 25%;
+  vertical-align: middle;
   align-items: center;
 }
 
-.singleIngredient__container img {
+.singleIngredient__imageContainer {
+  height: 6rem;
   width: 5rem;
+  border-radius: 1rem;
+}
+
+.plusBtn {
+  background-color: #fff;
+  border: none;
+  cursor: pointer;
+  justify-self: flex-end;
+  opacity: 0.5;
+}
+
+.plusBtn:hover {
+  opacity: 1;
+}
+
+.showMoreBtn,
+.showLessBtn {
+  cursor: pointer;
+  border-radius: 1rem;
+  border: none;
+  border: 0.2rem solid transparent;
+  background-color: #ddd;
+  margin: 0.5rem 0.25rem;
+}
+
+.showMoreBtn:hover,
+.showLessBtn:hover {
+  background-color: #333;
+  color: white;
 }
 
 .pantrySearch__container h1,
@@ -295,7 +369,8 @@ h3 {
   background-color: #efbb00;
   border-radius: 1rem;
   filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
-  width: 50%;
+  min-width: 80%;
+  width: fit-content;
   margin: 0 auto;
 }
 
@@ -304,11 +379,24 @@ h3 {
   margin-top: 1rem;
 }
 
-.recipeSearch.imageContainer {
+.recipeSearch__templateResult .imageContainer {
   background-color: #ddd;
-  padding: 0 0.5rem;
   border-radius: 1rem 1rem 0 0;
+}
+
+.recipeSearch__templateResult .text_section {
+  padding: 1rem;
+}
+
+.recipeSearch__templateResult .text_section ol {
+  padding-inline-start: 0;
+  padding: 0 2rem;
+}
+
+.recipeSearch.imageContainer {
+  padding: 0 0.5rem;
   height: 20rem;
+  width: 100%;
 }
 
 .recipeSearch .recipeImage {
@@ -332,9 +420,13 @@ h3 {
   border-right: none;
 }
 
-.searchInput:focus ~ .searchBar__icons {
+.searchInput:focus ~ .searchBar__icons__container {
   border: 0.5rem solid #efbb00;
   border-left: none;
+}
+
+.searchInput:focus ~ .suggestions__container {
+  border: 0.5rem solid #efbb00;
 }
 
 .recipeSearchBar__container h1,
@@ -376,6 +468,7 @@ h3 {
 .recipeSearchResults__list {
   display: grid;
   grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
 p.sub-heading {
@@ -397,22 +490,24 @@ p.sub-heading {
 .savedRecipes__container {
   display: grid;
   grid-template-columns: 1fr;
+  gap: 1rem;
 }
 
 .singleRecipe__container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-content: space-evenly;
   background-color: #efbb00;
   border-radius: 0.5rem;
-  margin: 0.5rem auto;
-  width: fit-content;
+  min-height: fit-content;
+  min-width: fit-content;
   padding: 1rem;
   box-shadow: 0.1em 0.1em 0.5rem;
 }
 
-.singleRecipe__container h4 {
-  margin-bottom: 1rem;
+.singleRecipe__container h2 {
+  margin-bottom: 0.8rem;
+  font-size: medium;
 }
 
 .singleRecipe__container button {
@@ -434,16 +529,24 @@ button {
 }
 
 .additionalIngredients__list {
-  padding: 0.75rem;
-  background-color: #bbb;
+  padding: 1rem;
+  color: black;
   border-radius: 0.5rem;
-  box-shadow: 0.1rem 0.1rem 0.1rem;
+  background-color: #fbd95e;
+  box-shadow: 0.1rem 0.1rem 0.3rem black;
+  margin: 0.25rem auto;
+  width: fit-content;
 }
 
 .additionalIngredients__list p,
 .additionalIngredients__list li {
   margin: 0;
+  margin-bottom: 0.25rem;
   font-size: 1.2rem;
+}
+
+.additionalIngredients__list ul.typographic {
+  padding-right: 2rem;
 }
 
 .recipeItem.text_section {
@@ -549,9 +652,8 @@ button {
   }
   .recipeSearchResults__list {
     grid-template-columns: repeat(2, 1fr);
-    margin: 0;
-    gap: 1rem;
   }
+
   .savedRecipes__container {
     grid-template-columns: repeat(2, 1fr);
     margin: 0;
@@ -563,18 +665,44 @@ button {
     display: flex;
     justify-content: space-around;
   }
-  body {
+
+  body,
+  li {
     font-size: 1.5rem;
+  }
+
+  .dietaryInfo__container h1 {
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .dietaryInfo__container h2 {
+    font-size: 2.2rem;
+    margin-bottom: 0.5rem;
   }
 
   .onboarding__container {
     min-width: fit-content;
-    max-height: 75vh;
+    max-height: 80vh;
     min-height: fit-content;
   }
 
   button {
     font-size: 1.2rem;
+  }
+
+  .searchBtn,
+  .clearBtn {
+    padding: 0.5rem;
+  }
+
+  .icons,
+  .clearBtn .icons {
+    height: 1.5rem;
+  }
+
+  .suggestions__container {
+    top: 4.5rem;
   }
 }
 
@@ -584,7 +712,13 @@ button {
   }
   .recipeSearchResults__list {
     grid-template-columns: repeat(3, 1fr);
+    gap: 1rem;
   }
+
+  .singleRecipe__container {
+    min-width: 20rem;
+  }
+
   .savedRecipes__container {
     grid-template-columns: repeat(3, 1fr);
   }
@@ -596,17 +730,6 @@ button {
     font-size: 1.6rem;
   }
 
-  h1 {
-    font-size: 2.4rem;
-  }
-
-  h2 {
-    font-size: 2rem;
-  }
-
-  h3 {
-    font-size: 1.6rem;
-  }
   .onboarding__container {
     width: 60%;
     max-height: 85vh;
@@ -616,6 +739,15 @@ button {
   .signUp__container {
     padding: 2rem;
     min-height: fit-content;
+  }
+
+  .searchBtn,
+  .clearBtn {
+    padding: 0.55rem;
+  }
+  .singleIngredient__imageContainer {
+    height: 8.5rem;
+    width: 7.5rem;
   }
 }
 

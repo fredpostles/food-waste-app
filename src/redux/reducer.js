@@ -14,6 +14,7 @@ import {
   ADD_PREFERENCES,
   UPDATE_PREFERENCES,
   SET_INGREDIENT_SEARCH,
+  CLEAR_INGREDIENT_SEARCH,
   SET_RECIPE_INSTRUCTIONS,
 } from "./types";
 import { storeItem, getItem } from "../localStorage";
@@ -130,6 +131,7 @@ export function reducer(state = getItem("store") || initialState, action) {
 
     case SET_SEARCH_TERM: {
       const newState = { ...state, searchTerm: action.payload };
+
       storeItem("store", newState);
 
       return newState;
@@ -184,6 +186,15 @@ export function reducer(state = getItem("store") || initialState, action) {
 
       storeItem("store", newState);
 
+      return newState;
+    }
+
+    case CLEAR_INGREDIENT_SEARCH: {
+      const clearedIngredientSearch = null;
+
+      const newState = { ...state, ingredientSearch: clearedIngredientSearch };
+
+      storeItem("store", newState);
       return newState;
     }
 

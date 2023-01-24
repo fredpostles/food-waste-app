@@ -23,7 +23,7 @@ const DietaryInfo = () => {
       <div className="dietaryInfo__container">
         <div className="dietaryPrefs__container">
           <h1>Dietary preferences:</h1>
-          <p>Tick all that apply</p>
+          <p className="italic">Tick all that apply</p>
           <ul className="dietaryPreferences">
             <li onInput={onInput}>
               <label htmlFor="isVegan">
@@ -47,7 +47,7 @@ const DietaryInfo = () => {
         </div>
         <div className="intolerances__container">
           <h2>Allergies or intolerances:</h2>
-          <p>Tick all that apply</p>
+          <p className="italic">Tick all that apply</p>
           <ul className="allergiesOrIntolerances">
             <li onInput={onInput}>
               <label htmlFor="noDairy">

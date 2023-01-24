@@ -5,6 +5,7 @@ import {
   SET_SCREEN_MODE,
   SET_INGREDIENT_SEARCH,
   SET_RECIPE_INSTRUCTIONS,
+  SET_SEARCH_TERM,
 } from "../../redux/types";
 import { capitalizeFirstLetter } from "../../utils";
 import {
@@ -24,8 +25,13 @@ const PantryItem = ({ item }) => {
   const onRecipeSearch = async () => {
     dispatch({ type: SET_SCREEN_MODE, payload: 2 });
 
+    // console.log(item.itemName);
+
     const result = await getRecipeByIngredient(item.itemName);
-    dispatch({ type: SET_INGREDIENT_SEARCH, payload: result });
+    dispatch(
+      { type: SET_INGREDIENT_SEARCH, payload: result },
+      { type: SET_SEARCH_TERM, payload: item.itemName }
+    );
 
     // const idsToSearch = result.map((item) => item.id);
     // // console.log("Result", result, "IDs", idsToSearch);
@@ -38,17 +44,27 @@ const PantryItem = ({ item }) => {
     setShowQuantity(true);
   };
 
+  const src = `https://spoonacular.com/cdn/ingredients_100x100/${item.image}`;
   return (
     <>
       <div className="pantryItem__container">
         {item.image === "no" ? (
-          <p>No image</p>
-        ) : (
           <div className="pantryItem image__container">
-            <img
+            <p>No image</p>
+          </div>
+        ) : (
+          <div
+            className="pantryItem image__container"
+            style={{
+              backgroundImage: `url(${src})`,
+              backgroundRepeat: "no-repeat",
+              backgroundPosition: "center",
+            }}
+          >
+            {/* <img
               src={`https://spoonacular.com/cdn/ingredients_100x100/${item.image}`}
               alt={capitalizeFirstLetter(item.itemName)}
-            />
+            /> */}
           </div>
         )}
         <div className="card__body">
