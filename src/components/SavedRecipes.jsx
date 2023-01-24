@@ -16,7 +16,11 @@ const SavedRecipes = () => {
           {savedRecipes &&
             savedRecipes.map((savedRecipe) => {
               return (
-                <Recipe savedRecipe={savedRecipe} key={generateRandomID(34)} />
+                <Recipe
+                  savedRecipe={savedRecipe}
+                  key={savedRecipe.id}
+                  id={savedRecipe.id}
+                />
               );
             })}
         </div>

@@ -30,6 +30,10 @@ li {
   font-style: italic;
 }
 
+.bold {
+  font-weight: bold;
+}
+
 .appLogo {
   width: 40rem;
   margin: auto;
@@ -144,21 +148,38 @@ li {
   align-items: center;
   background-color: #efbb00;
   border-radius: 1rem;
-  padding: 1.5rem;
+  padding: 1rem;
   box-shadow: 0.1em 0.1em 0.5rem;
 }
 
+.quantityInput__form {
+  border-radius: 0.5rem;
+  padding: 0.5rem 0;
+}
+
+.pantryItem__quantity__inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
 .pantryItem__quantityInput {
-  width: 3.5rem;
+  width: 5rem;
   font-size: 1.2rem;
 }
 
 .pantryItem__quantityInput__unitOptions {
-  width: 2rem;
+  width: 5rem;
+  height: 2rem;
 }
 
 .pantryItem__quantityInput__unitOptions__option {
   font-size: 1rem;
+}
+
+.saveBtn {
+  background-color: #333;
 }
 
 .pantrySort__label {
@@ -183,9 +204,7 @@ li {
 }
 
 .card__body p {
-  margin: 0;
-  font-weight: bold;
-  font-size: 1.6rem;
+  font-size: 1.2rem;
 }
 
 .ingredientSearch__noResults {
@@ -332,7 +351,8 @@ li {
 }
 
 .showMoreBtn,
-.showLessBtn {
+.showLessBtn,
+.saveBtn {
   cursor: pointer;
   border-radius: 1rem;
   border: none;
@@ -342,7 +362,8 @@ li {
 }
 
 .showMoreBtn:hover,
-.showLessBtn:hover {
+.showLessBtn:hover,
+.saveBtn:hover {
   background-color: #333;
   color: white;
 }

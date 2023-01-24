@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { getIngredients } from "../../apiCalls/dataFetching";
-import { SET_SEARCH_TERM } from "../../redux/types";
+import { getIngredients } from "../../../apiCalls/dataFetching";
+import { SET_SEARCH_TERM } from "../../../redux/types";
 
 const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
   const dispatch = useDispatch();

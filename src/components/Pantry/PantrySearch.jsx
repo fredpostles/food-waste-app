@@ -1,8 +1,8 @@
 import React, { useState } from "react";
-import SearchBar from "./SearchBar";
-import SearchSuggestions from "./SearchSuggestions";
+import SearchBar from "./PantrySearch/SearchBar";
+import SearchSuggestions from "./PantrySearch/SearchSuggestions";
 
-const PantrySearch = (props) => {
+const PantrySearch = ({ suggestions, setSuggestions }) => {
   const [searchTerm, setSearchterm] = useState("");
   return (
     <div className="pantrySearch__container">
@@ -14,11 +14,9 @@ const PantrySearch = (props) => {
         <SearchBar
           searchTerm={searchTerm}
           setSearchterm={setSearchterm}
-          setSuggestions={props.setSuggestions}
+          setSuggestions={setSuggestions}
         />
-        {props.suggestions && (
-          <SearchSuggestions suggestions={props.suggestions} />
-        )}
+        {suggestions && <SearchSuggestions suggestions={suggestions} />}
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import PantryItem from "./PantryItem";
+import PantryItem from "./MyPantry/PantryItem";
 
 const MyPantry = (setSuggestions) => {
   const pantryItems = useSelector((state) => state.pantryItems);

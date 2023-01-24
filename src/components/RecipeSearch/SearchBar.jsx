@@ -14,7 +14,6 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
     dispatch({ type: SET_SEARCH_TERM, payload: searchTerm });
     const result = await getRecipeByIngredient(searchTerm);
     setSuggestions(result);
-    console.log(result);
     dispatch({ type: CLEAR_INGREDIENT_SEARCH, payload: null });
   };
 

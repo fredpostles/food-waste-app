@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import NoResults from "./NoResults";
 import SearchResults from "./SearchResults";
 import { useDispatch } from "react-redux";
-import { ADD_PANTRY_ITEM } from "../../redux/types";
-import ShowMoreButton from "../Buttons/ShowMoreButton";
-import ShowLessButton from "../Buttons/ShowLessButton";
+import { ADD_PANTRY_ITEM } from "../../../redux/types";
+import ShowMoreButton from "../../Buttons/ShowMoreButton";
+import ShowLessButton from "../../Buttons/ShowLessButton";
 
 const SearchSuggestions = (props) => {
   const dispatch = useDispatch();

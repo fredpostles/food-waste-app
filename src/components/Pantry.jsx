@@ -17,9 +17,7 @@ const Pantry = () => {
           suggestions={suggestions}
           setSuggestions={setSuggestions}
         />
-        {pantryItems && pantryItems.length > 0 && (
-          <MyPantry setSuggestions={setSuggestions} />
-        )}
+        {pantryItems && pantryItems.length > 0 && <MyPantry />}
       </div>
     </>
   );

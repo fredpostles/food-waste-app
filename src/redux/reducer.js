@@ -7,8 +7,9 @@ import {
   SET_SCREEN_MODE,
   SET_SEARCH_TERM,
   ADD_PANTRY_ITEM,
-  UPDATE_PANTRY_ITEM,
   DELETE_PANTRY_ITEM,
+  EDIT_QUANTITY,
+  CLEAR_QUANTITY,
   SAVE_RECIPE,
   DELETE_RECIPE,
   ADD_PREFERENCES,
@@ -109,10 +110,6 @@ export function reducer(state = getItem("store") || initialState, action) {
       return newState;
     }
 
-    case UPDATE_PANTRY_ITEM:
-      // logic to update pantry item e.g. add quantity
-      break;
-
     case DELETE_PANTRY_ITEM: {
       const pantryItems = [...state.pantryItems];
 
@@ -121,6 +118,46 @@ export function reducer(state = getItem("store") || initialState, action) {
       );
 
       pantryItems.splice(indexOfItem, 1);
+
+      const newState = { ...state, pantryItems };
+
+      storeItem("store", newState);
+
+      return newState;
+    }
+
+    case EDIT_QUANTITY: {
+      const pantryItems = [...state.pantryItems];
+
+      const indexOfItem = pantryItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      pantryItems[indexOfItem] = {
+        ...pantryItems[indexOfItem],
+        quantity: action.payload.quantity,
+      };
+
+      console.log(pantryItems[indexOfItem].quantity);
+
+      const newState = { ...state, pantryItems };
+
+      storeItem("store", newState);
+
+      return newState;
+    }
+
+    case CLEAR_QUANTITY: {
+      const pantryItems = [...state.pantryItems];
+
+      const indexOfItem = pantryItems.findIndex(
+        (item) => item.id === action.payload.id
+      );
+
+      pantryItems[indexOfItem] = {
+        ...pantryItems[indexOfItem],
+        quantity: action.payload.quantity,
+      };
 
       const newState = { ...state, pantryItems };
 
