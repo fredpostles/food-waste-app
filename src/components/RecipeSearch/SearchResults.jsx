@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import NoResults from "./NoResults";
-import ShowResultsButtons from "./ShowResultsButtons";
-import SingleRecipeResult from "./SingleRecipeResult";
+import NoResults from "./SearchResults/NoResults";
+import ShowResultsButtons from "./SearchResults/ShowResultsButtons";
+import SingleRecipeResult from "./SearchResults/SingleRecipeResult";
 
 const SearchResults = (props) => {
   const suggestions = props.suggestions;

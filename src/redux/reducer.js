@@ -9,7 +9,6 @@ import {
   ADD_PANTRY_ITEM,
   DELETE_PANTRY_ITEM,
   EDIT_QUANTITY,
-  CLEAR_QUANTITY,
   SAVE_RECIPE,
   DELETE_RECIPE,
   ADD_PREFERENCES,
@@ -138,8 +137,6 @@ export function reducer(state = getItem("store") || initialState, action) {
         quantity: action.payload.quantity,
       };
 
-      console.log(pantryItems[indexOfItem].quantity);
-
       const newState = { ...state, pantryItems };
 
       storeItem("store", newState);
@@ -147,24 +144,21 @@ export function reducer(state = getItem("store") || initialState, action) {
       return newState;
     }
 
-    case CLEAR_QUANTITY: {
-      const pantryItems = [...state.pantryItems];
+    // case CLEAR_QUANTITY: {
+    //   const pantryItems = [...state.pantryItems];
 
-      const indexOfItem = pantryItems.findIndex(
-        (item) => item.id === action.payload.id
-      );
+    //   const indexOfItem = pantryItems.findIndex(
+    //     (item) => item.id === action.payload.id
+    //   );
 
-      pantryItems[indexOfItem] = {
-        ...pantryItems[indexOfItem],
-        quantity: action.payload.quantity,
-      };
+    //   delete pantryItems[indexOfItem].quantity;
 
-      const newState = { ...state, pantryItems };
+    //   const newState = { ...state, pantryItems };
 
-      storeItem("store", newState);
+    //   storeItem("store", newState);
 
-      return newState;
-    }
+    //   return newState;
+    // }
 
     case SET_SEARCH_TERM: {
       const newState = { ...state, searchTerm: action.payload };

@@ -46,7 +46,9 @@ const Account = () => {
           <h2>Hi {capitalizeFirstLetter(user.name)}!</h2>
           <h3>Here is your account info:</h3>
           <AccountInfo onInput={onInput} errors={errors} user={user} />
-          <button onClick={onUpdate}>Update</button>
+          <button onClick={onUpdate} className="updateBtn">
+            Update
+          </button>
         </div>
         <Preferences user={user} />
       </div>

@@ -205,6 +205,12 @@ li {
 
 .card__body p {
   font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+p.card__title {
+  font-size: 1.6rem;
+  font-weight: bold;
 }
 
 .ingredientSearch__noResults {
@@ -352,7 +358,14 @@ li {
 
 .showMoreBtn,
 .showLessBtn,
-.saveBtn {
+.saveBtn,
+.updateBtn,
+.addQuantityBtn,
+.editQuantityBtn,
+.deleteBtn,
+.ingredientSearchBtn,
+.seeMethodBtn,
+.saveRecipeBtn {
   cursor: pointer;
   border-radius: 1rem;
   border: none;
@@ -363,7 +376,14 @@ li {
 
 .showMoreBtn:hover,
 .showLessBtn:hover,
-.saveBtn:hover {
+.saveBtn:hover,
+.updateBtn:hover,
+.addQuantityBtn:hover,
+.editQuantityBtn:hover,
+.deleteBtn:hover,
+.ingredientSearchBtn:hover,
+.seeMethodBtn:hover,
+.saveRecipeBtn:hover {
   background-color: #333;
   color: white;
 }
@@ -531,10 +551,6 @@ p.sub-heading {
   font-size: medium;
 }
 
-.singleRecipe__container button {
-  margin: 0.5rem auto;
-}
-
 .singleRecipe__container img {
   border-radius: 0.5rem;
 }
@@ -542,11 +558,6 @@ p.sub-heading {
 .recipeImage {
   width: 100%;
   border-radius: 0.4rem;
-}
-
-button {
-  margin: 0.25rem;
-  font-size: 1rem;
 }
 
 .additionalIngredients__list {
@@ -576,8 +587,9 @@ button {
   margin-top: 0.5rem;
 }
 
-.recipeLikes {
-  margin: 0.5rem auto;
+.recipeButtons {
+  display: flex;
+  justify-content: center;
 }
 
 .account__container {
@@ -600,7 +612,7 @@ button {
 .accountInfo__container {
   background-color: #efbb00;
   border-radius: 1rem;
-  box-shadow: 0.25rem 0.25rem 0.5rem;
+  box-shadow: 0 0 1rem;
   padding: 1.5rem 2.5rem;
   width: fit-content;
   min-width: 45rem;
@@ -628,7 +640,7 @@ button {
 .account__dietaryInfo__container {
   background-color: #efbb00;
   border-radius: 1rem;
-  box-shadow: 0.25rem 0.25rem 0.5rem;
+  box-shadow: 0 0 1rem;
   padding: 1.5rem 3rem;
   width: fit-content;
   min-width: 45rem;

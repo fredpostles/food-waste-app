@@ -2,7 +2,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Recipe from "./SavedRecipes/Recipe";
 import Navigation from "./Navigation";
-import { generateRandomID } from "../utils";
 
 const SavedRecipes = () => {
   const savedRecipes = useSelector((state) => state.savedRecipes);

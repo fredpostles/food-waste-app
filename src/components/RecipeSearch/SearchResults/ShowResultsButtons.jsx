@@ -1,6 +1,6 @@
 import React from "react";
-import ShowLessButton from "../Buttons/ShowLessButton";
-import ShowMoreButton from "../Buttons/ShowMoreButton";
+import ShowLessButton from "../../Buttons/ShowLessButton";
+import ShowMoreButton from "../../Buttons/ShowMoreButton";
 
 const ShowResultsButtons = (props) => {
   const { suggestions, ingredientSearch, showMore, onShowMore, onShowLess } =

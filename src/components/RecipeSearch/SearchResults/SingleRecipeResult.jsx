@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SAVE_RECIPE, SET_RECIPE_INSTRUCTIONS } from "../../redux/types";
-import { getRecipeInformationBulk } from "../../apiCalls/dataFetching";
+import { SAVE_RECIPE, SET_RECIPE_INSTRUCTIONS } from "../../../redux/types";
+import { getRecipeInformationBulk } from "../../../apiCalls/dataFetching";
 import AdditionalIngredients from "./AdditionalIngredients";
 
 const SingleRecipeResult = ({ recipe }) => {
@@ -46,9 +46,12 @@ const SingleRecipeResult = ({ recipe }) => {
           {/* <ol>{steps}</ol> */}
         </div>
         <div className="recipeButtons">
-          <button onClick={getRecipeMethod}>See method</button>
-          <button className="recipeLikes">Likes: {recipe.likes}</button>
-          <button onClick={onSaveRecipe}>Save recipe</button>
+          <button onClick={getRecipeMethod} className="seeMethodBtn">
+            See method
+          </button>
+          <button onClick={onSaveRecipe} className="saveRecipeBtn">
+            Save recipe
+          </button>
         </div>
       </div>
     </>

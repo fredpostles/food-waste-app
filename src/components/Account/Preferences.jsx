@@ -191,7 +191,9 @@ const Preferences = ({ user }) => {
             </li>
           </ul>
         </div>
-        <button onClick={onSubmit}>Update</button>
+        <button onClick={onSubmit} className="updateBtn">
+          Update
+        </button>
       </div>
     </>
   );
