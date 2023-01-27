@@ -1,5 +1,5 @@
 import React from "react";
-import { capitalizeFirstLetter } from "../../../utils";
+import { capitalizeFirstLetter } from "../../../../utils";
 
 const AdditionalIngredients = ({ recipe }) => {
   return (

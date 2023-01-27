@@ -1,10 +1,22 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { getRecipeByIngredient } from "../../apiCalls/dataFetching";
 import { CLEAR_INGREDIENT_SEARCH, SET_SEARCH_TERM } from "../../redux/types";
 
 const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
   const dispatch = useDispatch();
+  const userPreferences = useSelector((state) => state.user.preferences);
+
+  //check user diet prefs
+  const userDiet = [
+    userPreferences.isVegan ? "vegan" : null,
+    userPreferences.isVegetarian ? "vegetarian" : null,
+  ];
+  // console.log(userDiet);
+
+  // get string list of diet(s) to send in API call
+  const diet = userDiet.toString();
+  // console.log(diet);
 
   const onInput = (e) => {
     setSearchterm(e.target.value);
@@ -12,7 +24,10 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
 
   const onSubmitSearch = async () => {
     dispatch({ type: SET_SEARCH_TERM, payload: searchTerm });
+    // get basic recipe info for recipes matching searchTerm(s)
     const result = await getRecipeByIngredient(searchTerm);
+
+    // get IDs of returned recipes
     setSuggestions(result);
     dispatch({ type: CLEAR_INGREDIENT_SEARCH, payload: null });
   };
@@ -40,7 +55,7 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
             <input
               name="search"
               type="text"
-              placeholder="Enter ingredients"
+              placeholder="Kale, tomatoes, pasta..."
               className="searchInput"
               value={searchTerm}
               onInput={onInput}

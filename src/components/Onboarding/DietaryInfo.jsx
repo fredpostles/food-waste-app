@@ -37,12 +37,6 @@ const DietaryInfo = () => {
                 <input type="checkbox" name="isVegetarian" />
               </label>
             </li>
-            <li onInput={onInput}>
-              <label htmlFor="isGlutenFree">
-                Gluten-free
-                <input type="checkbox" name="isGlutenFree" />
-              </label>
-            </li>
           </ul>
         </div>
         <div className="intolerances__container">

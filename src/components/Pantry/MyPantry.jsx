@@ -1,8 +1,15 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getRecipeByIngredient } from "../../apiCalls/dataFetching";
+import {
+  SET_SCREEN_MODE,
+  SET_INGREDIENT_SEARCH,
+  SET_SEARCH_TERM,
+} from "../../redux/types";
 import PantryItem from "./MyPantry/PantryItem";
 
 const MyPantry = (setSuggestions) => {
+  const dispatch = useDispatch();
   const pantryItems = useSelector((state) => state.pantryItems);
 
   const filterChange = (e) => {
@@ -46,6 +53,15 @@ const MyPantry = (setSuggestions) => {
     }
   }
 
+  const onUsePantry = async () => {
+    const wholePantry = sortedData.map((item) => item.itemName).toString();
+    console.log("1", wholePantry);
+    const result = await getRecipeByIngredient(wholePantry);
+    console.log("2", result);
+    dispatch({ type: SET_INGREDIENT_SEARCH, payload: result });
+    dispatch({ type: SET_SCREEN_MODE, payload: 2 });
+  };
+
   return (
     <div className="myPantry__container">
       <h3>My Pantry Items:</h3>
@@ -65,6 +81,15 @@ const MyPantry = (setSuggestions) => {
           </select>
         </label>
       )}
+      <div className="wholePantrySearch__container">
+        <button
+          onClick={onUsePantry}
+          className="wholePantrySearchBtn"
+          title="Search for recipes using as many pantry ingredients as possible"
+        >
+          Use as many pantry ingredients as possible
+        </button>
+      </div>
       <div className="pantryItems__container">
         {sortedData &&
           sortedData.map((item) => {

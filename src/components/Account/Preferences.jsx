@@ -62,16 +62,6 @@ const Preferences = ({ user }) => {
                 />
               </label>
             </li>
-            <li onInput={onInput}>
-              <label htmlFor="isGlutenFree">
-                Gluten-free
-                <input
-                  type="checkbox"
-                  name="isGlutenFree"
-                  defaultChecked={isGlutenFree}
-                />
-              </label>
-            </li>
           </ul>
         </div>
         <div className="intolerances__container">

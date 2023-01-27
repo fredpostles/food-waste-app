@@ -6,7 +6,7 @@ import axios from "axios";
 
 export const getIngredients = async (searchTerm) => {
   try {
-    const url = `https://api.spoonacular.com/food/ingredients/autocomplete?query=${searchTerm}&number=100&apiKey=97d9014fa12e44a4be62b6f3c8fc2a0e`;
+    const url = `https://api.spoonacular.com/food/ingredients/autocomplete?query=${searchTerm}&number=15&apiKey=97d9014fa12e44a4be62b6f3c8fc2a0e`;
 
     const result = await axios.get(url);
 
@@ -18,7 +18,7 @@ export const getIngredients = async (searchTerm) => {
 
 export const getRecipeByIngredient = async (searchTerm) => {
   try {
-    const url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${searchTerm}&number=100&ranking=1&apiKey=97d9014fa12e44a4be62b6f3c8fc2a0e`;
+    const url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${searchTerm}&number=15&ranking=1&apiKey=97d9014fa12e44a4be62b6f3c8fc2a0e`;
 
     const result = await axios.get(url);
 
@@ -28,15 +28,15 @@ export const getRecipeByIngredient = async (searchTerm) => {
   }
 };
 
-export const getRecipeSummary = async (id) => {
+export const getRecipeInformation = async (id) => {
   try {
-    const url = `https://api.spoonacular.com/recipes/${id}/summary&apiKey=97d9014fa12e44a4be62b6f3c8fc2a0e`;
+    const url = `https://api.spoonacular.com/recipes/${id}/information?includeNutrition=false&apiKey=97d9014fa12e44a4be62b6f3c8fc2a0e`;
 
     const result = await axios.get(url);
 
     return result.data;
   } catch (error) {
-    console.log("Incorrect ID sent or API error:", error.details);
+    console.log("Incorrect IDs sent or API error:", error.details);
   }
 };
 

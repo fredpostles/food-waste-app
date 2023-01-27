@@ -27,12 +27,11 @@ const SearchResults = (props) => {
         {suggestions &&
           suggestions.map((recipe, index) => {
             if (index > showMore) return;
-            else
-              return (
-                <li className="singleRecipe__container" key={recipe.id}>
-                  <SingleRecipeResult recipe={recipe} id={recipe.id} />
-                </li>
-              );
+            return (
+              <li className="singleRecipe__container" key={recipe.id}>
+                <SingleRecipeResult recipe={recipe} />
+              </li>
+            );
           })}
         {!suggestions &&
           ingredientSearch &&
@@ -42,7 +41,7 @@ const SearchResults = (props) => {
             else
               return (
                 <li className="singleRecipe__container" key={recipe.id}>
-                  <SingleRecipeResult recipe={recipe} id={recipe.id} />
+                  <SingleRecipeResult recipe={recipe} />
                 </li>
               );
           })}

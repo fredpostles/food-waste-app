@@ -1,53 +1,58 @@
-import React from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SAVE_RECIPE, SET_RECIPE_INSTRUCTIONS } from "../../../redux/types";
-import { getRecipeInformationBulk } from "../../../apiCalls/dataFetching";
-import AdditionalIngredients from "./AdditionalIngredients";
+import { SAVE_RECIPE } from "../../../redux/types";
+import { getRecipeInformation } from "../../../apiCalls/dataFetching";
+import AdditionalIngredients from "./SingleRecipeResult/AdditionalIngredients";
+import UsedIngredients from "./SingleRecipeResult/UsedIngredients";
+import { capitalizeFirstLetter } from "../../../utils";
 
 const SingleRecipeResult = ({ recipe }) => {
   const dispatch = useDispatch();
-  const ingredientSearch = useSelector((state) => state.ingredientSearch);
-  const recipeInstructions = useSelector((state) => state.recipeInstructions);
+  const recipeInfo = useSelector((state) => state.recipeInfo);
+  const [showRecipeMethod, setShowRecipeMethod] = useState(false);
 
   const onSaveRecipe = () => {
     dispatch({ type: SAVE_RECIPE, payload: recipe });
   };
 
-  const getRecipeMethod = async (e) => {
-    const idsToSearch = ingredientSearch.map((item) => item.id);
-    // console.log("Result", result, "IDs", idsToSearch);
-    const recipes = await getRecipeInformationBulk(idsToSearch);
-    dispatch({ type: SET_RECIPE_INSTRUCTIONS, payload: recipes });
+  const displayRecipeMethod = () => {
+    setShowRecipeMethod(!showRecipeMethod);
   };
 
-  // const indexOfRecipe = ingredientSearch.findIndex(
-  //   (item) => item.id === recipe.id
-  // );
-  // const currentRecipeMethod = recipeInstructions[indexOfRecipe];
-
-  // const steps = currentRecipeMethod.analyzedInstructions[0].steps.map(
-  //   (element) => {
-  //     return <li>{element.step}</li>;
-  //   }
-  // );
+  const indexOfItem = recipeInfo.findIndex(
+    (element) => element.id === recipe.id
+  );
 
   return (
     <>
-      <h2>{recipe.title}</h2>
+      <h2>{capitalizeFirstLetter(recipe.title)}</h2>
       <div className="recipeSearch imageContainer">
         <img src={recipe.image} alt={recipe.title} className="recipeImage" />
       </div>
       <div className="recipeItem text_section">
-        <AdditionalIngredients recipe={recipe} />
-        {/* {want to only show the below conditionally when 'see method' button is clicked} */}
-        {/* {and the recipe in question should become full-screen then} */}
-        <div className="recipeMethod">
-          {/* <h5>Method:</h5> */}
-          {/* <ol>{steps}</ol> */}
+        <div className="recipeInfo__container">
+          <ul className="recipeInfo__list">
+            <li>Ready in {recipeInfo[indexOfItem].readyInMinutes} minutes</li>
+            <li>Servings: {recipeInfo[indexOfItem].servings}</li>
+          </ul>
         </div>
+        {recipe.usedIngredients && <UsedIngredients recipe={recipe} />}
+        <AdditionalIngredients recipe={recipe} />
+        {showRecipeMethod ? (
+          <div className="recipeMethod__container">
+            <h5>Method:</h5>
+            <ol>
+              {recipeInfo[indexOfItem].analyzedInstructions[0].steps.map(
+                (element) => {
+                  return <li key={element.number}>{element.step}</li>;
+                }
+              )}
+            </ol>
+          </div>
+        ) : null}
         <div className="recipeButtons">
-          <button onClick={getRecipeMethod} className="seeMethodBtn">
-            See method
+          <button onClick={displayRecipeMethod} className="seeMethodBtn">
+            {showRecipeMethod ? "Hide method" : "See method"}
           </button>
           <button onClick={onSaveRecipe} className="saveRecipeBtn">
             Save recipe
