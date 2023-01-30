@@ -99,14 +99,12 @@ const DietaryInfo = () => {
             </li>
             <li onInput={onInput}>
               <label htmlFor="noSulfite">
-                {" "}
                 Sulfite
                 <input type="checkbox" name="noSulfite" />
               </label>
             </li>
             <li onInput={onInput}>
               <label htmlFor="noTreeNuts">
-                {" "}
                 Tree nut
                 <input type="checkbox" name="noTreeNuts" />
               </label>

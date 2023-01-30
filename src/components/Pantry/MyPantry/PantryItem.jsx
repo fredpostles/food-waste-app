@@ -46,8 +46,6 @@ const PantryItem = ({ item }) => {
 
     // send array of results to store
     dispatch({ type: SET_RECIPE_INFO, payload: recipes }); // console.log("Recipe info", recipes);
-    // maybe do invididual requests and only call this function
-    // when 'see method' button clicked - too many API quota points used when done in bulk
   };
 
   return (

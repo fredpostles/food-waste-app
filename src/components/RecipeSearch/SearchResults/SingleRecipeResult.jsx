@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SAVE_RECIPE } from "../../../redux/types";
-import { getRecipeInformation } from "../../../apiCalls/dataFetching";
 import AdditionalIngredients from "./SingleRecipeResult/AdditionalIngredients";
 import UsedIngredients from "./SingleRecipeResult/UsedIngredients";
 import { capitalizeFirstLetter } from "../../../utils";
@@ -30,12 +29,14 @@ const SingleRecipeResult = ({ recipe }) => {
         <img src={recipe.image} alt={recipe.title} className="recipeImage" />
       </div>
       <div className="recipeItem text_section">
-        <div className="recipeInfo__container">
-          <ul className="recipeInfo__list">
-            <li>Ready in {recipeInfo[indexOfItem].readyInMinutes} minutes</li>
-            <li>Servings: {recipeInfo[indexOfItem].servings}</li>
-          </ul>
-        </div>
+        {recipeInfo[indexOfItem] ? (
+          <div className="recipeInfo__container">
+            <ul className="recipeInfo__list">
+              <li>Ready in {recipeInfo[indexOfItem].readyInMinutes} minutes</li>
+              <li>Serves {recipeInfo[indexOfItem].servings}</li>
+            </ul>
+          </div>
+        ) : null}
         {recipe.usedIngredients && <UsedIngredients recipe={recipe} />}
         <AdditionalIngredients recipe={recipe} />
         {showRecipeMethod ? (
@@ -50,14 +51,22 @@ const SingleRecipeResult = ({ recipe }) => {
             </ol>
           </div>
         ) : null}
-        <div className="recipeButtons">
-          <button onClick={displayRecipeMethod} className="seeMethodBtn">
-            {showRecipeMethod ? "Hide method" : "See method"}
-          </button>
-          <button onClick={onSaveRecipe} className="saveRecipeBtn">
-            Save recipe
-          </button>
-        </div>
+      </div>
+      {recipeInfo[indexOfItem] ? (
+        <small>
+          <a href={recipeInfo[indexOfItem].sourceUrl}>Source</a>
+        </small>
+      ) : null}
+      <div className="recipeButtons">
+        <button onClick={displayRecipeMethod} className="seeMethodBtn">
+          {showRecipeMethod ? "Hide method" : "See method"}
+        </button>
+        <button onClick={() => console.log(recipeInfo[indexOfItem])}>
+          Console log recipeInfo for this recipe
+        </button>
+        <button onClick={onSaveRecipe} className="saveRecipeBtn">
+          Save recipe
+        </button>
       </div>
     </>
   );

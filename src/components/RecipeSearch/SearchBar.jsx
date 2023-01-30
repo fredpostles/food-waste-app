@@ -8,11 +8,23 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
   const userPreferences = useSelector((state) => state.user.preferences);
 
   //check user diet prefs
-  const userDiet = [
-    userPreferences.isVegan ? "vegan" : null,
-    userPreferences.isVegetarian ? "vegetarian" : null,
-  ];
-  // console.log(userDiet);
+  const userDiet = [];
+
+  // if user identified as vegan
+  userPreferences.isVegan &&
+    !userPreferences.isVegetarian &&
+    userDiet.push("vegan");
+
+  // if user idenfitied as vegetarian only, or both vegan & vegetarian
+  (userPreferences.isVegetarian ||
+    (userPreferences.isVegan && userPreferences.isVegetarian)) &&
+    userDiet.push("vegan|vegetarian");
+
+  // if no diet preferences, clear the array
+  !userPreferences.isVegan &&
+    !userPreferences.isVegetarian &&
+    userDiet.splice(0, userDiet.length);
+  console.log(userDiet);
 
   // get string list of diet(s) to send in API call
   const diet = userDiet.toString();

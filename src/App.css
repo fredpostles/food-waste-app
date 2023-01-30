@@ -593,13 +593,19 @@ h4 {
 }
 
 .additionalIngredients__list,
-.usedIngredients__container {
+.usedIngredients__container,
+.recipeInfo__list {
   padding: 1rem;
   color: #333;
   border-radius: 0.5rem;
-  background-color: white;
+  background-color: antiquewhite;
   margin: 0.5rem auto;
   width: 90%;
+}
+
+.recipeInfo__list li {
+  font-size: 1.2rem;
+  font-weight: 500;
 }
 
 .additionalIngredients__list p,
@@ -638,9 +644,23 @@ h4 {
   padding-inline-start: 2rem;
 }
 
+.singleRecipe__container a {
+  display: inline-block;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background-color: antiquewhite;
+}
+
+.singleRecipe__container a:hover {
+  background-color: #333;
+  color: white;
+  text-decoration: underline;
+}
+
 .recipeButtons {
   display: flex;
   justify-content: center;
+  align-items: center;
   padding: 0.5rem;
 }
 
