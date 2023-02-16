@@ -37,7 +37,9 @@ const SingleRecipeResult = ({ recipe }) => {
             </ul>
           </div>
         ) : null}
-        {recipe.usedIngredients && <UsedIngredients recipe={recipe} />}
+        {recipe && recipe.usedIngredients && (
+          <UsedIngredients recipe={recipe} />
+        )}
         <AdditionalIngredients recipe={recipe} />
         {showRecipeMethod ? (
           <div className="recipeMethod__container">

@@ -12,7 +12,7 @@ export const getIngredients = async (searchTerm) => {
 
     return result.data;
   } catch (error) {
-    console.log("API error", error.details);
+    console.log("API error:", error.details);
   }
 };
 
@@ -24,7 +24,7 @@ export const getRecipeByIngredient = async (searchTerm) => {
 
     return result.data;
   } catch (error) {
-    console.log("API error", error.details);
+    console.log("API error:", error.details);
   }
 };
 
@@ -36,7 +36,7 @@ export const getRecipeInformation = async (id) => {
 
     return result.data;
   } catch (error) {
-    console.log("Incorrect IDs sent or API error:", error.details);
+    console.log("Incorrect ID sent or API error:", error.details);
   }
 };
 
