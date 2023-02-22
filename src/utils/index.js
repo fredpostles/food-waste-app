@@ -30,9 +30,13 @@ export const getUserDiet = (userPreferences) => {
     (userPreferences.isVegan && userPreferences.isVegetarian)) &&
     userDiet.push("vegan|vegetarian");
 
+  // if user identified as gluten free
+  userPreferences.isGlutenFree && userDiet.push("glutenFree");
+
   // if no diet preferences, clear the array
   !userPreferences.isVegan &&
     !userPreferences.isVegetarian &&
+    !userPreferences.isGlutenFree &&
     userDiet.splice(0, userDiet.length);
 
   return userDiet;
@@ -52,15 +56,24 @@ export const getUserIntolerances = (userPreferences) => {
   return userIntolerances;
 };
 
-export const checkUserPrefs = (userPreferences, recipes) => {
+export const checkUserPrefs = (userDiet, recipes) => {
   // filter recipes to only return ones that match user's diet
-  const result = recipes.filter(
-    (element) =>
-      element.vegan === userPreferences.isVegan &&
-      element.vegetarian === userPreferences.isVegetarian
-  );
+  let result = [];
+
+  recipes.forEach((element) => {
+    element.vegan === true &&
+      userDiet.includes("vegan") &&
+      result.push(element);
+    element.vegetarian === true &&
+      userDiet.includes("vegan|vegetarian") &&
+      result.push(element);
+    element.glutenFree === true &&
+      userDiet.includes("glutenFree") &&
+      result.push(element);
+  });
+
+  // console.log(result);
 
   // return only suitable recipes
-  console.log(result);
   return result;
 };

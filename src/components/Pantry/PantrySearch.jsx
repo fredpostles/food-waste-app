@@ -16,7 +16,7 @@ const PantrySearch = ({ suggestions, setSuggestions }) => {
           setSearchterm={setSearchterm}
           setSuggestions={setSuggestions}
         />
-        {suggestions && <SearchSuggestions suggestions={suggestions} />}
+        {suggestions ? <SearchSuggestions suggestions={suggestions} /> : null}
       </div>
     </div>
   );

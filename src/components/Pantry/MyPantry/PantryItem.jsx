@@ -1,5 +1,5 @@
 import React from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   DELETE_PANTRY_ITEM,
   SET_SCREEN_MODE,
@@ -10,11 +10,15 @@ import {
   getRecipeByIngredient,
   getRecipeInformationBulk,
 } from "../../../apiCalls/dataFetching";
-import PantryItemImage from "../PantryItem/PantryItemImage";
-import PantryItemBody from "../PantryItem/PantryItemBody";
+import PantryItemImage from "./PantryItem/PantryItemImage";
+import PantryItemBody from "./PantryItem/PantryItemBody";
+import { checkUserPrefs, getUserDiet } from "../../../utils";
 
 const PantryItem = ({ item }) => {
   const dispatch = useDispatch();
+  const userPreferences = useSelector((state) => state.user.preferences);
+  const userDiet = getUserDiet(userPreferences);
+
   const onDelete = () => {
     dispatch({ type: DELETE_PANTRY_ITEM, payload: item.id });
   };
@@ -24,28 +28,33 @@ const PantryItem = ({ item }) => {
     // change screen to Recipe Search
     dispatch({ type: SET_SCREEN_MODE, payload: 2 });
 
-    // console.log(item.itemName);
-
     // send searchTerm (ingredient(s)) to API to get matching recipes
     const result = await getRecipeByIngredient(item.itemName);
-
-    // send array of results to store
-    dispatch({ type: SET_INGREDIENT_SEARCH, payload: result });
 
     // extract IDs from the recipes returned by API
     const idsToSearch = result.map((item) => item.id);
 
     // send IDs to function that calls API to get recipe info
-    await getRecipeInfo(idsToSearch);
-    console.log("Result", result, "IDs", idsToSearch);
-  };
+    const infoForRecipes = await getRecipeInformationBulk(idsToSearch);
 
-  const getRecipeInfo = async (recipeIds) => {
-    // get recipe info in bulk for all recipes
-    const recipes = await getRecipeInformationBulk(recipeIds);
+    // filter for recipes that match user's dietary prefs, using recipe info
+    const filteredRecipes = checkUserPrefs(userDiet, infoForRecipes);
+
+    // extract IDs of recipes that match dietary prefs
+    const filteredIds = filteredRecipes.map((item) => item.id);
+
+    // find these recipes in original array by ID
+    const recipesToDisplay = result.filter((element) =>
+      filteredIds.includes(element.id)
+    );
 
     // send array of results to store
-    dispatch({ type: SET_RECIPE_INFO, payload: recipes }); // console.log("Recipe info", recipes);
+    dispatch({ type: SET_INGREDIENT_SEARCH, payload: recipesToDisplay });
+
+    // send recipe info to store
+    dispatch({ type: SET_RECIPE_INFO, payload: filteredRecipes });
+
+    // console.log("Result", result, "IDs", idsToSearch);
   };
 
   return (

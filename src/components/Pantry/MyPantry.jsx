@@ -20,9 +20,6 @@ const MyPantry = (setSuggestions) => {
   const userPreferences = useSelector((state) => state.user.preferences);
 
   const userDiet = getUserDiet(userPreferences);
-  const userIntolerances = getUserIntolerances(userPreferences);
-
-  console.log("User diet:", userDiet, "user intolerances:", userIntolerances);
 
   // copy of pantry items to be used for sorting data
   let sortedData = [...pantryItems];
@@ -72,7 +69,6 @@ const MyPantry = (setSuggestions) => {
 
     // send to API
     const result = await getRecipeByIngredient(wholePantry);
-    console.log(result);
 
     // extract IDs from the recipes returned by API
     const idsToSearch = result.map((item) => item.id);
@@ -81,8 +77,7 @@ const MyPantry = (setSuggestions) => {
     const infoForRecipes = await getRecipeInformationBulk(idsToSearch);
 
     // filter for recipes that match user's dietary prefs, using recipe info
-    const filteredRecipes = checkUserPrefs(userPreferences, infoForRecipes);
-    console.log(filteredRecipes);
+    const filteredRecipes = checkUserPrefs(userDiet, infoForRecipes);
 
     // extract IDs of recipes that match dietary prefs
     const filteredIds = filteredRecipes.map((item) => item.id);
@@ -91,7 +86,6 @@ const MyPantry = (setSuggestions) => {
     const recipesToDisplay = result.filter((element) =>
       filteredIds.includes(element.id)
     );
-    console.log("recipestodisplay", recipesToDisplay);
 
     // send result (array of recipes returned) to store
     dispatch({ type: SET_INGREDIENT_SEARCH, payload: recipesToDisplay });
@@ -115,7 +109,7 @@ const MyPantry = (setSuggestions) => {
           className="wholePantrySearchBtn"
           title="Search for recipes using as many pantry ingredients as possible"
         >
-          Use as many pantry ingredients as possible
+          Use as many pantry items as possible
         </button>
       </div>
       <div className="pantryItems__container">

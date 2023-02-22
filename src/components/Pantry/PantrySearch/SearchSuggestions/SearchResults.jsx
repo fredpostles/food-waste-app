@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { capitalizeFirstLetter } from "../../../utils";
+import { capitalizeFirstLetter } from "../../../../utils";
 
 const SearchResults = ({ addPantryItem, item }) => {
   const [isAdded, setIsAdded] = useState(false);

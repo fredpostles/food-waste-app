@@ -1,6 +1,6 @@
 import React from "react";
-import { capitalizeFirstLetter } from "../../../utils";
-import ItemQuantity from "./ItemQuantity";
+import { capitalizeFirstLetter } from "../../../../utils";
+import ItemQuantity from "./PantryItemBody/ItemQuantity";
 
 const PantryItemBody = ({ item, onDelete, onRecipeSearch }) => {
   return (

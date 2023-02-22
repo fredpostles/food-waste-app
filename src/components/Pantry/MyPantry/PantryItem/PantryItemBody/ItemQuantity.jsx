@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { EDIT_QUANTITY } from "../../../redux/types";
-import QuantityInputForm from "./QuantityInputForm";
+import { EDIT_QUANTITY } from "../../../../../redux/types";
+import QuantityInputForm from "./ItemQuantity/QuantityInputForm";
 
 const ItemQuantity = ({ item }) => {
   const dispatch = useDispatch();

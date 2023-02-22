@@ -12,7 +12,6 @@ const Preferences = ({ user }) => {
     isGlutenFree,
     noDairy,
     noEgg,
-    noGluten,
     noGrain,
     noPeanut,
     noSeafood,
@@ -62,6 +61,16 @@ const Preferences = ({ user }) => {
                 />
               </label>
             </li>
+            <li onInput={onInput}>
+              <label htmlFor="isGlutenFree">
+                Gluten-Free
+                <input
+                  type="checkbox"
+                  name="isGlutenFree"
+                  defaultChecked={isGlutenFree}
+                />
+              </label>
+            </li>
           </ul>
         </div>
         <div className="intolerances__container">
@@ -81,16 +90,6 @@ const Preferences = ({ user }) => {
               <label htmlFor="noEgg">
                 Egg
                 <input type="checkbox" name="noEgg" defaultChecked={noEgg} />
-              </label>
-            </li>
-            <li onInput={onInput}>
-              <label htmlFor="noGluten">
-                Gluten
-                <input
-                  type="checkbox"
-                  name="noGluten"
-                  defaultChecked={noGluten}
-                />
               </label>
             </li>
             <li onInput={onInput}>

@@ -2,9 +2,10 @@ import React from "react";
 
 const NoResults = () => {
   return (
-    <p className="ingredientSearch__noResults">
-      Sorry, there are no results for recipes using this ingredient. Please try
-      searching for another ingredient!
+    <p className="recipeSearch__noResults">
+      Sorry, there are no results for this search.
+      <br />
+      Please try another search!
     </p>
   );
 };

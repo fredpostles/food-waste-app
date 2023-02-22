@@ -155,6 +155,45 @@ li {
   border: 0.5rem solid #efbb00;
 }
 
+.pantry__templateResult {
+  background-color: #efbb00;
+  border-radius: 1rem;
+  filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
+  min-width: 50%;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.pantry__templateResult h1 {
+  margin: 0;
+}
+
+.pantry__templateResult .imageContainer {
+  background-color: #ddd;
+  border-radius: 1rem 1rem 0 0;
+}
+
+.pantry__templateResult .text_section {
+  padding: 1rem 3rem 2rem;
+}
+
+.pantry__templateResult .text_section ol {
+  padding-inline-start: 0;
+  margin: 0 auto;
+  width: 30ch;
+}
+
+.pantry.imageContainer {
+  padding: 0 0.5rem;
+  height: 20rem;
+  width: 100%;
+}
+
+.pantryImage.templateImage {
+  max-width: 20rem;
+  height: 20rem;
+}
+
 .pantryItems__container {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -245,7 +284,7 @@ p.card__title {
   display: flex;
   flex-direction: column;
   width: 80%;
-  margin: 0 auto;
+  margin: 0 auto 2rem;
 }
 
 .pantrySearchBar {
@@ -444,6 +483,9 @@ p.card__title {
 .recipeSearch__templateResult .imageContainer {
   background-color: #ddd;
   border-radius: 1rem 1rem 0 0;
+  padding: 0 0.5rem;
+  height: 20rem;
+  width: 100%;
 }
 
 .recipeSearch__templateResult .text_section {
@@ -453,12 +495,6 @@ p.card__title {
 .recipeSearch__templateResult .text_section ol {
   padding-inline-start: 0;
   padding: 0 2rem;
-}
-
-.recipeSearch.imageContainer {
-  padding: 0 0.5rem;
-  height: 20rem;
-  width: 100%;
 }
 
 .recipeSearch .recipeImage {
@@ -553,6 +589,42 @@ p.sub-heading {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+}
+
+.savedRecipes__templateResult {
+  background-color: #efbb00;
+  border-radius: 1rem;
+  filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
+  min-width: 50%;
+  width: fit-content;
+  margin: 0 auto;
+}
+
+.savedRecipes__templateResult h1 {
+  margin: 0;
+}
+
+.savedRecipes__templateResult .imageContainer {
+  background-color: #ddd;
+  border-radius: 1rem 1rem 0 0;
+  padding: 0 0.5rem;
+  height: 20rem;
+  width: 100%;
+}
+
+.savedRecipe.text_section {
+  padding: 1rem;
+}
+
+.savedRecipe.text_section ol {
+  padding-inline-start: 1rem;
+  padding: 0 2rem;
+  width: 40ch;
+}
+
+.savedRecipeImage {
+  max-width: 20rem;
+  height: 20rem;
 }
 
 .savedRecipe__buttons {

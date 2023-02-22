@@ -46,10 +46,10 @@ const SearchResults = (props) => {
               );
           })}
       </ul>
-      {(!suggestions && ingredientSearch && ingredientSearch.length === 0) ||
-        (suggestions && !ingredientSearch && suggestions.length === 0 && (
-          <NoResults />
-        ))}
+      {((!suggestions && ingredientSearch && ingredientSearch.length === 0) ||
+        (!ingredientSearch && suggestions && suggestions.length === 0)) && (
+        <NoResults />
+      )}
       {(suggestions || ingredientSearch) && (
         <ShowResultsButtons
           suggestions={suggestions}

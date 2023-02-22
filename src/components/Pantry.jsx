@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import Navigation from "./Navigation";
 import PantrySearch from "./Pantry/PantrySearch";
 import MyPantry from "./Pantry/MyPantry";
+import PantryItemTemplate from "./Pantry/PantryItemTemplate";
 
 const Pantry = () => {
   const pantryItems = useSelector((state) => state.pantryItems);
@@ -17,7 +18,11 @@ const Pantry = () => {
           suggestions={suggestions}
           setSuggestions={setSuggestions}
         />
-        {pantryItems && pantryItems.length > 0 && <MyPantry />}
+        {pantryItems && pantryItems.length > 0 ? (
+          <MyPantry />
+        ) : (
+          <PantryItemTemplate />
+        )}
       </div>
     </>
   );
