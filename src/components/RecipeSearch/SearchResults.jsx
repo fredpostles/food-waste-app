@@ -24,33 +24,33 @@ const SearchResults = (props) => {
   return (
     <div className="searchResults__container">
       <ul className="recipeSearchResults__list">
-        {suggestions &&
-          suggestions.map((recipe, index) => {
-            if (index > showMore) return;
-            return (
-              <li className="singleRecipe__container" key={recipe.id}>
-                <SingleRecipeResult recipe={recipe} />
-              </li>
-            );
-          })}
-        {!suggestions &&
-          ingredientSearch &&
-          ingredientSearch.length > 0 &&
-          ingredientSearch.map((recipe, index) => {
-            if (index > showMore) return;
-            else
+        {suggestions
+          ? suggestions.map((recipe, index) => {
+              if (index > showMore) return;
               return (
                 <li className="singleRecipe__container" key={recipe.id}>
                   <SingleRecipeResult recipe={recipe} />
                 </li>
               );
-          })}
+            })
+          : null}
+        {!suggestions && ingredientSearch && ingredientSearch.length > 0
+          ? ingredientSearch.map((recipe, index) => {
+              if (index > showMore) return;
+              else
+                return (
+                  <li className="singleRecipe__container" key={recipe.id}>
+                    <SingleRecipeResult recipe={recipe} />
+                  </li>
+                );
+            })
+          : null}
       </ul>
-      {((!suggestions && ingredientSearch && ingredientSearch.length === 0) ||
-        (!ingredientSearch && suggestions && suggestions.length === 0)) && (
+      {(!suggestions && ingredientSearch && ingredientSearch.length === 0) ||
+      (!ingredientSearch && suggestions && suggestions.length === 0) ? (
         <NoResults />
-      )}
-      {(suggestions || ingredientSearch) && (
+      ) : null}
+      {suggestions || ingredientSearch ? (
         <ShowResultsButtons
           suggestions={suggestions}
           ingredientSearch={ingredientSearch}
@@ -58,7 +58,7 @@ const SearchResults = (props) => {
           onShowMore={onShowMore}
           onShowLess={onShowLess}
         />
-      )}
+      ) : null}
     </div>
   );
 };

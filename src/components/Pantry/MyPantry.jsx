@@ -9,7 +9,7 @@ import {
   SET_INGREDIENT_SEARCH,
   SET_RECIPE_INFO,
 } from "../../redux/types";
-import { getUserDiet, getUserIntolerances, checkUserPrefs } from "../../utils";
+import { getUserDiet, checkUserPrefs } from "../../utils";
 import PantryItem from "./MyPantry/PantryItem";
 import PantrySortSelection from "./MyPantry/PantrySortSelection";
 

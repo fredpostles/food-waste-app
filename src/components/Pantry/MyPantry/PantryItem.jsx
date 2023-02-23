@@ -12,12 +12,11 @@ import {
 } from "../../../apiCalls/dataFetching";
 import PantryItemImage from "./PantryItem/PantryItemImage";
 import PantryItemBody from "./PantryItem/PantryItemBody";
-import { checkUserPrefs, getUserDiet } from "../../../utils";
+import { checkUserPrefs } from "../../../utils";
 
 const PantryItem = ({ item }) => {
   const dispatch = useDispatch();
   const userPreferences = useSelector((state) => state.user.preferences);
-  const userDiet = getUserDiet(userPreferences);
 
   const onDelete = () => {
     dispatch({ type: DELETE_PANTRY_ITEM, payload: item.id });

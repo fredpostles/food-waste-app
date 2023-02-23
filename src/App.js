@@ -24,9 +24,9 @@ const App = () => {
   };
 
   useEffect(() => {
-    // setTimeout(() => {
-    setInterface();
-    // }, 2000);
+    setTimeout(() => {
+      setInterface();
+    }, 2000);
   }, []);
 
   return (

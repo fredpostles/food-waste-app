@@ -6,7 +6,7 @@ import axios from "axios";
 
 export const getIngredients = async (searchTerm) => {
   try {
-    const url = `https://api.spoonacular.com/food/ingredients/autocomplete?query=${searchTerm}&number=15&apiKey=97d9014fa12e44a4be62b6f3c8fc2a0e`;
+    const url = `https://api.spoonacular.com/food/ingredients/autocomplete?query=${searchTerm}&number=25&apiKey=97d9014fa12e44a4be62b6f3c8fc2a0e`;
 
     const result = await axios.get(url);
 

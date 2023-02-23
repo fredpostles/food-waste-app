@@ -1,5 +1,4 @@
-import { setSelectionRange } from "@testing-library/user-event/dist/utils";
-import React, { useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { capitalizeFirstLetter } from "../../../../utils";
 
