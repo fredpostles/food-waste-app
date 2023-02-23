@@ -56,23 +56,19 @@ export const getUserIntolerances = (userPreferences) => {
   return userIntolerances;
 };
 
-export const checkUserPrefs = (userDiet, recipes) => {
+export const checkUserPrefs = (userPreferences, recipes) => {
   // filter recipes to only return ones that match user's diet
   let result = [];
 
   recipes.forEach((element) => {
-    element.vegan === true &&
-      userDiet.includes("vegan") &&
-      result.push(element);
-    element.vegetarian === true &&
-      userDiet.includes("vegan|vegetarian") &&
-      result.push(element);
-    element.glutenFree === true &&
-      userDiet.includes("glutenFree") &&
+    element.vegan === userPreferences.isVegan &&
+      (element.vegetarian === userPreferences.isVegetarian ||
+        element.vegetarian === userPreferences.isVegan) &&
+      element.glutenFree === userPreferences.isGlutenFree &&
       result.push(element);
   });
 
-  // console.log(result);
+  console.log(result);
 
   // return only suitable recipes
   return result;

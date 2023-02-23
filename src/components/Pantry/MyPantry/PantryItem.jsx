@@ -38,7 +38,7 @@ const PantryItem = ({ item }) => {
     const infoForRecipes = await getRecipeInformationBulk(idsToSearch);
 
     // filter for recipes that match user's dietary prefs, using recipe info
-    const filteredRecipes = checkUserPrefs(userDiet, infoForRecipes);
+    const filteredRecipes = checkUserPrefs(userPreferences, infoForRecipes);
 
     // extract IDs of recipes that match dietary prefs
     const filteredIds = filteredRecipes.map((item) => item.id);

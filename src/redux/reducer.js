@@ -155,12 +155,7 @@ export function reducer(state = getItem("store") || initialState, action) {
     case SAVE_RECIPE:
       const savedRecipes = [...state.savedRecipes];
 
-      const recipe = {
-        id: action.payload.id,
-        name: action.payload.title,
-        image: action.payload.image,
-        likes: action.payload.likes,
-      };
+      const recipe = action.payload;
 
       const indexOfRecipe = savedRecipes.findIndex((recipe) => {
         return recipe.id === action.payload.id;

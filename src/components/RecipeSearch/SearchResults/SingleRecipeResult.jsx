@@ -11,7 +11,7 @@ const SingleRecipeResult = ({ recipe }) => {
   const [showRecipeMethod, setShowRecipeMethod] = useState(false);
 
   const onSaveRecipe = () => {
-    dispatch({ type: SAVE_RECIPE, payload: recipe });
+    dispatch({ type: SAVE_RECIPE, payload: recipeInfo[indexOfItem] });
   };
 
   const displayRecipeMethod = () => {
@@ -64,7 +64,7 @@ const SingleRecipeResult = ({ recipe }) => {
           {showRecipeMethod ? "Hide method" : "See method"}
         </button>
         <button onClick={() => console.log(recipeInfo[indexOfItem])}>
-          Console log recipeInfo for this recipe
+          Console log info for this recipe
         </button>
         <button onClick={onSaveRecipe} className="saveRecipeBtn">
           Save recipe
