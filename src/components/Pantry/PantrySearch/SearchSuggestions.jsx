@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-// import { useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import NoResults from "./SearchSuggestions/NoResults";
-import SearchResults from "./SearchSuggestions/SearchResults";
+import SearchResult from "./SearchSuggestions/SearchResult";
 import { useDispatch } from "react-redux";
 import { ADD_PANTRY_ITEM } from "../../../redux/types";
 import ShowMoreButton from "../../Buttons/ShowMoreButton";
@@ -9,11 +9,7 @@ import ShowLessButton from "../../Buttons/ShowLessButton";
 
 const SearchSuggestions = ({ suggestions }) => {
   const dispatch = useDispatch();
-  const [showMore, setShowMore] = useState(9);
-
-  // check if item is already in pantry
-  // if yes show checkmark in its SearchResults item
-  // if no show plus
+  const [showMore, setShowMore] = useState(11);
 
   const addPantryItem = (item) => {
     dispatch({ type: ADD_PANTRY_ITEM, payload: item });
@@ -24,8 +20,8 @@ const SearchSuggestions = ({ suggestions }) => {
   };
 
   const onShowLess = () => {
-    if (showMore <= 14) {
-      setShowMore(9);
+    if (showMore <= 16) {
+      setShowMore(11);
     } else {
       setShowMore(showMore - 5);
     }
@@ -40,7 +36,7 @@ const SearchSuggestions = ({ suggestions }) => {
             else
               return (
                 <li className="suggestionItem" key={index}>
-                  <SearchResults item={item} addPantryItem={addPantryItem} />
+                  <SearchResult item={item} addPantryItem={addPantryItem} />
                 </li>
               );
           })}

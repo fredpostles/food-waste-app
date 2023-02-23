@@ -8,7 +8,7 @@ import PantryItemTemplate from "./Pantry/PantryItemTemplate";
 
 const Pantry = () => {
   const pantryItems = useSelector((state) => state.pantryItems);
-  const [suggestions, setSuggestions] = useState("");
+  const [suggestions, setSuggestions] = useState();
 
   return (
     <>

@@ -13,6 +13,7 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
   const onSubmitSearch = async () => {
     dispatch({ type: SET_SEARCH_TERM, payload: searchTerm });
     const result = await getIngredients(searchTerm);
+    console.log(result);
     setSuggestions(result);
   };
 

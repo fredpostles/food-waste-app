@@ -1,28 +1,19 @@
+import { setSelectionRange } from "@testing-library/user-event/dist/utils";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { capitalizeFirstLetter } from "../../../../utils";
 
-const SearchResults = ({ addPantryItem, item }) => {
-  const [isAdded, setIsAdded] = useState(false);
+const SearchResult = ({ addPantryItem, item }) => {
   const pantryItems = useSelector((state) => state.pantryItems);
 
-  // NOT WORKING AS EXPECTED...
-  // checkmarks only show up second time;
-  // object is undefined first
-  const checkPantry = (item) => {
-    let o = {};
-    o = pantryItems.find((object) => object.name === item.itemName);
-
-    console.log(o);
-
-    // if (
-    //   pantryItems &&
-    // ) {
-    //   setIsAdded(true);
-    // } else {
-    //   setIsAdded(false);
-    // }
+  let isAdded;
+  const checkIfAdded = (item) => {
+    if (pantryItems.some((element) => element.itemName === item.name)) {
+      isAdded = true;
+    } else isAdded = false;
   };
+
+  checkIfAdded(item);
 
   const src = `https://spoonacular.com/cdn/ingredients_100x100/${item.image}`;
   return (
@@ -46,8 +37,7 @@ const SearchResults = ({ addPantryItem, item }) => {
         <p>{capitalizeFirstLetter(item.name)}</p>
         <button
           onClick={() => {
-            addPantryItem(item);
-            checkPantry(item);
+            !isAdded ? addPantryItem(item) : alert("Item already in pantry.");
           }}
           className="plusBtn"
         >
@@ -63,6 +53,7 @@ const SearchResults = ({ addPantryItem, item }) => {
           ) : (
             <>
               <img
+                className="icons"
                 src="/assets/icons/check.svg"
                 alt="Checkmark"
                 title="Added to pantry"
@@ -75,4 +66,4 @@ const SearchResults = ({ addPantryItem, item }) => {
   );
 };
 
-export default SearchResults;
+export default SearchResult;
