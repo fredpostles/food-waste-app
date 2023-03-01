@@ -103,15 +103,18 @@ const MyPantry = (setSuggestions) => {
       {pantryItems.length > 1 && (
         <PantrySortSelection filterChange={filterChange} />
       )}
-      <div className="wholePantrySearch__container">
-        <button
-          onClick={onUsePantry}
-          className="wholePantrySearchBtn"
-          title="Search for recipes using as many pantry ingredients as possible"
-        >
-          Use as many pantry items as possible
-        </button>
-      </div>
+      {pantryItems.length > 2 && (
+        <div className="wholePantrySearch__container">
+          <button
+            onClick={onUsePantry}
+            className="wholePantrySearchBtn"
+            title="Search for recipes using as many pantry ingredients as possible"
+          >
+            Use as many pantry items as possible
+          </button>
+        </div>
+      )}
+
       <div className="pantryItems__container">
         {sortedData &&
           sortedData.map((item) => {

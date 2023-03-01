@@ -3,10 +3,16 @@ import { useDispatch } from "react-redux";
 import { DELETE_RECIPE } from "../../redux/types";
 import { capitalizeFirstLetter } from "../../utils";
 
-const Recipe = ({ savedRecipe }) => {
+const Recipe = ({
+  savedRecipe,
+  showRecipeMethod,
+  setShowRecipeMethod,
+  openModal,
+  setOpenModal,
+  getModalContent,
+}) => {
   const recipe = savedRecipe;
   const dispatch = useDispatch();
-  const [showRecipeMethod, setShowRecipeMethod] = useState(false);
 
   const onDelete = () => {
     dispatch({ type: DELETE_RECIPE, payload: recipe.id });
@@ -14,8 +20,10 @@ const Recipe = ({ savedRecipe }) => {
 
   const displayRecipeMethod = () => {
     setShowRecipeMethod(!showRecipeMethod);
+    setOpenModal(!openModal);
+    getModalContent(recipe);
   };
-  console.log(recipe);
+
   return (
     <div className="singleRecipe__container">
       <h4>{capitalizeFirstLetter(recipe.title)}</h4>
@@ -31,23 +39,14 @@ const Recipe = ({ savedRecipe }) => {
             <li>Serves {recipe.servings}</li>
           </ul>
         </div>
-        {showRecipeMethod ? (
-          <div className="recipeMethod__container">
-            <h5>Method:</h5>
-            <ol>
-              {recipe.analyzedInstructions[0].steps.map((element) => {
-                return <li key={element.number}>{element.step}</li>;
-              })}
-            </ol>
-          </div>
-        ) : null}
-        <small>
+        {/* Removed as Foodista links seems to redirect to spam websites */}
+        {/* <small>
           <a href={recipe.sourceUrl}>Source</a>
-        </small>
+        </small> */}
       </div>
       <div className="savedRecipe__buttons">
         <button onClick={displayRecipeMethod} className="seeMethodBtn">
-          {showRecipeMethod ? "Hide method" : "See method"}
+          See method{" "}
         </button>
         <button onClick={onDelete} className="deleteBtn">
           Delete recipe

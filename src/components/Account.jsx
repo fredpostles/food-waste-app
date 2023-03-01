@@ -34,7 +34,11 @@ const Account = () => {
   };
 
   const onUpdate = () => {
-    dispatch({ type: UPDATE_USER, payload: userInput });
+    if (!errors) {
+      dispatch({ type: UPDATE_USER, payload: userInput });
+    } else {
+      alert("Could not update. Please check the errors below.");
+    }
   };
 
   return (

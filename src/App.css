@@ -165,7 +165,9 @@ li {
 }
 
 .pantry__templateResult h1 {
-  margin: 0;
+  margin: 0 0 1rem 0;
+  color: white;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
 }
 
 .pantry__templateResult .imageContainer {
@@ -175,12 +177,13 @@ li {
 
 .pantry__templateResult .text_section {
   padding: 1rem 3rem 2rem;
+  width: 40ch;
+  margin: 0 auto;
 }
 
 .pantry__templateResult .text_section ol {
   padding-inline-start: 0;
   margin: 0 auto;
-  width: 30ch;
 }
 
 .pantry.imageContainer {
@@ -470,7 +473,7 @@ p.card__title {
   background-color: #efbb00;
   border-radius: 1rem;
   filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
-  min-width: 80%;
+  min-width: 50%;
   width: fit-content;
   margin: 0 auto;
 }
@@ -478,6 +481,8 @@ p.card__title {
 .recipeSearch__templateResult h1 {
   margin: 0;
   margin-top: 1rem;
+  color: white;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
 }
 
 .recipeSearch__templateResult .imageContainer {
@@ -490,10 +495,11 @@ p.card__title {
 
 .recipeSearch__templateResult .text_section {
   padding: 1rem;
+  width: 40ch;
+  margin: 0 auto;
 }
 
 .recipeSearch__templateResult .text_section ol {
-  padding-inline-start: 0;
   padding: 0 2rem;
 }
 
@@ -574,6 +580,7 @@ p.sub-heading {
 }
 
 .savedRecipeSection__container {
+  position: relative;
   padding: 1rem;
   background-color: #436436;
   min-height: 100vh;
@@ -585,10 +592,71 @@ p.sub-heading {
   filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
 }
 
-.savedRecipes__container {
+.savedRecipes__container__grid {
   display: grid;
   grid-template-columns: 1fr;
   gap: 1rem;
+}
+
+.modalBackground {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalContainer {
+  width: 80vw;
+  height: 80vh;
+  border-radius: 1.2rem;
+  background-color: #c69c04;
+  box-shadow: rgba(0.5, 0.5, 0.5, 0.9) 0rem 0.5rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  overflow: scroll;
+}
+
+.modalTitle h1 {
+  margin: 0 auto 1rem;
+  color: white;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
+}
+
+.ingredients__container h2 {
+  margin: 0 auto;
+  font-size: medium;
+  color: white;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
+}
+
+.modalContainer .ingredients__list {
+  text-align: left;
+}
+
+.modalCloseBtn {
+  align-self: flex-end;
+  background: none;
+  border: none;
+  border: 0.1rem solid black;
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.modalFooter {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modalFooter button {
+  cursor: pointer;
 }
 
 .savedRecipes__templateResult {
@@ -614,12 +682,13 @@ p.sub-heading {
 
 .savedRecipe.text_section {
   padding: 1rem;
+  width: 40ch;
+  margin: 0 auto;
 }
 
 .savedRecipe.text_section ol {
   padding-inline-start: 1rem;
   padding: 0 2rem;
-  width: 40ch;
 }
 
 .savedRecipeImage {
@@ -666,7 +735,8 @@ h4 {
 
 .additionalIngredients__list,
 .usedIngredients__container,
-.recipeInfo__list {
+.recipeInfo__list,
+.ingredients__list {
   padding: 1rem;
   color: #333;
   border-radius: 0.5rem;
@@ -675,7 +745,8 @@ h4 {
   width: 90%;
 }
 
-.recipeInfo__list li {
+.recipeInfo__list li,
+.ingredients__list li {
   font-size: 1.2rem;
   font-weight: 500;
 }
@@ -832,7 +903,7 @@ h4 {
     padding: 0.25rem;
   }
 
-  .savedRecipes__container {
+  .savedRecipes__container__grid {
     grid-template-columns: repeat(2, 1fr);
     margin: 0;
     gap: 1rem;
@@ -889,7 +960,7 @@ h4 {
     grid-template-columns: repeat(4, 1fr);
   }
 
-  .savedRecipes__container {
+  .savedRecipes__container__grid {
     grid-template-columns: repeat(3, 1fr);
   }
   .mainNav a {
@@ -926,7 +997,7 @@ h4 {
     grid-template-columns: repeat(5, 1fr);
   }
 
-  .savedRecipes__container {
+  .savedRecipes__container__grid {
     grid-template-columns: repeat(4, 1fr);
   }
   .mainNav a {
@@ -939,7 +1010,7 @@ h4 {
     grid-template-columns: repeat(6, 1fr);
   }
 
-  .savedRecipes__container {
+  .savedRecipes__container__grid {
     grid-template-columns: repeat(5, 1fr);
   }
 }

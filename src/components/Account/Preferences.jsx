@@ -7,9 +7,9 @@ const Preferences = ({ user }) => {
   const [userInput, setUserInput] = useState({});
 
   const {
-    isVegan,
-    isVegetarian,
-    isGlutenFree,
+    vegan,
+    vegetarian,
+    glutenFree,
     noDairy,
     noEgg,
     noGrain,
@@ -42,32 +42,28 @@ const Preferences = ({ user }) => {
           <h2>Dietary Preferences:</h2>
           <ul className="dietaryPreferences">
             <li onInput={onInput}>
-              <label htmlFor="isVegan">
+              <label htmlFor="vegan">
                 Vegan
-                <input
-                  type="checkbox"
-                  name="isVegan"
-                  defaultChecked={isVegan}
-                />
+                <input type="checkbox" name="vegan" defaultChecked={vegan} />
               </label>
             </li>
             <li onInput={onInput}>
-              <label htmlFor="isVegetarian">
+              <label htmlFor="vegetarian">
                 Vegetarian
                 <input
                   type="checkbox"
-                  name="isVegetarian"
-                  defaultChecked={isVegetarian}
+                  name="vegetarian"
+                  defaultChecked={vegetarian}
                 />
               </label>
             </li>
             <li onInput={onInput}>
-              <label htmlFor="isGlutenFree">
+              <label htmlFor="glutenFree">
                 Gluten-Free
                 <input
                   type="checkbox"
-                  name="isGlutenFree"
-                  defaultChecked={isGlutenFree}
+                  name="glutenFree"
+                  defaultChecked={glutenFree}
                 />
               </label>
             </li>

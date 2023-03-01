@@ -26,21 +26,21 @@ const DietaryInfo = () => {
           <p className="italic">Tick all that apply</p>
           <ul className="dietaryPreferences">
             <li onInput={onInput}>
-              <label htmlFor="isVegan">
+              <label htmlFor="vegan">
                 Vegan
-                <input type="checkbox" name="isVegan" />
+                <input type="checkbox" name="vegan" />
               </label>
             </li>
             <li onInput={onInput}>
-              <label htmlFor="isVegetarian">
+              <label htmlFor="vegetarian">
                 Vegetarian
-                <input type="checkbox" name="isVegetarian" />
+                <input type="checkbox" name="vegetarian" />
               </label>
             </li>
             <li onInput={onInput}>
-              <label htmlFor="isGlutenFree">
+              <label htmlFor="glutenFree">
                 Gluten-Free
-                <input type="checkbox" name="isGlutenFree" />
+                <input type="checkbox" name="glutenFree" />
               </label>
             </li>
           </ul>

@@ -12,9 +12,9 @@ const PantryItemTemplate = () => {
         />
       </div>
       <div className="pantryItem text_section">
-        <h1>No items in pantry yet!</h1>
+        <h1>Pantry empty!</h1>
         <ol>
-          <li>Add ingredients to your pantry by searching for items above.</li>
+          <li>Add ingredients to your pantry by searching above.</li>
           <li>
             Then, you can search for recipes that use the items you have in your
             pantry!
