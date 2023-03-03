@@ -9,14 +9,19 @@ import {
   SET_SEARCH_TERM,
   SET_RECIPE_INFO,
 } from "../../redux/types";
-import { checkUserPrefs, getUserDiet } from "../../utils";
+import { checkUserPrefs } from "../../utils";
 
-const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
+const SearchBar = ({
+  searchTerm,
+  setSearchterm,
+  setSuggestions,
+  setLoading,
+}) => {
   const dispatch = useDispatch();
   const userPreferences = useSelector((state) => state.user.preferences);
-  const userDiet = getUserDiet(userPreferences);
 
   const onSubmitSearch = async () => {
+    setLoading(true);
     dispatch({ type: SET_SEARCH_TERM, payload: searchTerm });
 
     // get basic recipe info for recipes matching searchTerm(s)
@@ -29,7 +34,7 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
     const infoForRecipes = await getRecipeInformationBulk(idsToSearch);
 
     // filter for recipes that match user's dietary prefs, using recipe info
-    const filteredRecipes = checkUserPrefs(userDiet, infoForRecipes);
+    const filteredRecipes = checkUserPrefs(userPreferences, infoForRecipes);
 
     // extract IDs of recipes that match dietary prefs
     const filteredIds = filteredRecipes.map((item) => item.id);
@@ -44,6 +49,8 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
 
     // send recipe info to store
     dispatch({ type: SET_RECIPE_INFO, payload: filteredRecipes });
+
+    setLoading(false);
 
     // clear previously stored ingredient search from store
     dispatch({ type: CLEAR_INGREDIENT_SEARCH, payload: null });

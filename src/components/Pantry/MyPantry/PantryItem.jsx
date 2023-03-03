@@ -14,7 +14,7 @@ import PantryItemImage from "./PantryItem/PantryItemImage";
 import PantryItemBody from "./PantryItem/PantryItemBody";
 import { checkUserPrefs } from "../../../utils";
 
-const PantryItem = ({ item }) => {
+const PantryItem = ({ item, setLoading }) => {
   const dispatch = useDispatch();
   const userPreferences = useSelector((state) => state.user.preferences);
 
@@ -24,8 +24,7 @@ const PantryItem = ({ item }) => {
 
   // MOVE THIS TO DATA FETCHING/CONTROLLER
   const onRecipeSearch = async () => {
-    // change screen to Recipe Search
-    dispatch({ type: SET_SCREEN_MODE, payload: 2 });
+    setLoading(true);
 
     // send searchTerm (ingredient(s)) to API to get matching recipes
     const result = await getRecipeByIngredient(item.itemName);
@@ -53,7 +52,10 @@ const PantryItem = ({ item }) => {
     // send recipe info to store
     dispatch({ type: SET_RECIPE_INFO, payload: filteredRecipes });
 
-    // console.log("Result", result, "IDs", idsToSearch);
+    // change screen to Recipe Search
+    dispatch({ type: SET_SCREEN_MODE, payload: 2 });
+
+    setLoading(false);
   };
 
   return (

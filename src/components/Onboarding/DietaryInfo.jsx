@@ -28,19 +28,27 @@ const DietaryInfo = () => {
             <li onInput={onInput}>
               <label htmlFor="vegan">
                 Vegan
-                <input type="checkbox" name="vegan" />
+                <input type="checkbox" name="vegan" defaultChecked={false} />
               </label>
             </li>
             <li onInput={onInput}>
               <label htmlFor="vegetarian">
                 Vegetarian
-                <input type="checkbox" name="vegetarian" />
+                <input
+                  type="checkbox"
+                  name="vegetarian"
+                  defaultChecked={false}
+                />
               </label>
             </li>
             <li onInput={onInput}>
               <label htmlFor="glutenFree">
                 Gluten-Free
-                <input type="checkbox" name="glutenFree" />
+                <input
+                  type="checkbox"
+                  name="glutenFree"
+                  defaultChecked={false}
+                />
               </label>
             </li>
           </ul>

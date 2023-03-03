@@ -1,5 +1,3 @@
-import { user } from "../fakeApi";
-
 export function generateRandomID(length = 64) {
   const now = Date.now().toString;
   let uniqueId = "";
@@ -30,15 +28,15 @@ export const getUserDiet = (userPreferences) => {
   // if user idenfitied as vegetarian only, or both vegan & vegetarian
   (userPreferences.vegetarian ||
     (userPreferences.vegan && userPreferences.vegetarian)) &&
-    userDiet.push("vegan|vegetarian");
+    userDiet.push("vegan, vegetarian");
 
   // if user identified as gluten free
   userPreferences.glutenFree && userDiet.push("glutenFree");
 
   // if no diet preferences, clear the array
-  !userPreferences.vegan &&
-    !userPreferences.vegetarian &&
-    !userPreferences.glutenFree &&
+  (!userPreferences.vegan || userPreferences.vegan === false) &&
+    (!userPreferences.vegetarian || userPreferences.vegetarian === false) &&
+    (!userPreferences.glutenFree || userPreferences.glutenFree === false) &&
     userDiet.splice(0, userDiet.length);
 
   return userDiet;
@@ -59,77 +57,31 @@ export const getUserIntolerances = (userPreferences) => {
 };
 
 export const checkUserPrefs = (userPreferences, recipes) => {
-  // filter recipes to only return ones that match user's diet
+  const preferences = userPreferences;
+  console.log(recipes);
+  // if neither argument needed sent in, return
+  if (!preferences || !recipes) return;
+
+  // array to put filtered recipes into
   let result = [];
 
-  const userDiet = getUserDiet(userPreferences);
-  console.log(userDiet);
-
-  // console log user prefs and unfiltered recipes
-  console.log("User prefs:", userPreferences, "recipes:", recipes);
-
-  // Russell's solution
-  // recipes.forEach((recipe) => {
-  //   let keep = true;
-  //   for (const key in userPreferences) {
-  //     if (recipe[key] === false) {
-  //       keep = false;
-  //     }
-  //   }
-  //   if (keep === true) {
-  //     result.push(recipe);
-  //   }
-  // });
-
-  const dietAsString = userDiet.toLocaleString();
-  console.log(dietAsString);
-
-  // const regex = new RegExp(`([^,]+)`);
-  // const matched = dietAsString.match(regex);
-  // console.log("regex", regex, "matched", matched);
-
-  // recipes.forEach((recipe) => {
-  //   recipe[ke];
-  // });
-  // if (dietAsString.includes("vegan")) {
-  //   recipes.forEach((recipe) => recipe.vegan === true);
-  // }
-
-  const keys = dietAsString.split(",");
-  console.log(keys);
-
-  // for (const [key, value] of Object.entries(object1)) {
-  //   console.log(`${key}: ${value}`);
-  // }
-
+  // filter recipes to only return ones that match user's diet
   recipes.forEach((recipe) => {
-    // let keep = undefined;
-    keys.forEach((key) => {
-      if (userPreferences[key] === true) {
-        if (result.includes(recipe)) {
-          return;
-        }
-        if (recipe[key] === true) {
-          result.push(recipe);
-        } else return;
+    // if recipe already added, return
+    if (result.includes(recipe)) {
+      return;
+    }
+    // for each key in preferences, filter matching recipes
+    for (const key in preferences) {
+      if (preferences[key] === true && recipe[key] === preferences[key]) {
+        result = recipes.filter((recipe) => recipe[key] === preferences[key]);
       }
-
-      // if (keep === true) {
-      //   result.push(recipe);
-      // }
-    });
+    }
   });
 
   // console log filtered recipes
   console.log("Filtered recipes (result)", result);
+
   // return only suitable recipes
   return result;
-
-  // recipes.forEach((element) => {
-  //   element.vegan === userPreferences.isVegan &&
-  //     (element.vegetarian === userPreferences.isVegetarian ||
-  //       element.vegetarian === userPreferences.isVegan) &&
-  //     element.glutenFree === userPreferences.isGlutenFree &&
-  //     result.push(element);
-  // });
 };

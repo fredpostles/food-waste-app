@@ -5,8 +5,10 @@ import { DELETE_RECIPE } from "../../redux/types";
 
 const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
   const dispatch = useDispatch();
+
   const onDelete = () => {
     dispatch({ type: DELETE_RECIPE, payload: recipe.id });
+    setOpenModal(false);
   };
 
   const recipe = modalContent;
@@ -28,11 +30,13 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
           <h1>{capitalizeFirstLetter(recipe.title)}</h1>
         </div>
         <div className="modalBody">
-          <img
-            src={recipe.image}
-            alt={recipe.name}
-            className="savedRecipes recipeImage"
-          />
+          <div className="imageContainer">
+            <img
+              src={recipe.image}
+              alt={recipe.name}
+              className="savedRecipes recipeImage"
+            />
+          </div>
           <div className="recipeItem text_section">
             <div className="recipeInfo__container">
               <ul className="recipeInfo__list">

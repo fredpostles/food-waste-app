@@ -1,25 +1,26 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  getRecipeByIngredient,
-  getRecipeInformationBulk,
-} from "../../apiCalls/dataFetching";
-import {
   SET_SCREEN_MODE,
   SET_INGREDIENT_SEARCH,
   SET_RECIPE_INFO,
 } from "../../redux/types";
-import { getUserDiet, checkUserPrefs } from "../../utils";
+import {
+  getRecipeByIngredient,
+  getRecipeInformationBulk,
+} from "../../apiCalls/dataFetching";
+import { checkUserPrefs } from "../../utils";
+
 import PantryItem from "./MyPantry/PantryItem";
 import PantrySortSelection from "./MyPantry/PantrySortSelection";
+import LoadingModal from "../Modal/LoadingModal";
 
-const MyPantry = (setSuggestions) => {
+const MyPantry = ({ setSuggestions }) => {
   const dispatch = useDispatch();
   const [sort, setSort] = useState("");
+  const [loading, setLoading] = useState(false);
   const pantryItems = useSelector((state) => state.pantryItems);
   const userPreferences = useSelector((state) => state.user.preferences);
-
-  const userDiet = getUserDiet(userPreferences);
 
   // copy of pantry items to be used for sorting data
   let sortedData = [...pantryItems];
@@ -64,6 +65,7 @@ const MyPantry = (setSuggestions) => {
   }
 
   const onUsePantry = async () => {
+    setLoading(true);
     // get string of pantry items to send to API to find matching recipes
     const wholePantry = sortedData.map((item) => item.itemName).toString();
 
@@ -77,7 +79,7 @@ const MyPantry = (setSuggestions) => {
     const infoForRecipes = await getRecipeInformationBulk(idsToSearch);
 
     // filter for recipes that match user's dietary prefs, using recipe info
-    const filteredRecipes = checkUserPrefs(userDiet, infoForRecipes);
+    const filteredRecipes = checkUserPrefs(userPreferences, infoForRecipes);
 
     // extract IDs of recipes that match dietary prefs
     const filteredIds = filteredRecipes.map((item) => item.id);
@@ -95,7 +97,24 @@ const MyPantry = (setSuggestions) => {
 
     // set screen to recipe search
     dispatch({ type: SET_SCREEN_MODE, payload: 2 });
+
+    setLoading(false);
   };
+
+  // possible messages to display in "use pantry" buton
+  const messagesArray = [
+    "Use as many pantry items as possible",
+    "Use up my pantry!",
+    "What can I make with what I've got?",
+    "Find recipes using what I have",
+    "Show me recipes that use my pantry items",
+  ];
+
+  // get random index value
+  const randomIndex = Math.floor(Math.random() * messagesArray.length);
+
+  // get random message
+  const message = messagesArray[randomIndex];
 
   return (
     <div className="myPantry__container">
@@ -103,18 +122,17 @@ const MyPantry = (setSuggestions) => {
       {pantryItems.length > 1 && (
         <PantrySortSelection filterChange={filterChange} />
       )}
-      {pantryItems.length > 2 && (
+      {pantryItems.length > 1 && (
         <div className="wholePantrySearch__container">
           <button
             onClick={onUsePantry}
             className="wholePantrySearchBtn"
             title="Search for recipes using as many pantry ingredients as possible"
           >
-            Use as many pantry items as possible
+            {message}
           </button>
         </div>
       )}
-
       <div className="pantryItems__container">
         {sortedData &&
           sortedData.map((item) => {
@@ -123,10 +141,12 @@ const MyPantry = (setSuggestions) => {
                 item={item}
                 setSuggestions={setSuggestions}
                 key={item.id}
+                setLoading={setLoading}
               />
             );
           })}
       </div>
+      {loading ? <LoadingModal /> : null}
     </div>
   );
 };
