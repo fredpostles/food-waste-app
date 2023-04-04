@@ -11,6 +11,7 @@ const SearchSuggestions = ({ suggestions }) => {
   const [showMore, setShowMore] = useState(9);
 
   const addPantryItem = (item) => {
+    console.log("pantry item", item);
     dispatch({ type: ADD_PANTRY_ITEM, payload: item });
   };
 

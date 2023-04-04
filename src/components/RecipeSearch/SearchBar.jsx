@@ -21,7 +21,9 @@ const SearchBar = ({
   const userPreferences = useSelector((state) => state.user.preferences);
 
   const onSubmitSearch = async () => {
+    // show loading modal
     setLoading(true);
+
     dispatch({ type: SET_SEARCH_TERM, payload: searchTerm });
 
     // get basic recipe info for recipes matching searchTerm(s)
@@ -44,12 +46,13 @@ const SearchBar = ({
       filteredIds.includes(element.id)
     );
 
-    // set matching recipes to display
+    // send matching recipes to display
     setSuggestions(recipesToDisplay);
 
     // send recipe info to store
     dispatch({ type: SET_RECIPE_INFO, payload: filteredRecipes });
 
+    // get rid of loading modal
     setLoading(false);
 
     // clear previously stored ingredient search from store

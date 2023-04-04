@@ -11,12 +11,6 @@ const SavedRecipes = () => {
   const [showRecipeMethod, setShowRecipeMethod] = useState(false);
   const [modalContent, setModalContent] = useState({ undefined });
 
-  // if (openModal) {
-  //   setShowRecipeMethod(true);
-  // } else if (!openModal) {
-  //   setShowRecipeMethod(false);
-  // }
-
   const getModalContent = (recipe) => {
     const item = savedRecipes.find((element) => element.id === recipe.id);
 

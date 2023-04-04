@@ -53,7 +53,7 @@ const DietaryInfo = () => {
             </li>
           </ul>
         </div>
-        <div className="intolerances__container">
+        {/* <div className="intolerances__container">
           <h2>Allergies or intolerances:</h2>
           <p className="italic">Tick all that apply</p>
           <ul className="allergiesOrIntolerances">
@@ -124,7 +124,7 @@ const DietaryInfo = () => {
               </label>
             </li>
           </ul>
-        </div>
+        </div> */}
         <button onClick={onSubmit} className="signUp__button">
           Submit
         </button>

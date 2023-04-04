@@ -6,22 +6,8 @@ const Preferences = ({ user }) => {
   const dispatch = useDispatch();
   const [userInput, setUserInput] = useState({});
 
-  const {
-    vegan,
-    vegetarian,
-    glutenFree,
-    noDairy,
-    noEgg,
-    noGrain,
-    noPeanut,
-    noSeafood,
-    noSesame,
-    noShellfish,
-    noSoy,
-    noSulfite,
-    noTreeNuts,
-    noWheat,
-  } = user.preferences;
+  const { vegan, vegetarian, glutenFree } = user.preferences;
+  console.log(user);
 
   const onInput = (e) => {
     const newInput = { ...userInput, [e.target.name]: e.target.checked };
@@ -69,8 +55,9 @@ const Preferences = ({ user }) => {
             </li>
           </ul>
         </div>
-        <div className="intolerances__container">
-          <h2>Allergies or intolerances:</h2>
+        {
+          <div className="intolerances__container">
+            {/* <h2>Allergies or intolerances:</h2>
           <ul className="allergiesOrIntolerances">
             <li onInput={onInput}>
               <label htmlFor="noDairy">
@@ -174,8 +161,9 @@ const Preferences = ({ user }) => {
                 />
               </label>
             </li>
-          </ul>
-        </div>
+          </ul> */}
+          </div>
+        }
         <button onClick={onSubmit} className="updateBtn">
           Update
         </button>

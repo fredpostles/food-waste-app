@@ -33,7 +33,7 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
           <div className="imageContainer">
             <img
               src={recipe.image}
-              alt={recipe.name}
+              alt={recipe.title}
               className="savedRecipes recipeImage"
             />
           </div>
@@ -56,11 +56,20 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
             ) : null}
             <div className="recipeMethod__container">
               <h5>Method:</h5>
-              <ol>
-                {recipe.analyzedInstructions[0].steps.map((element) => {
-                  return <li key={element.number}>{element.step}</li>;
-                })}
-              </ol>
+              {recipe.analyzedInstructions.length === 0 &&
+              recipe.instructions ? (
+                <p>{recipe.instructions}</p>
+              ) : recipe.analyzedInstructions.length === 0 &&
+                !recipe.instructions ? (
+                <p>Oops! No method to show...</p>
+              ) : null}
+              {recipe.analyzedInstructions.length > 0 ? (
+                <ol>
+                  {recipe.analyzedInstructions[0].steps.map((element) => {
+                    return <li key={element.number}>{element.step}</li>;
+                  })}
+                </ol>
+              ) : null}
             </div>
           </div>
         </div>

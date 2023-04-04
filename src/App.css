@@ -428,7 +428,8 @@ p.card__title {
 .deleteBtn,
 .ingredientSearchBtn,
 .seeMethodBtn,
-.saveRecipeBtn {
+.saveRecipeBtn,
+.unsaveRecipeBtn {
   cursor: pointer;
   border-radius: 1rem;
   border: none;
@@ -446,7 +447,8 @@ p.card__title {
 .deleteBtn:hover,
 .ingredientSearchBtn:hover,
 .seeMethodBtn:hover,
-.saveRecipeBtn:hover {
+.saveRecipeBtn:hover,
+.unsaveRecipeBtn:hover {
   background-color: #333;
   color: white;
 }

@@ -10,6 +10,7 @@ import {
   DELETE_PANTRY_ITEM,
   EDIT_QUANTITY,
   SAVE_RECIPE,
+  UNSAVE_RECIPE,
   DELETE_RECIPE,
   ADD_PREFERENCES,
   UPDATE_PREFERENCES,
@@ -34,7 +35,7 @@ export function reducer(state = getItem("store") || initialState, action) {
         ...action.payload,
       };
 
-      const newState = { ...state, user, screenMode: 0.5 };
+      const newState = { ...state, user, screenMode: 1 };
 
       storeItem("store", newState);
 
@@ -172,6 +173,22 @@ export function reducer(state = getItem("store") || initialState, action) {
       storeItem("store", newState);
 
       return newState;
+
+    case UNSAVE_RECIPE: {
+      const savedRecipes = [...state.savedRecipes];
+
+      const indexOfRecipe = savedRecipes.findIndex((recipe) => {
+        return recipe.id === action.payload;
+      });
+
+      savedRecipes.splice(indexOfRecipe, 1);
+
+      const newState = { ...state, savedRecipes };
+
+      storeItem("store", newState);
+
+      return newState;
+    }
 
     case DELETE_RECIPE: {
       const savedRecipes = [...state.savedRecipes];

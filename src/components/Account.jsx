@@ -9,6 +9,7 @@ import Preferences from "./Account/Preferences";
 
 const Account = () => {
   const user = useSelector((state) => state.user);
+  // const dbUser = getDBUser(/* code here*/)
   const dispatch = useDispatch();
   const [userInput, setUserInput] = useState({
     email: user.email,

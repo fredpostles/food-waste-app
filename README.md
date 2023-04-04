@@ -2,9 +2,11 @@
 
 ### A React SPA to help save food from going to waste
 
-This app was made as part of {the jump digital school}'s full stack course, as a React Front-end project.
+This app was made as part of {the jump digital school}'s full stack software engineering course, as a frontend React proof of concept project.
 
-Still a work in progress. Back-end to follow.
+Still a work in progress.
+
+Backend [here](https://github.com/fredpostles/mfnw-backend).
 
 ### To do:
 

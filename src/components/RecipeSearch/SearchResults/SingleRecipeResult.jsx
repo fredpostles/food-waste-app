@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SAVE_RECIPE } from "../../../redux/types";
+import { SAVE_RECIPE, UNSAVE_RECIPE } from "../../../redux/types";
 import AdditionalIngredients from "./SingleRecipeResult/AdditionalIngredients";
 import UsedIngredients from "./SingleRecipeResult/UsedIngredients";
 import { capitalizeFirstLetter } from "../../../utils";
@@ -9,9 +9,14 @@ const SingleRecipeResult = ({ recipe }) => {
   const dispatch = useDispatch();
   const recipeInfo = useSelector((state) => state.recipeInfo);
   const [showRecipeMethod, setShowRecipeMethod] = useState(false);
+  const savedRecipes = useSelector((state) => state.savedRecipes);
 
   const onSaveRecipe = () => {
     dispatch({ type: SAVE_RECIPE, payload: recipeInfo[indexOfItem] });
+  };
+
+  const onUnsaveRecipe = () => {
+    dispatch({ type: UNSAVE_RECIPE, payload: recipe.id });
   };
 
   const displayRecipeMethod = () => {
@@ -44,21 +49,31 @@ const SingleRecipeResult = ({ recipe }) => {
         {showRecipeMethod ? (
           <div className="recipeMethod__container">
             <h5>Method:</h5>
-            <ol>
-              {recipeInfo[indexOfItem].analyzedInstructions[0].steps.map(
-                (element) => {
-                  return <li key={element.number}>{element.step}</li>;
-                }
-              )}
-            </ol>
+            {recipeInfo[indexOfItem].analyzedInstructions.length === 0 &&
+            recipeInfo[indexOfItem].instructions ? (
+              <p>{recipeInfo[indexOfItem].instructions}</p>
+            ) : recipeInfo[indexOfItem].analyzedInstructions.length === 0 &&
+              !recipeInfo[indexOfItem].instructions ? (
+              <p>Oops! No method to show...</p>
+            ) : null}
+            {recipeInfo[indexOfItem].analyzedInstructions.length > 0 ? (
+              <ol>
+                {recipeInfo[indexOfItem].analyzedInstructions[0].steps.map(
+                  (element) => {
+                    return <li key={element.number}>{element.step}</li>;
+                  }
+                )}
+              </ol>
+            ) : null}
           </div>
         ) : null}
       </div>
-      {recipeInfo[indexOfItem] ? (
+      {/* Remove source as Foodista links seem to redirect to spam websites*/}
+      {/* {recipeInfo[indexOfItem] ? (
         <small>
           <a href={recipeInfo[indexOfItem].sourceUrl}>Source</a>
         </small>
-      ) : null}
+      ) : null} */}
       <div className="recipeButtons">
         <button onClick={displayRecipeMethod} className="seeMethodBtn">
           {showRecipeMethod ? "Hide method" : "See method"}
@@ -66,9 +81,15 @@ const SingleRecipeResult = ({ recipe }) => {
         <button onClick={() => console.log(recipeInfo[indexOfItem])}>
           Console log info for this recipe
         </button>
-        <button onClick={onSaveRecipe} className="saveRecipeBtn">
-          Save recipe
-        </button>
+        {savedRecipes.some((element) => element.id === recipe.id) ? (
+          <button onClick={onUnsaveRecipe} className="unsaveRecipeBtn">
+            Remove from saved recipes
+          </button>
+        ) : (
+          <button onClick={onSaveRecipe} className="saveRecipeBtn">
+            Save recipe
+          </button>
+        )}
       </div>
     </>
   );
