@@ -1,20 +1,24 @@
 import { joiValidation } from "./joi";
-import { onboarding } from "./joiSchemas";
+import { onboarding, login } from "./joiSchemas";
 
 export const validate = (type, payload) => {
   // type indicates what part of app is being validated, e.g. 1, 2, 3, 4 (to match diff screens)
   // payload is whatever data is to be validated
 
   switch (type) {
-    case 0: // onboarding
+    case "onboarding": // onboarding
       return joiValidation(onboarding, payload);
 
-    case 1:
-      // pantry
+    case "login":
+      // login
+      return joiValidation(login, payload);
+
+    case "pantry":
+      //pantry
       break;
 
-    case 2:
-      //recipe search
+    case "recipeSearch":
+      // recipe search
       break;
 
     default:

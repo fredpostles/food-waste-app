@@ -45,7 +45,7 @@ const Signup = () => {
   const onInput = (e) => {
     const { name, value, type, checked } = e.target;
     // only spread userInput if input is not checkbox
-    const newInput = type !== "checkbox" ? { ...userInput } : {};
+    const newInput = { ...userInput };
 
     if (type === "checkbox") {
       newInput.preferences = {
@@ -53,7 +53,6 @@ const Signup = () => {
         [name]: checked ? true : false,
       };
     } else {
-      console.log("onInput else ran");
       newInput[name] = value;
     }
 
@@ -67,7 +66,7 @@ const Signup = () => {
   };
 
   const validateUserInput = () => {
-    const result = validate(0, userInput);
+    const result = validate("onboarding", userInput);
     if (result === true) {
       // no error to display
       setErrors(undefined);
@@ -118,6 +117,7 @@ const Signup = () => {
           onFocus={onFocus}
           errors={errors}
           focusedInput={focusedInput}
+          userInput={userInput}
         />
         <button className="signUp__button" onClick={onSubmit}>
           Sign Up

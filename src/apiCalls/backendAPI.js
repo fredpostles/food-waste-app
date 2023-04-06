@@ -5,10 +5,21 @@ const API_URL = `http://localhost:6005`;
 export const createUser = async (user) => {
   try {
     const { data } = await axios.post(`${API_URL}/signup`, user);
-    console.log("data:", data);
+    console.log("createUser - data:", data);
     return data;
   } catch (error) {
     console.log("createUser error:", error);
+    throw error;
+  }
+};
+
+export const login = async (loginDetails) => {
+  try {
+    const { data } = await axios.post(`${API_URL}/login`, loginDetails);
+    console.log("login - data:", data);
+    return data;
+  } catch (error) {
+    console.log("login error:", error);
     throw error;
   }
 };

@@ -1,6 +1,6 @@
 import React from "react";
 
-const SignUpForm = ({ onInput, onFocus, errors, focusedInput }) => {
+const SignUpForm = ({ onInput, onFocus, errors, focusedInput, userInput }) => {
   return (
     <form onInput={onInput}>
       <div className="signUp__container">
@@ -15,7 +15,9 @@ const SignUpForm = ({ onInput, onFocus, errors, focusedInput }) => {
             onFocus={onFocus}
           />
         </div>
-        <p>{focusedInput === "email" && errors?.email ? errors.email : null}</p>
+        <p>
+          {userInput.email?.length > 0 && errors?.email ? errors.email : null}
+        </p>
         <div className="signUp password">
           <label htmlFor="password">Password:</label>
           <input
@@ -27,7 +29,7 @@ const SignUpForm = ({ onInput, onFocus, errors, focusedInput }) => {
           />
         </div>
         <p>
-          {focusedInput === "password" && errors?.password
+          {userInput.password?.length > 0 && errors?.password
             ? errors.password
             : null}
         </p>
@@ -41,7 +43,7 @@ const SignUpForm = ({ onInput, onFocus, errors, focusedInput }) => {
             onFocus={onFocus}
           />
         </div>
-        <p>{focusedInput === "name" && errors?.name ? errors.name : null}</p>
+        <p>{userInput.name?.length > 0 && errors?.name ? errors.name : null}</p>
         <div className="signUp surname">
           <label htmlFor="surname">Surname:</label>
           <input
@@ -53,7 +55,7 @@ const SignUpForm = ({ onInput, onFocus, errors, focusedInput }) => {
           />
         </div>
         <p>
-          {focusedInput === "surname" && errors?.surname
+          {userInput.surname?.length > 0 && errors?.surname
             ? errors.surname
             : null}
         </p>

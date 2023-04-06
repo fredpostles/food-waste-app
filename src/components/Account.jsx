@@ -23,7 +23,7 @@ const Account = () => {
     const newInput = { ...userInput, [e.target.name]: e.target.value };
     setUserInput(newInput);
 
-    const result = validate(0, newInput);
+    const result = validate("onboarding", newInput);
 
     if (result === true) {
       // no error to display

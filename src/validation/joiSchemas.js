@@ -15,3 +15,10 @@ export const onboarding = {
   surname: Joi.string().required().min(2).max(25),
   preferences: preferenceSchema,
 };
+
+export const login = {
+  email: Joi.string()
+    .required()
+    .email({ tlds: { allow: false } }),
+  password: Joi.string().required(),
+};

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { SET_SCREEN_MODE } from "../redux/types";
 
@@ -8,7 +9,11 @@ const Navigation = () => {
   return (
     <>
       <nav className="mainNav">
-        <a onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 1 })}>
+        <Link to="/pantry">Pantry</Link>
+        <Link to="/recipe-search">Recipe Search</Link>
+        <Link to="/saved-recipes">Saved Recipes</Link>
+        <Link to="/account">Account</Link>
+        {/* <a onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 1 })}>
           Pantry
         </a>
         <a onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 2 })}>
@@ -19,7 +24,7 @@ const Navigation = () => {
         </a>
         <a onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 4 })}>
           Account
-        </a>
+        </a> */}
       </nav>
     </>
   );

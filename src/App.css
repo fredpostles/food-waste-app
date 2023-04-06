@@ -46,7 +46,8 @@ li {
 }
 
 .onboarding__container,
-.dietaryInfo__container {
+.dietaryInfo__container,
+.login__container {
   background-color: #efbb00;
   color: white;
   min-height: fit-content;
@@ -67,7 +68,8 @@ li {
   margin: 0 auto;
 }
 
-.signUp {
+.signUp,
+.login {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -79,7 +81,8 @@ li {
   margin-top: 1rem;
 }
 
-.signUp__button {
+.signUp__button,
+.login__button {
   border-radius: 1rem;
   background-color: #fff;
   cursor: pointer;
@@ -87,26 +90,34 @@ li {
   border: 0.1rem inset black;
 }
 
-.signUp__button:hover {
+.signUp__button:hover,
+.login__button:hover {
   background-color: #436436;
   color: white;
 }
 
-.signUp input {
-  border-radius: 1.5rem;
-  padding: 1rem;
+.signUp input,
+.login input {
+  border-radius: 1rem;
+  padding: 0.5rem;
   border: none;
-  border-bottom: 0.5rem solid transparent;
+  border: 0.5rem solid transparent;
   outline: none;
 }
 
-.signUp input:focus {
+.signUp input:focus,
+.login input:focus {
   border-bottom: 0.5rem solid #436436;
 }
 
-.signUp label {
+.signUp label,
+.login label {
   margin: 0 1rem;
   font-size: 1.4rem;
+}
+
+div.errors {
+  min-height: 1rem;
 }
 
 .dietaryInfo__container h1 {
@@ -534,6 +545,11 @@ p.card__title {
   border: 0.5rem solid #efbb00;
 }
 
+.recipeSearchBar__container {
+  background-color: #436436;
+  padding-bottom: 1.5rem;
+}
+
 .recipeSearchBar__container h1,
 .recipeSearchBar__container h2 {
   margin-bottom: 0.5rem;
@@ -545,11 +561,6 @@ p.card__title {
   margin-bottom: 1rem;
   color: #faffff;
   filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
-}
-
-.recipeSearchBar__container {
-  background-color: #436436;
-  padding: 1.5rem;
 }
 
 .recipeSearchBar {
@@ -942,9 +953,10 @@ h4 {
   }
 
   .onboarding__container {
-    min-width: fit-content;
-    max-height: 80vh;
+    /* min-width: fit-content; */
+    width: 60vw;
     min-height: fit-content;
+    max-height: 100vh;
   }
 
   button {
@@ -984,7 +996,7 @@ h4 {
 
   .onboarding__container {
     width: 60%;
-    max-height: 85vh;
+    /* max-height: 85vh; */
     height: fit-content;
   }
 

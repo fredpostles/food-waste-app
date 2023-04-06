@@ -17,6 +17,7 @@ import {
   SET_INGREDIENT_SEARCH,
   CLEAR_INGREDIENT_SEARCH,
   SET_RECIPE_INFO,
+  ADD_TOKEN,
 } from "./types";
 import { storeItem, getItem } from "../localStorage";
 
@@ -35,7 +36,7 @@ export function reducer(state = getItem("store") || initialState, action) {
         ...action.payload,
       };
 
-      const newState = { ...state, user, screenMode: 1 };
+      const newState = { ...state, user };
 
       storeItem("store", newState);
 
@@ -79,6 +80,14 @@ export function reducer(state = getItem("store") || initialState, action) {
           preferences: { ...state.user.preferences, ...action.payload },
         },
       };
+
+      storeItem("store", newState);
+
+      return newState;
+    }
+
+    case ADD_TOKEN: {
+      const newState = { ...state, token: action.payload };
 
       storeItem("store", newState);
 
