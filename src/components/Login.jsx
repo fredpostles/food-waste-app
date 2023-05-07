@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { login } from "../apiCalls/backendAPI";
 import { ADD_TOKEN } from "../redux/types";
-import { generateRandomID } from "../utils";
 import { validate } from "../validation";
 import LoginForm from "./Login/LoginForm";
 
@@ -26,7 +25,7 @@ const Login = () => {
 
   const validateLogin = () => {
     const result = validate("login", userInput);
-    // console.log("result of validate:", result);
+    console.log("result of validate:", result);
     setErrors({ ...result });
     console.log("errors after validate:", errors);
   };
@@ -36,20 +35,16 @@ const Login = () => {
     validateLogin();
 
     // call backend to login
-    // const result = await login(userInput);
+    const result = await login(userInput);
 
-    // if (result.data?.response.error) {
-    //   console.log("Login error:", result.data.response.error);
-    //   setErrors({ ...errors, general: result.data.response.error });
-    // } else {
-    //   console.log("Login success!");
-    //   dispatch({ type: ADD_TOKEN, payload: result.token });
-    // }
-
-    if (!errors) {
-      const token = generateRandomID(64);
-      dispatch({ type: ADD_TOKEN, payload: token });
+    if (result.data?.response.error) {
+      console.log("Login error:", result.data.response.error);
+      setErrors({ ...errors, general: result.data.response.error });
+    } else {
+      console.log("Login success!");
+      dispatch({ type: ADD_TOKEN, payload: result.token });
     }
+
     console.log(errors);
   };
 

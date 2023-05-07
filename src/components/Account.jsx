@@ -25,8 +25,8 @@ const Account = () => {
     const fetchUserData = async () => {
       try {
         // console.log("here");
-        // const user = await getUser(token);
-        // console.log("user", user);
+        const user = await getUser(token);
+        console.log("user", user);
         setUserData({
           email: user.email,
           // leave hashed password in back end
@@ -84,7 +84,7 @@ const Account = () => {
     fetchUserData();
   }, [token]);
 
-  // console.log("userData after being set", userData);
+  console.log("userData after being set", userData);
 
   const onInput = (e) => {
     const newInput = { ...userInput, [e.target.name]: e.target.value };
@@ -104,9 +104,8 @@ const Account = () => {
 
   const onUpdate = async () => {
     if (!errors) {
-      // const result = await updateUser({ ...userInput }, token);
-      // console.log("result of updateUser, account:", result);
-      dispatch({ type: UPDATE_USER, payload: userInput });
+      const result = await updateUser({ ...userInput }, token);
+      console.log("result of updateUser, account:", result);
     } else {
       alert("Could not update. Please check the errors below.");
     }

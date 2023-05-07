@@ -27,8 +27,8 @@ const Signup = () => {
     validateUserInput();
     if (!errors) {
       try {
-        // const createdUser = await createUser(userInput);
-        dispatch({ type: ADD_USER, payload: userInput });
+        const createdUser = await createUser(userInput);
+        // dispatch({ type: ADD_USER, payload: userInput });
         setUserInput({});
       } catch (error) {
         console.log(error);
