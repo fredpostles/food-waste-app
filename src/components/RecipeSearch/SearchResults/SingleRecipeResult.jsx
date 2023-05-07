@@ -5,11 +5,22 @@ import AdditionalIngredients from "./SingleRecipeResult/AdditionalIngredients";
 import UsedIngredients from "./SingleRecipeResult/UsedIngredients";
 import { capitalizeFirstLetter } from "../../../utils";
 
-const SingleRecipeResult = ({ recipe }) => {
+const SingleRecipeResult = (props) => {
+  const {
+    recipe,
+    showRecipeMethod,
+    setShowRecipeMethod,
+    openModal,
+    setOpenModal,
+    getModalContent,
+  } = props;
   const dispatch = useDispatch();
   const recipeInfo = useSelector((state) => state.recipeInfo);
-  const [showRecipeMethod, setShowRecipeMethod] = useState(false);
   const savedRecipes = useSelector((state) => state.savedRecipes);
+
+  const indexOfItem = recipeInfo.findIndex(
+    (element) => element.id === recipe.id
+  );
 
   const onSaveRecipe = () => {
     dispatch({ type: SAVE_RECIPE, payload: recipeInfo[indexOfItem] });
@@ -21,11 +32,9 @@ const SingleRecipeResult = ({ recipe }) => {
 
   const displayRecipeMethod = () => {
     setShowRecipeMethod(!showRecipeMethod);
+    setOpenModal(!openModal);
+    getModalContent(recipe, recipeInfo[indexOfItem]);
   };
-
-  const indexOfItem = recipeInfo.findIndex(
-    (element) => element.id === recipe.id
-  );
 
   return (
     <>
@@ -46,7 +55,7 @@ const SingleRecipeResult = ({ recipe }) => {
           <UsedIngredients recipe={recipe} />
         )}
         <AdditionalIngredients recipe={recipe} />
-        {showRecipeMethod ? (
+        {/* {showRecipeMethod ? (
           <div className="recipeMethod__container">
             <h5>Method:</h5>
             {recipeInfo[indexOfItem].analyzedInstructions.length === 0 &&
@@ -66,7 +75,7 @@ const SingleRecipeResult = ({ recipe }) => {
               </ol>
             ) : null}
           </div>
-        ) : null}
+        ) : null} */}
       </div>
       {/* Remove source as Foodista links seem to redirect to spam websites*/}
       {/* {recipeInfo[indexOfItem] ? (
@@ -76,7 +85,7 @@ const SingleRecipeResult = ({ recipe }) => {
       ) : null} */}
       <div className="recipeButtons">
         <button onClick={displayRecipeMethod} className="seeMethodBtn">
-          {showRecipeMethod ? "Hide method" : "See method"}
+          See method{" "}
         </button>
         {/* <button onClick={() => console.log(recipeInfo[indexOfItem])}>
           Console log info for this recipe

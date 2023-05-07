@@ -11,12 +11,12 @@ const App = () => {
   useEffect(() => {
     setTimeout(() => {
       setIsLoaded(true);
-    }, 2000);
+    }, 1000);
   }, []);
 
   return (
     <Router>
-      <button onClick={() => localStorage.clear()}>Clear localStorage</button>
+      {/* <button onClick={() => localStorage.clear()}>Clear localStorage</button> */}
       <Routes>
         {isLoaded ? (
           <Route path="/*" element={<Interface />} />

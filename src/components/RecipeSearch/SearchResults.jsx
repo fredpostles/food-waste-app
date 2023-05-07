@@ -3,11 +3,26 @@ import { useSelector } from "react-redux";
 import NoResults from "./SearchResults/NoResults";
 import ShowResultsButtons from "./SearchResults/ShowResultsButtons";
 import SingleRecipeResult from "./SearchResults/SingleRecipeResult";
+import RecipeModal from "../RecipeSearch/RecipeModal";
 
 const SearchResults = (props) => {
   const suggestions = props.suggestions;
   const ingredientSearch = useSelector((state) => state.ingredientSearch);
   const [showMore, setShowMore] = useState(11);
+  const [openModal, setOpenModal] = useState(false);
+  const [showRecipeMethod, setShowRecipeMethod] = useState(false);
+  const [modalContent, setModalContent] = useState({});
+  const recipeInfo = useSelector((state) => state.recipeInfo);
+
+  const getModalContent = (recipe, info) => {
+    let item;
+    if (ingredientSearch) {
+      item = ingredientSearch.find((element) => element.id === recipe.id);
+    } else if (suggestions) {
+      item = suggestions.find((element) => element.id === recipe.id);
+    }
+    setModalContent({ item, info });
+  };
 
   const onShowMore = () => {
     setShowMore(showMore + 10);
@@ -25,11 +40,20 @@ const SearchResults = (props) => {
     <div className="searchResults__container">
       <ul className="recipeSearchResults__list">
         {suggestions
-          ? suggestions.map((recipe, index) => {
+          ? suggestions?.map((recipe, index) => {
               if (index > showMore) return;
               return (
-                <li className="singleRecipe__container" key={recipe.id}>
-                  <SingleRecipeResult recipe={recipe} />
+                <li className="singleRecipe__container">
+                  <SingleRecipeResult
+                    recipe={recipe}
+                    key={recipe.id}
+                    id={recipe.id}
+                    showRecipeMethod={showRecipeMethod}
+                    setShowRecipeMethod={setShowRecipeMethod}
+                    openModal={openModal}
+                    setOpenModal={setOpenModal}
+                    getModalContent={getModalContent}
+                  />
                 </li>
               );
             })
@@ -40,7 +64,14 @@ const SearchResults = (props) => {
               else
                 return (
                   <li className="singleRecipe__container" key={recipe.id}>
-                    <SingleRecipeResult recipe={recipe} />
+                    <SingleRecipeResult
+                      recipe={recipe}
+                      showRecipeMethod={showRecipeMethod}
+                      setShowRecipeMethod={setShowRecipeMethod}
+                      openModal={openModal}
+                      setOpenModal={setOpenModal}
+                      getModalContent={getModalContent}
+                    />
                   </li>
                 );
             })
@@ -57,6 +88,14 @@ const SearchResults = (props) => {
           showMore={showMore}
           onShowMore={onShowMore}
           onShowLess={onShowLess}
+        />
+      ) : null}
+      {openModal ? (
+        <RecipeModal
+          setShowRecipeMethod={setShowRecipeMethod}
+          setOpenModal={setOpenModal}
+          modalContent={modalContent}
+          recipeInfo={recipeInfo}
         />
       ) : null}
     </div>

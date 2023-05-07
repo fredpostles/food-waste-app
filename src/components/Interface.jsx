@@ -15,30 +15,34 @@ const Interface = () => {
 
   useEffect(() => {
     const lastPage = localStorage.getItem("lastPage");
-    if (user.id && token && lastPage) {
-      setInitialPage(lastPage);
-    } else if (!user.id && !token) {
+    if (!user.id) {
       setInitialPage("/signup");
     } else if (user.id && !token) {
       setInitialPage("/login");
     } else {
-      setInitialPage("/pantry");
+      setInitialPage(lastPage ? lastPage : "/pantry");
     }
   }, [user.id, token]);
 
-  return (
-    <Routes initialPath={initialPage}>
-      {!user.id && !token && <Route path="/*" element={<Signup />} />}
-      {user.id && !token && <Route path="/*" element={<Login />} />}
-      <Route path="/signup" element={<Signup />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/pantry" element={<Pantry />} />
-      <Route path="/recipe-search" element={<RecipeSearch />} />
-      <Route path="/saved-recipes" element={<SavedRecipes />} />
-      <Route path="/account" element={<Account />} />
-      <Route path="*" element={<Navigate to="/pantry" />} />
-    </Routes>
-  );
+  const renderRoutes = () => {
+    if (!user.id) {
+      return <Route path="/*" element={<Signup />} />;
+    } else if (user.id && !token) {
+      return <Route path="/*" element={<Login />} />;
+    } else {
+      return (
+        <>
+          <Route path="/pantry" element={<Pantry />} />
+          <Route path="/recipe-search" element={<RecipeSearch />} />
+          <Route path="/saved-recipes" element={<SavedRecipes />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="*" element={<Navigate to="/pantry" />} />
+        </>
+      );
+    }
+  };
+
+  return <Routes initialPath={initialPage}>{renderRoutes()}</Routes>;
 };
 
 export default Interface;

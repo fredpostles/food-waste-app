@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import Recipe from "./SavedRecipes/Recipe";
 import Navigation from "./Navigation";
 import SavedRecipeTemplate from "./SavedRecipes/SavedRecipeTemplate";
-import RecipeModal from "./SavedRecipes/RecipeModal";
+import SavedRecipeModal from "./SavedRecipes/SavedRecipeModal";
 
 const SavedRecipes = () => {
   const savedRecipes = useSelector((state) => state.savedRecipes);
@@ -43,7 +43,7 @@ const SavedRecipes = () => {
         </div>
       </div>
       {openModal ? (
-        <RecipeModal
+        <SavedRecipeModal
           setShowRecipeMethod={setShowRecipeMethod}
           setOpenModal={setOpenModal}
           modalContent={modalContent}

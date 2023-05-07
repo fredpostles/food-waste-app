@@ -4,7 +4,11 @@ import { useDispatch } from "react-redux";
 import { DELETE_RECIPE } from "../../redux/types";
 import CloseModalButton from "../Buttons/CloseModalButton";
 
-const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
+const SavedRecipeModal = ({
+  setShowRecipeMethod,
+  setOpenModal,
+  modalContent,
+}) => {
   const dispatch = useDispatch();
 
   const onDelete = () => {
@@ -25,7 +29,6 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
     <div className="modalBackground">
       <div className="modalContainer">
         <button className="modalCloseBtn" onClick={closeModal}>
-          {/* X */}
           <CloseModalButton />
         </button>
         <div className="modalTitle">
@@ -76,12 +79,8 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
           </div>
         </div>
         <div className="modalFooter">
-          {/* Removed as Foodista links seems to redirect to spam websites */}
-          {/* <button>
-            <a href={recipe.sourceUrl}>Source</a>
-          </button> */}
           <button onClick={closeModal} title="Return to Saved Recipes">
-            Return
+            Close
           </button>
           <button onClick={onDelete} title="Delete from Saved Recipes">
             Delete recipe
@@ -92,4 +91,4 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
   );
 };
 
-export default RecipeModal;
+export default SavedRecipeModal;

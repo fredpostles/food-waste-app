@@ -64,6 +64,14 @@ li {
   filter: drop-shadow(0.2rem 0.2rem 0.5rem black);
 }
 
+.onboarding__container {
+  margin: 3rem auto;
+}
+
+.onboarding__container form {
+  margin: 0 auto;
+}
+
 .login__container {
   margin: 25% auto;
 }
@@ -78,10 +86,19 @@ li {
   margin: 0 auto;
 }
 
-.signUp,
+.signUp {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  margin: 0 auto;
+}
+
 .login {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
@@ -441,8 +458,6 @@ p.card__title {
   opacity: 1;
 }
 
-.showMoreBtn,
-.showLessBtn,
 .saveBtn,
 .updateBtn,
 .addQuantityBtn,
@@ -457,6 +472,15 @@ p.card__title {
   border: none;
   border: 0.2rem solid transparent;
   background-color: #f5f5f5;
+  margin: 0.5rem 0.25rem;
+}
+
+.showMoreBtn,
+.showLessBtn {
+  cursor: pointer;
+  border-radius: 1rem;
+  border: none;
+  border: 0.2rem solid transparent;
   margin: 0.5rem 0.25rem;
 }
 
@@ -644,7 +668,7 @@ p.sub-heading {
   overflow: scroll;
 }
 
-.imageContainer {
+.modalBody .imageContainer {
   width: 90%;
   margin: 0 auto;
 }
@@ -813,6 +837,7 @@ h4 {
   padding: 1rem;
   border-radius: 0.5rem;
   background-color: #f5f5f5;
+  color: #0f4c81;
   margin: 0.5rem auto;
   width: 90%;
 }
@@ -820,6 +845,7 @@ h4 {
 .recipeMethod__container h5 {
   font-size: large;
   margin-bottom: 0.5rem;
+  text-decoration: underline;
 }
 
 .recipeMethod__container ol {
@@ -1040,7 +1066,6 @@ label {
   }
 
   .signUp__container {
-    padding: 2rem;
     min-height: fit-content;
   }
 
