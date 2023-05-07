@@ -164,7 +164,7 @@ div.errors {
 
 .pantry__section__container {
   padding: 0.5rem;
-  background-color: #ffe8d6;
+  background-color: #c2e2d9;
   text-align: center;
   min-height: 100vh;
 }
@@ -510,7 +510,7 @@ p.card__title {
 }
 
 .recipeSearch__container {
-  background-color: #ffe8d6;
+  background-color: #c2e2d9;
   padding: 1rem 1rem 2rem 1rem;
   min-height: 100vh;
 }
@@ -587,13 +587,12 @@ p.card__title {
 .recipeSearchBar__container h1,
 .recipeSearchBar__container h2 {
   margin-bottom: 0.5rem;
-  filter: drop-shadow(0.1rem 0.1rem white);
 }
 
 .recipeSearchBar__container h3 {
   margin-bottom: 1rem;
   color: black;
-  filter: drop-shadow(0.1rem 0.1rem white);
+  filter: none;
 }
 
 .recipeSearchBar {
@@ -629,12 +628,8 @@ p.sub-heading {
 .savedRecipeSection__container {
   position: relative;
   padding: 1rem;
-  background-color: #ffe8d6;
+  background-color: #c2e2d9;
   min-height: 100vh;
-}
-
-.savedRecipeSection__container h1 {
-  filter: drop-shadow(0.1rem 0.1rem 0.1rem white);
 }
 
 .savedRecipes__container__grid {
@@ -873,13 +868,9 @@ h4 {
 }
 
 .account__container {
-  background-color: #ffe8d6;
+  background-color: #c2e2d9;
   padding: 1rem 1rem 2rem 1rem;
   height: 100vh;
-}
-
-.account__container > h1 {
-  filter: drop-shadow(0.1rem 0.1rem 0.1rem white);
 }
 
 .account__container > h2 {
@@ -929,7 +920,7 @@ label {
 .account__dietaryInfo__container {
   background-color: #519d87;
   border-radius: 1rem;
-  box-shadow: 0 0 1rem;
+  filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
   padding: 1.5rem 3rem;
   width: fit-content;
   min-width: 30rem;
