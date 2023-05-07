@@ -1,55 +1,62 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { updateUser } from "../../apiCalls/backendAPI";
 import { UPDATE_PREFERENCES } from "../../redux/types";
 
 const Preferences = ({ user }) => {
-  const dispatch = useDispatch();
-  const [userInput, setUserInput] = useState({});
-
-  const { vegan, vegetarian, glutenFree } = user.preferences;
   console.log(user);
+  const [preferences, setPreferences] = useState(user.preferences);
+  const token = useSelector((state) => state.token);
+  const dispatch = useDispatch();
 
   const onInput = (e) => {
-    const newInput = { ...userInput, [e.target.name]: e.target.checked };
-    setUserInput(newInput);
+    const { name, checked } = e.target;
+    setPreferences((previousState) => ({
+      ...previousState,
+      [name]: checked ? true : false,
+    }));
   };
 
-  const onSubmit = () => {
-    dispatch({
-      type: UPDATE_PREFERENCES,
-      payload: userInput,
-    });
+  const onSubmit = async (e) => {
+    e.preventDefault();
+    // const result = await updateUser({ ...preferences }, token);
+    // console.log("Result of updateUser query in front:", result);
+    dispatch({ type: UPDATE_PREFERENCES, payload: preferences });
   };
 
   return (
-    <>
+    <form onInput={onInput}>
       <div className="account__dietaryInfo__container">
         <div className="account__dietaryPrefs__container">
           <h2>Dietary Preferences:</h2>
           <ul className="dietaryPreferences">
-            <li onInput={onInput}>
+            <li>
               <label htmlFor="vegan">
                 Vegan
-                <input type="checkbox" name="vegan" defaultChecked={vegan} />
+                <input
+                  type="checkbox"
+                  name="vegan"
+                  defaultChecked={preferences.vegan}
+                />
               </label>
             </li>
-            <li onInput={onInput}>
+            <li>
               <label htmlFor="vegetarian">
                 Vegetarian
                 <input
                   type="checkbox"
                   name="vegetarian"
-                  defaultChecked={vegetarian}
+                  defaultChecked={preferences.vegetarian}
                 />
               </label>
             </li>
-            <li onInput={onInput}>
+            <li>
               <label htmlFor="glutenFree">
                 Gluten-Free
                 <input
                   type="checkbox"
                   name="glutenFree"
-                  defaultChecked={glutenFree}
+                  defaultChecked={preferences.glutenFree}
                 />
               </label>
             </li>
@@ -168,7 +175,7 @@ const Preferences = ({ user }) => {
           Update
         </button>
       </div>
-    </>
+    </form>
   );
 };
 

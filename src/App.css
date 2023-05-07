@@ -8,8 +8,10 @@
   src: url(../public/assets/fonts/PublicSans-Italic-VariableFont_wght.ttf);
 }
 
+@import url("https://fonts.googleapis.com/css2?family=Merriweather&display=swap");
+
 body {
-  font-family: PublicSans, Arial, Helvetica, sans-serif;
+  font-family: Merriweather, serif;
   text-align: center;
   font-size: 1.2rem;
 }
@@ -34,6 +36,10 @@ li {
   font-weight: bold;
 }
 
+.section__heading {
+  margin: 2rem;
+}
+
 .appLogo {
   width: 40rem;
   margin: auto;
@@ -48,14 +54,18 @@ li {
 .onboarding__container,
 .dietaryInfo__container,
 .login__container {
-  background-color: #efbb00;
-  color: white;
+  background-color: #519d87;
+  color: #f5f5f5;
   min-height: fit-content;
   width: 60vw;
   margin: auto;
   border-radius: 2.5rem;
   padding: 2.5rem;
   filter: drop-shadow(0.2rem 0.2rem 0.5rem black);
+}
+
+.login__container {
+  margin: 25% auto;
 }
 
 .onboarding__container h1 {
@@ -83,17 +93,18 @@ li {
 
 .signUp__button,
 .login__button {
+  border: none;
   border-radius: 1rem;
-  background-color: #fff;
+  background-color: #f5f5f5;
   cursor: pointer;
   outline: none;
-  border: 0.1rem inset black;
+  padding: 0.5rem;
 }
 
 .signUp__button:hover,
 .login__button:hover {
-  background-color: #436436;
-  color: white;
+  background-color: #0f4c81;
+  color: #f5f5f5;
 }
 
 .signUp input,
@@ -107,7 +118,7 @@ li {
 
 .signUp input:focus,
 .login input:focus {
-  border-bottom: 0.5rem solid #436436;
+  border: 0.5rem solid #0f4c81;
 }
 
 .signUp label,
@@ -136,7 +147,7 @@ div.errors {
 
 .pantry__section__container {
   padding: 0.5rem;
-  background-color: #436436;
+  background-color: #ffe8d6;
   text-align: center;
   min-height: 100vh;
 }
@@ -151,8 +162,8 @@ div.errors {
 
 .wholePantrySearchBtn {
   padding: 1.5rem;
-  background-color: #efbb00;
-  color: white;
+  background-color: #519d87;
+  color: #f5f5f5;
   font-size: 1.6rem;
   font-weight: 600;
   border-radius: 1rem;
@@ -161,13 +172,13 @@ div.errors {
 }
 
 .wholePantrySearchBtn:hover {
-  background-color: white;
-  color: #efbb00;
-  border: 0.5rem solid #efbb00;
+  background-color: #f5f5f5;
+  color: #519d87;
+  border: 0.5rem solid #519d87;
 }
 
 .pantry__templateResult {
-  background-color: #efbb00;
+  background-color: #519d87;
   border-radius: 1rem;
   filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
   min-width: 50%;
@@ -177,7 +188,7 @@ div.errors {
 
 .pantry__templateResult h1 {
   margin: 0 0 1rem 0;
-  color: white;
+  color: #f5f5f5;
   filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
 }
 
@@ -220,7 +231,7 @@ div.errors {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: #efbb00;
+  background-color: #519d87;
   border-radius: 1rem;
   padding: 1rem;
   box-shadow: 0.1em 0.1em 0.5rem;
@@ -257,12 +268,11 @@ div.errors {
 }
 
 .pantrySort__label {
-  color: white;
   font-weight: 500;
 }
 
 .image__container.pantryItem {
-  background-color: white;
+  background-color: #f5f5f5;
   text-align: center;
   min-width: 10rem;
   width: auto;
@@ -307,6 +317,7 @@ p.card__title {
   display: flex;
   justify-content: center;
   align-items: center;
+  filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
 }
 
 .innerPantrySearch {
@@ -336,7 +347,7 @@ p.card__title {
 }
 
 .searchBtn {
-  background-color: inherit;
+  background-color: white;
   border: none;
   cursor: pointer;
   padding: 0;
@@ -349,7 +360,7 @@ p.card__title {
 
 .clearBtn {
   border: none;
-  background-color: inherit;
+  background-color: white;
   cursor: pointer;
   padding: 0.4rem;
 }
@@ -373,7 +384,7 @@ p.card__title {
   max-width: 56.4rem;
   height: fit-content;
   max-height: 75vh;
-  background-color: white;
+  background-color: #f5f5f5;
   border-radius: 0 0 1rem 1rem;
   filter: drop-shadow(0 0.1rem 0.2rem black);
   overflow: scroll;
@@ -419,7 +430,7 @@ p.card__title {
 }
 
 .plusBtn {
-  background-color: #fff;
+  background-color: #f5f5f5;
   border: none;
   cursor: pointer;
   justify-self: flex-end;
@@ -445,7 +456,7 @@ p.card__title {
   border-radius: 1rem;
   border: none;
   border: 0.2rem solid transparent;
-  background-color: #ddd;
+  background-color: #f5f5f5;
   margin: 0.5rem 0.25rem;
 }
 
@@ -460,16 +471,14 @@ p.card__title {
 .seeMethodBtn:hover,
 .saveRecipeBtn:hover,
 .unsaveRecipeBtn:hover {
-  background-color: #333;
-  color: white;
+  background-color: #0f4c81;
+  color: #f5f5f5;
 }
 
 .pantrySearch__container h1,
 .pantrySearch__container h2,
 .myPantry__container h3 {
   margin-bottom: 0.5rem;
-  color: #faffff;
-  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
 }
 
 .myPantry__container h1 {
@@ -477,13 +486,13 @@ p.card__title {
 }
 
 .recipeSearch__container {
-  background-color: #436436;
+  background-color: #ffe8d6;
   padding: 1rem 1rem 2rem 1rem;
   min-height: 100vh;
 }
 
 .recipeSearch__templateResult {
-  background-color: #efbb00;
+  background-color: #519d87;
   border-radius: 1rem;
   filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
   min-width: 50%;
@@ -529,38 +538,38 @@ p.card__title {
   outline: none;
   border: 0.5rem solid transparent;
   border-right: none;
+  background-color: white;
+  color: #0f4c81;
 }
 
 .searchInput:focus {
-  border: 0.5rem solid #efbb00;
+  border: 0.5rem solid #519d87;
   border-right: none;
 }
 
 .searchInput:focus ~ .searchBar__icons__container {
-  border: 0.5rem solid #efbb00;
+  border: 0.5rem solid #519d87;
   border-left: none;
 }
 
 .searchInput:focus ~ .suggestions__container {
-  border: 0.5rem solid #efbb00;
+  border: 0.5rem solid #519d87;
 }
 
 .recipeSearchBar__container {
-  background-color: #436436;
   padding-bottom: 1.5rem;
 }
 
 .recipeSearchBar__container h1,
 .recipeSearchBar__container h2 {
   margin-bottom: 0.5rem;
-  color: #faffff;
-  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
+  filter: drop-shadow(0.1rem 0.1rem white);
 }
 
 .recipeSearchBar__container h3 {
   margin-bottom: 1rem;
-  color: #faffff;
-  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
+  color: black;
+  filter: drop-shadow(0.1rem 0.1rem white);
 }
 
 .recipeSearchBar {
@@ -579,6 +588,7 @@ p.card__title {
   display: flex;
   justify-content: center;
   width: 80%;
+  filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
 }
 
 .recipeSearchResults__list {
@@ -595,14 +605,12 @@ p.sub-heading {
 .savedRecipeSection__container {
   position: relative;
   padding: 1rem;
-  background-color: #436436;
+  background-color: #ffe8d6;
   min-height: 100vh;
 }
 
 .savedRecipeSection__container h1 {
-  margin-bottom: 0.5rem;
-  color: white;
-  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem white);
 }
 
 .savedRecipes__container__grid {
@@ -625,11 +633,11 @@ p.sub-heading {
 }
 
 .modalContainer {
-  width: 80vw;
-  height: 80vh;
+  width: 90vw;
+  height: 90vh;
   border-radius: 1.2rem;
-  background-color: #c69c04;
-  box-shadow: rgba(0.5, 0.5, 0.5, 0.9) 0rem 0.5rem 1.5rem;
+  background-color: #519d87;
+  filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
   display: flex;
   flex-direction: column;
   padding: 2rem;
@@ -644,17 +652,17 @@ p.sub-heading {
 .modalTitle h1 {
   margin: 0 auto 1rem;
   color: white;
-  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem #0f4c81);
 }
 
-.ingredients__container h2 {
-  margin: 0 auto;
-  font-size: medium;
-  color: white;
-  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
+.ingredients__container h1 {
+  text-align: center;
+  margin: 0 0 1rem 0;
+  color: #0f4c81;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem white);
 }
 
-.modalContainer .ingredients__list {
+.ingredients__list {
   text-align: left;
 }
 
@@ -662,9 +670,15 @@ p.sub-heading {
   align-self: flex-end;
   background: none;
   border: none;
-  border: 0.1rem solid black;
   border-radius: 1rem;
   cursor: pointer;
+  width: 3.5rem;
+}
+
+.modalCloseBtn svg {
+  width: 100%;
+  height: 100%;
+  color: white;
 }
 
 .modalFooter {
@@ -682,7 +696,7 @@ p.sub-heading {
 }
 
 .savedRecipes__templateResult {
-  background-color: #efbb00;
+  background-color: #519d87;
   border-radius: 1rem;
   filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
   min-width: 50%;
@@ -691,7 +705,8 @@ p.sub-heading {
 }
 
 .savedRecipes__templateResult h1 {
-  margin: 0;
+  color: white;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
 }
 
 .savedRecipes__templateResult .imageContainer {
@@ -726,16 +741,18 @@ p.sub-heading {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  background-color: #efbb00;
+  background-color: #519d87;
   border-radius: 0.5rem;
   min-height: fit-content;
   min-width: fit-content;
   padding: 1.5rem;
-  box-shadow: 0.1em 0.1em 0.5rem;
+  filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
+  color: #f5f5f5;
 }
 
 .singleRecipe__container h2,
 h4 {
+  filter: drop-shadow(0.2rem 0.2rem 0.2rem #0f4c81);
   margin-bottom: 0.8rem;
   font-size: medium;
 }
@@ -752,7 +769,6 @@ h4 {
 .recipeItem.text_section {
   display: flex;
   flex-direction: column;
-  margin-top: 0.5rem;
 }
 
 .additionalIngredients__list,
@@ -760,10 +776,11 @@ h4 {
 .recipeInfo__list,
 .ingredients__list {
   padding: 1rem;
-  color: #333;
+  color: #0f4c81;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
   border-radius: 0.5rem;
-  background-color: antiquewhite;
-  margin: 0.5rem auto;
+  background-color: #f5f5f5;
+  margin: 1rem auto;
   width: 90%;
 }
 
@@ -794,14 +811,14 @@ h4 {
 
 .recipeMethod__container {
   padding: 1rem;
-  color: white;
   border-radius: 0.5rem;
-  background-color: #436436;
+  background-color: #f5f5f5;
   margin: 0.5rem auto;
   width: 90%;
 }
 
 .recipeMethod__container h5 {
+  font-size: large;
   margin-bottom: 0.5rem;
 }
 
@@ -830,43 +847,52 @@ h4 {
 }
 
 .account__container {
-  background-color: #436436;
+  background-color: #ffe8d6;
   padding: 1rem 1rem 2rem 1rem;
+  height: 100vh;
 }
 
 .account__container > h1 {
-  margin-bottom: 0.5rem;
-  color: white;
-  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem white);
 }
 
 .account__container > h2 {
   margin-bottom: 1rem;
-  color: white;
+  color: #6d6875;
   filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
 }
 
 .accountInfo__container {
-  background-color: #efbb00;
+  background-color: #519d87;
   border-radius: 1rem;
-  box-shadow: 0 0 1rem;
+  filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
   padding: 1.5rem 2.5rem;
   width: fit-content;
-  min-width: 45rem;
+  min-width: 30rem;
   margin: 0 auto;
   margin-bottom: 2rem;
 }
 
 .accountInfo__container input {
   border-radius: 1.5rem;
-  border: none;
+  border: 0.5rem solid transparent;
   padding: 1rem;
   outline: none;
-  border-bottom: 0.5rem solid transparent;
 }
 
 .accountInfo__container input:focus {
-  border-bottom: 0.5rem solid #436436;
+  border: solid 0.5rem #0f4c81;
+}
+
+.accountInfo__container h2 {
+  margin-bottom: 0.5rem;
+}
+
+.accountInfo__container h2,
+h3,
+label {
+  color: white;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
 }
 
 .accountInfo__label {
@@ -875,20 +901,25 @@ h4 {
 }
 
 .account__dietaryInfo__container {
-  background-color: #efbb00;
+  background-color: #519d87;
   border-radius: 1rem;
   box-shadow: 0 0 1rem;
   padding: 1.5rem 3rem;
   width: fit-content;
-  min-width: 45rem;
+  min-width: 30rem;
   margin: 0 auto;
+}
+
+.account__dietaryInfo__container h2 {
+  color: white;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
 }
 
 .mainNav {
   position: sticky;
   top: 0;
   z-index: 100;
-  background-color: #efbb00;
+  background-color: #519d87;
   display: flex;
   justify-content: space-evenly;
   align-items: center;
@@ -896,14 +927,19 @@ h4 {
 }
 
 .mainNav a {
-  border-left: solid 0.1rem black;
-  border-bottom: solid 0.1rem black;
+  border-left: solid 0.15rem black;
+  border-bottom: solid 0.15rem black;
   font-weight: 400;
   font-size: 1.4rem;
   padding: 1rem;
   width: 100%;
   min-width: fit-content;
   height: 100%;
+}
+
+.activePage {
+  color: #333;
+  background-color: #a5ccb9;
 }
 
 .mainNav a:first-of-type {
@@ -913,7 +949,7 @@ h4 {
 .mainNav a:hover {
   color: #333;
   cursor: pointer;
-  background-color: #c69c04;
+  background-color: #a5ccb9;
 }
 
 @media screen and (min-width: 540px) {
@@ -953,8 +989,7 @@ h4 {
   }
 
   .onboarding__container {
-    /* min-width: fit-content; */
-    width: 60vw;
+    width: 65vw;
     min-height: fit-content;
     max-height: 100vh;
   }
@@ -975,6 +1010,10 @@ h4 {
 
   .suggestions__container {
     top: 4.5rem;
+  }
+
+  .signUp {
+    flex-wrap: nowrap;
   }
 }
 

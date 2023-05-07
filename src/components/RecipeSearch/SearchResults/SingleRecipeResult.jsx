@@ -78,9 +78,9 @@ const SingleRecipeResult = ({ recipe }) => {
         <button onClick={displayRecipeMethod} className="seeMethodBtn">
           {showRecipeMethod ? "Hide method" : "See method"}
         </button>
-        <button onClick={() => console.log(recipeInfo[indexOfItem])}>
+        {/* <button onClick={() => console.log(recipeInfo[indexOfItem])}>
           Console log info for this recipe
-        </button>
+        </button> */}
         {savedRecipes.some((element) => element.id === recipe.id) ? (
           <button onClick={onUnsaveRecipe} className="unsaveRecipeBtn">
             Remove from saved recipes

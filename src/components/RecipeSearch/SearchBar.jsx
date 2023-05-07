@@ -68,7 +68,7 @@ const SearchBar = ({
   return (
     <>
       <div className="recipeSearchBar__container">
-        <h1>Search for recipes</h1>
+        <h1 className="section__heading">Search for recipes</h1>
         <h2>Got items in your pantry you need to use up?</h2>
         <h3>Search for recipes by ingredient below:</h3>
         <div className="recipeSearchBar">

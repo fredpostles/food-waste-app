@@ -2,8 +2,6 @@ import React, { useState, useEffect } from "react";
 import Startup from "./components/Startup";
 import Interface from "./components/Interface";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { SET_SCREEN_MODE } from "./redux/types";
 import "./css/generics.css";
 import "./App.css";
 
@@ -23,7 +21,7 @@ const App = () => {
         {isLoaded ? (
           <Route path="/*" element={<Interface />} />
         ) : (
-          <Route path="/" element={<Startup />} />
+          <Route path="/*" element={<Startup />} />
         )}
       </Routes>
     </Router>

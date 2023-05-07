@@ -7,7 +7,7 @@ const PantrySearch = ({ suggestions, setSuggestions }) => {
   return (
     <div className="pantrySearch__container">
       <div className="pantrySearch__container__header">
-        <h1>Pantry</h1>
+        <h1 className="section__heading">Pantry</h1>
         <h2>Search for items to add to your pantry:</h2>
       </div>
       <div className="innerPantrySearch">

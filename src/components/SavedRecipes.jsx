@@ -21,7 +21,7 @@ const SavedRecipes = () => {
     <>
       <Navigation />
       <div className="savedRecipeSection__container">
-        <h1>My Saved Recipes</h1>
+        <h1 className="section__heading">My Saved Recipes</h1>
         {savedRecipes.length < 1 ? <SavedRecipeTemplate /> : null}
         <div className="savedRecipes__container__grid">
           {savedRecipes && savedRecipes.length > 0

@@ -24,13 +24,33 @@ export const login = async (loginDetails) => {
   }
 };
 
-export const getUser = async () => {
+export const getUser = async (token) => {
   try {
-    const { data } = await axios.get(`${API_URL}/users`);
+    const { data } = await axios.get(`${API_URL}/users`, {
+      headers: {
+        token: `${token}`,
+      },
+    });
     console.log("Data:", data);
-    return data;
+    return data.user;
   } catch (error) {
     console.log("getUser error:", error);
+    throw error;
+  }
+};
+
+export const updateUser = async (userInput, token) => {
+  console.log("updateUser ran");
+  console.log("userInput in updateUser front", userInput);
+  try {
+    const { data } = await axios.put(`${API_URL}/users`, userInput, {
+      headers: {
+        token: `${token}`,
+      },
+    });
+    console.log("Data", data);
+  } catch (error) {
+    console.log("updateUser error:", error);
     throw error;
   }
 };

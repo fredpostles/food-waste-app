@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import {
   DELETE_PANTRY_ITEM,
-  SET_SCREEN_MODE,
   SET_INGREDIENT_SEARCH,
   SET_RECIPE_INFO,
 } from "../../../redux/types";
@@ -14,19 +14,21 @@ import PantryItemImage from "./PantryItem/PantryItemImage";
 import PantryItemBody from "./PantryItem/PantryItemBody";
 import { checkUserPrefs } from "../../../utils";
 
-const PantryItem = ({ item, setLoading }) => {
+const PantryItem = ({ item, setIsLoaded }) => {
   const dispatch = useDispatch();
   const userPreferences = useSelector((state) => state.user.preferences);
+  const navigate = useNavigate();
 
   const onDelete = () => {
     dispatch({ type: DELETE_PANTRY_ITEM, payload: item.id });
   };
 
-  // MOVE THIS TO DATA FETCHING/CONTROLLER
+  // search for recipes using current pantry item
   const onRecipeSearch = async () => {
-    setLoading(true);
+    // show loading modal
+    setIsLoaded(false);
 
-    // send searchTerm (ingredient(s)) to API to get matching recipes
+    // send item name to API to get matching recipes
     const result = await getRecipeByIngredient(item.itemName);
 
     // extract IDs from the recipes returned by API
@@ -53,9 +55,10 @@ const PantryItem = ({ item, setLoading }) => {
     dispatch({ type: SET_RECIPE_INFO, payload: filteredRecipes });
 
     // change screen to Recipe Search
-    dispatch({ type: SET_SCREEN_MODE, payload: 2 });
+    navigate("/recipe-search");
 
-    setLoading(false);
+    // close loading modal
+    setIsLoaded(true);
   };
 
   return (

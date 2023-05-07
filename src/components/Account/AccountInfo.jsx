@@ -1,8 +1,8 @@
 import React from "react";
 
-const AccountInfo = ({ onInput, errors, user }) => {
+const AccountInfo = ({ onInput, errors, user, hasChanged }) => {
   return (
-    <>
+    <form>
       <label htmlFor="email">
         Email:{" "}
         <input
@@ -15,17 +15,6 @@ const AccountInfo = ({ onInput, errors, user }) => {
         />
       </label>
       <p>{errors && errors.email}</p>
-      <label htmlFor="password">
-        Password:{" "}
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
-          onInput={onInput}
-          defaultValue={user.password}
-        />
-      </label>
-      <p>{errors && errors.password}</p>
       <label htmlFor="name">
         Name:{" "}
         <input
@@ -48,7 +37,21 @@ const AccountInfo = ({ onInput, errors, user }) => {
         />
       </label>
       <p>{errors && errors.surname}</p>
-    </>
+      {hasChanged ? (
+        <>
+          <label htmlFor="password">Enter your password to confirm: </label>
+          <br />
+          <input
+            type="password"
+            name="password"
+            placeholder="Password"
+            onInput={onInput}
+            defaultValue={""}
+          />
+          <p>{errors && errors.password}</p>
+        </>
+      ) : null}
+    </form>
   );
 };
 

@@ -4,7 +4,6 @@ import {
   ADD_USER,
   UPDATE_USER,
   DELETE_USER,
-  SET_SCREEN_MODE,
   SET_SEARCH_TERM,
   ADD_PANTRY_ITEM,
   DELETE_PANTRY_ITEM,
@@ -23,13 +22,6 @@ import { storeItem, getItem } from "../localStorage";
 
 export function reducer(state = getItem("store") || initialState, action) {
   switch (action.type) {
-    case SET_SCREEN_MODE: {
-      const newState = { ...state, screenMode: action.payload };
-
-      storeItem("store", newState);
-
-      return newState;
-    }
     case ADD_USER: {
       const user = {
         id: generateRandomID(64),
@@ -64,7 +56,6 @@ export function reducer(state = getItem("store") || initialState, action) {
       const newState = {
         ...state,
         user: { ...state.user, preferences: { ...action.payload } },
-        screenMode: 1,
       };
 
       storeItem("store", newState);

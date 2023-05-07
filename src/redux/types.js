@@ -21,6 +21,4 @@ export const SAVE_RECIPE = "SAVE_RECIPE";
 export const UNSAVE_RECIPE = "UNSAVE_RECIPE";
 export const DELETE_RECIPE = "UNSAVE_RECIPE";
 
-export const SET_SCREEN_MODE = "SET_SCREEN_MODE";
-
 export const SET_SEARCH_TERM = "SET_SEARCH_TERM";

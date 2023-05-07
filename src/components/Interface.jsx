@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, Navigate, useNavigate } from "react-router-dom";
+import { Routes, Route, Navigate } from "react-router-dom";
 import Signup from "./Signup";
 import Pantry from "./Pantry";
 import Account from "./Account";
@@ -11,14 +11,13 @@ import Login from "./Login";
 const Interface = () => {
   const user = useSelector((state) => state.user);
   const token = useSelector((state) => state.token);
-  const navigate = useNavigate();
   const [initialPage, setInitialPage] = useState("");
 
   useEffect(() => {
     const lastPage = localStorage.getItem("lastPage");
-    if (lastPage) {
+    if (user.id && token && lastPage) {
       setInitialPage(lastPage);
-    } else if (!user.id) {
+    } else if (!user.id && !token) {
       setInitialPage("/signup");
     } else if (user.id && !token) {
       setInitialPage("/login");
@@ -29,6 +28,8 @@ const Interface = () => {
 
   return (
     <Routes initialPath={initialPage}>
+      {!user.id && !token && <Route path="/*" element={<Signup />} />}
+      {user.id && !token && <Route path="/*" element={<Login />} />}
       <Route path="/signup" element={<Signup />} />
       <Route path="/login" element={<Login />} />
       <Route path="/pantry" element={<Pantry />} />

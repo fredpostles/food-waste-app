@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  SET_SCREEN_MODE,
-  SET_INGREDIENT_SEARCH,
-  SET_RECIPE_INFO,
-} from "../../redux/types";
+import { SET_INGREDIENT_SEARCH, SET_RECIPE_INFO } from "../../redux/types";
 import {
   getRecipeByIngredient,
   getRecipeInformationBulk,
 } from "../../apiCalls/dataFetching";
 import { checkUserPrefs } from "../../utils";
-
+import { useNavigate } from "react-router-dom";
 import PantryItem from "./MyPantry/PantryItem";
 import PantrySortSelection from "./MyPantry/PantrySortSelection";
 import LoadingModal from "../Modal/LoadingModal";
@@ -18,9 +14,10 @@ import LoadingModal from "../Modal/LoadingModal";
 const MyPantry = ({ setSuggestions }) => {
   const dispatch = useDispatch();
   const [sort, setSort] = useState("");
-  const [loading, setLoading] = useState(false);
+  const [isLoaded, setIsLoaded] = useState(true);
   const pantryItems = useSelector((state) => state.pantryItems);
   const userPreferences = useSelector((state) => state.user.preferences);
+  const navigate = useNavigate();
 
   // copy of pantry items to be used for sorting data
   let sortedData = [...pantryItems];
@@ -65,7 +62,9 @@ const MyPantry = ({ setSuggestions }) => {
   }
 
   const onUsePantry = async () => {
-    setLoading(true);
+    // show loading modal
+    setIsLoaded(false);
+
     // get string of pantry items to send to API to find matching recipes
     const wholePantry = sortedData.map((item) => item.itemName).toString();
 
@@ -96,9 +95,10 @@ const MyPantry = ({ setSuggestions }) => {
     dispatch({ type: SET_RECIPE_INFO, payload: filteredRecipes });
 
     // set screen to recipe search
-    dispatch({ type: SET_SCREEN_MODE, payload: 2 });
+    navigate("/recipe-search");
 
-    setLoading(false);
+    // close loading modal
+    setIsLoaded(true);
   };
 
   // possible messages to display in "use pantry" buton
@@ -141,12 +141,12 @@ const MyPantry = ({ setSuggestions }) => {
                 item={item}
                 setSuggestions={setSuggestions}
                 key={item.id}
-                setLoading={setLoading}
+                setIsLoaded={setIsLoaded}
               />
             );
           })}
       </div>
-      {loading ? <LoadingModal /> : null}
+      {!isLoaded ? <LoadingModal /> : null}
     </div>
   );
 };

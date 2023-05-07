@@ -1,32 +1,50 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { useDispatch } from "react-redux";
-import { SET_SCREEN_MODE } from "../redux/types";
+import { Link, useLocation } from "react-router-dom";
 
 const Navigation = () => {
-  const dispatch = useDispatch();
+  const location = useLocation();
+  const activeLinkClass = "activePage";
+  const inactiveLinkClass = "inactivePage";
 
   return (
-    <>
-      <nav className="mainNav">
-        <Link to="/pantry">Pantry</Link>
-        <Link to="/recipe-search">Recipe Search</Link>
-        <Link to="/saved-recipes">Saved Recipes</Link>
-        <Link to="/account">Account</Link>
-        {/* <a onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 1 })}>
-          Pantry
-        </a>
-        <a onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 2 })}>
-          Recipe Search
-        </a>
-        <a onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 3 })}>
-          Saved Recipes
-        </a>
-        <a onClick={() => dispatch({ type: SET_SCREEN_MODE, payload: 4 })}>
-          Account
-        </a> */}
-      </nav>
-    </>
+    <nav className="mainNav">
+      <Link
+        to="/pantry"
+        className={
+          location.pathname === "/pantry" ? activeLinkClass : inactiveLinkClass
+        }
+      >
+        Pantry
+      </Link>
+      <Link
+        to="/recipe-search"
+        className={
+          location.pathname === "/recipe-search"
+            ? activeLinkClass
+            : inactiveLinkClass
+        }
+      >
+        Recipe Search
+      </Link>
+      <Link
+        to="/saved-recipes"
+        className={
+          location.pathname === "/saved-recipes"
+            ? activeLinkClass
+            : inactiveLinkClass
+        }
+      >
+        Saved Recipes
+      </Link>
+      <Link
+        to="/account"
+        className={
+          location.pathname === "/account" ? activeLinkClass : inactiveLinkClass
+        }
+      >
+        Account
+      </Link>
+    </nav>
   );
 };
 

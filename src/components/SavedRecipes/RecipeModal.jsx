@@ -2,6 +2,7 @@ import React from "react";
 import { capitalizeFirstLetter } from "../../utils";
 import { useDispatch } from "react-redux";
 import { DELETE_RECIPE } from "../../redux/types";
+import CloseModalButton from "../Buttons/CloseModalButton";
 
 const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
   const dispatch = useDispatch();
@@ -24,7 +25,8 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
     <div className="modalBackground">
       <div className="modalContainer">
         <button className="modalCloseBtn" onClick={closeModal}>
-          X
+          {/* X */}
+          <CloseModalButton />
         </button>
         <div className="modalTitle">
           <h1>{capitalizeFirstLetter(recipe.title)}</h1>
@@ -46,8 +48,8 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
             </div>
             {recipe && ingredients ? (
               <div className="recipeModal ingredients__container">
-                <h2>Ingredients</h2>
                 <ul className="ingredients__list typographic">
+                  <h1>Ingredients</h1>
                   {ingredients.map((ingredient) => {
                     return <li key={ingredient.id}>{ingredient.original}</li>;
                   })}
