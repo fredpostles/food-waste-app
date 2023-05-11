@@ -3,6 +3,7 @@ export const UPDATE_USER = "UPDATE_USER";
 export const DELETE_USER = "DELETE_USER";
 
 export const ADD_TOKEN = "ADD_TOKEN";
+export const DELETE_TOKEN = "DELETE_TOKEN";
 
 export const ADD_PANTRY_ITEM = "ADD_PANTRY_ITEM";
 export const DELETE_PANTRY_ITEM = "DELETE_PANTRY_ITEM";

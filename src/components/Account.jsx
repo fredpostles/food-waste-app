@@ -8,17 +8,19 @@ import { UPDATE_USER } from "../redux/types";
 import Preferences from "./Account/Preferences";
 import { getUser, updateUser } from "../apiCalls/backendAPI";
 import LoadingModal from "./Modal/LoadingModal";
+import isEqual from "lodash/isEqual";
+import Logoff from "./Logoff/Logoff";
+import DeleteAccount from "./Account/DeleteAccount";
 
 const Account = () => {
   const token = useSelector((state) => state.token);
-  const user = useSelector((state) => state.user);
-  const dispatch = useDispatch();
   const [userData, setUserData] = useState();
   const [userInput, setUserInput] = useState({});
   const [errors, setErrors] = useState();
   const [isLoaded, setIsLoaded] = useState(true);
-  const [hasChanged, setHasChanged] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
+  const [preferencesUpdated, setPreferencesUpdated] = useState(false);
+  const [showPasswordInput, setShowPasswordInput] = useState(false);
 
   useEffect(() => {
     setIsLoaded(false);
@@ -26,7 +28,7 @@ const Account = () => {
       try {
         // console.log("here");
         const user = await getUser(token);
-        console.log("user", user);
+        // console.log("user", user);
         setUserData({
           email: user.email,
           // leave hashed password in back end
@@ -36,7 +38,7 @@ const Account = () => {
           preferences: {
             vegan: user.preferences.vegan,
             vegetarian: user.preferences.vegetarian,
-            glutenFree: user.preferences.gluten_free,
+            glutenFree: user.preferences.glutenFree,
           },
         });
         setUserInput({
@@ -82,9 +84,9 @@ const Account = () => {
       }
     };
     fetchUserData();
-  }, [token]);
+  }, [token, preferencesUpdated]);
 
-  console.log("userData after being set", userData);
+  // console.log("userData after being set", userData);
 
   const onInput = (e) => {
     const newInput = { ...userInput, [e.target.name]: e.target.value };
@@ -103,29 +105,30 @@ const Account = () => {
   };
 
   const onUpdate = async () => {
-    if (!errors) {
-      const result = await updateUser({ ...userInput }, token);
-      console.log("result of updateUser, account:", result);
-    } else {
+    if (errors) {
       alert("Could not update. Please check the errors below.");
+    } else {
+      const result = await updateUser({ ...userInput }, token);
+      // console.log("result of updateUser, account:", result);
+      setShowPasswordInput(false);
     }
   };
 
   const checkForInputChange = () => {
-    if (userData === userInput) {
+    if (isEqual(userData, userInput)) {
       console.log("no change in user data");
-      console.log("userData:", userData);
-      console.log("userInput:", userInput);
+      // console.log("userData:", userData);
+      // console.log("userInput:", userInput);
     } else {
-      console.log("There was a change");
-      console.log("userData:", userData);
-      console.log("userInput:", userInput);
-      setHasChanged(true);
+      console.log("There was a change in user data");
+      // console.log("userData:", userData);
+      // console.log("userInput:", userInput);
+      setShowPasswordInput(true);
     }
   };
 
   const onCancel = () => {
-    setHasChanged(false);
+    setShowPasswordInput(false);
   };
 
   return (
@@ -134,26 +137,53 @@ const Account = () => {
       <div className="account__container">
         <h1 className="section__heading">Your Account</h1>
         <div className="accountInfo__container">
-          <h2>Hi {userData ? capitalizeFirstLetter(userData.name) : null}!</h2>
-          <h3>Here is your account info:</h3>
+          <h2>
+            Hi {userData ? capitalizeFirstLetter(userData.name) : "there"}!
+          </h2>
           {userData ? (
-            <AccountInfo
-              onInput={onInput}
-              errors={errors}
-              user={userData}
-              hasChanged={hasChanged}
-            />
+            <>
+              <h3>Here is your account info:</h3>
+              <AccountInfo
+                onInput={onInput}
+                errors={errors}
+                user={userData}
+                showPasswordInput={showPasswordInput}
+              />
+              <button onClick={onUpdate} className="updateBtn">
+                Update
+              </button>
+            </>
           ) : null}
-          <button onClick={onUpdate} className="updateBtn">
-            Update
-          </button>
-          {hasChanged ? (
+
+          {showPasswordInput ? (
             <button className="cancelBtn" onClick={onCancel}>
               Cancel
             </button>
           ) : null}
         </div>
-        {userData ? <Preferences user={userData} /> : null}
+        {userData ? (
+          <Preferences
+            user={userData}
+            setUserData={setUserData}
+            setPreferencesUpdated={setPreferencesUpdated}
+          />
+        ) : null}
+        <div className="dangerZone__container">
+          <h2>Account Management:</h2>
+          <p>Choose from the following options to manage your account:</p>
+          <p>
+            <strong>Log Out:</strong> Click the "Log Out" button to securely log
+            out of your current session.
+          </p>
+          <p>
+            <strong>Delete Account:</strong> If you wish to delete your entire
+            account, use the "Delete Account" option.
+          </p>
+          <div className="accountMgmt__actions">
+            <Logoff token={token} />
+            <DeleteAccount token={token} />
+          </div>
+        </div>
         {!isLoaded ? <LoadingModal /> : null}
       </div>
     </>

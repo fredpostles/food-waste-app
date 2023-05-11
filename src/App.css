@@ -36,18 +36,22 @@ li {
   font-weight: bold;
 }
 
+.accent {
+  color: #0f4c81;
+}
+
 .section__heading {
   margin: 2rem;
 }
 
 .appLogo {
-  width: 40rem;
+  width: 30rem;
   margin: auto;
 }
 
 .startup__container {
   border-radius: 0.25rem;
-  padding: 20rem;
+  padding: 15rem;
   color: black;
 }
 
@@ -65,7 +69,7 @@ li {
 }
 
 .onboarding__container {
-  margin: 3rem auto;
+  margin: auto;
 }
 
 .onboarding__container form {
@@ -73,7 +77,8 @@ li {
 }
 
 .login__container {
-  margin: 25% auto;
+  margin: 20vh auto;
+  min-width: fit-content;
 }
 
 .onboarding__container h1 {
@@ -289,7 +294,7 @@ div.errors {
 }
 
 .image__container.pantryItem {
-  background-color: #f5f5f5;
+  background-color: white;
   text-align: center;
   min-width: 10rem;
   width: auto;
@@ -460,13 +465,15 @@ p.card__title {
 
 .saveBtn,
 .updateBtn,
+.cancelBtn,
 .addQuantityBtn,
 .editQuantityBtn,
 .deleteBtn,
 .ingredientSearchBtn,
 .seeMethodBtn,
 .saveRecipeBtn,
-.unsaveRecipeBtn {
+.unsaveRecipeBtn,
+.logoffBtn {
   cursor: pointer;
   border-radius: 1rem;
   border: none;
@@ -488,6 +495,7 @@ p.card__title {
 .showLessBtn:hover,
 .saveBtn:hover,
 .updateBtn:hover,
+.cancelBtn:hover,
 .addQuantityBtn:hover,
 .editQuantityBtn:hover,
 .deleteBtn:hover,
@@ -496,6 +504,12 @@ p.card__title {
 .saveRecipeBtn:hover,
 .unsaveRecipeBtn:hover {
   background-color: #0f4c81;
+  color: #f5f5f5;
+}
+
+.logoffBtn:hover,
+.accountMgmt__actions .deleteBtn:hover {
+  background-color: #d02d05;
   color: #f5f5f5;
 }
 
@@ -870,7 +884,7 @@ h4 {
 .account__container {
   background-color: #c2e2d9;
   padding: 1rem 1rem 2rem 1rem;
-  height: 100vh;
+  height: 100%;
 }
 
 .account__container > h2 {
@@ -925,11 +939,49 @@ label {
   width: fit-content;
   min-width: 30rem;
   margin: 0 auto;
+  margin-bottom: 2rem;
 }
 
 .account__dietaryInfo__container h2 {
   color: white;
   filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
+}
+
+.dangerZone__container {
+  background-color: #519d87;
+  width: 40rem;
+  margin: 0 auto;
+  padding: 1.5rem 3rem;
+  border-radius: 1rem;
+  filter: drop-shadow(0.25rem 0.25rem 0.25rem black);
+  margin-bottom: 2rem;
+  text-align: left;
+  transition: all 0.05s linear;
+  font-size: smaller;
+}
+
+.dangerZone__container h2 {
+  color: #f5f5f5;
+  filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
+  font-size: large;
+  text-align: center;
+}
+
+.accountMgmt__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.signup__redirect {
+  margin: 0 auto;
+  margin-top: 3rem;
+  width: 80%;
+  border-top: solid 0.1rem #333;
+}
+
+.signup__redirect p {
+  margin: 0.5rem;
 }
 
 .mainNav {
@@ -1008,7 +1060,7 @@ label {
   .onboarding__container {
     width: 65vw;
     min-height: fit-content;
-    max-height: 100vh;
+    max-height: 100%;
   }
 
   button {
@@ -1032,6 +1084,10 @@ label {
   .signUp {
     flex-wrap: nowrap;
   }
+
+  .signup__redirect {
+    width: 70%;
+  }
 }
 
 @media screen and (min-width: 720px) {
@@ -1052,12 +1108,15 @@ label {
 
   .onboarding__container {
     width: 60%;
-    /* max-height: 85vh; */
     height: fit-content;
   }
 
   .signUp__container {
     min-height: fit-content;
+  }
+
+  .signup__redirect {
+    width: 60%;
   }
 
   .searchBtn,

@@ -1,6 +1,6 @@
 import React from "react";
 
-const AccountInfo = ({ onInput, errors, user, hasChanged }) => {
+const AccountInfo = ({ onInput, errors, user, showPasswordInput }) => {
   return (
     <form>
       <label htmlFor="email">
@@ -37,7 +37,7 @@ const AccountInfo = ({ onInput, errors, user, hasChanged }) => {
         />
       </label>
       <p>{errors && errors.surname}</p>
-      {hasChanged ? (
+      {showPasswordInput ? (
         <>
           <label htmlFor="password">Enter your password to confirm: </label>
           <br />

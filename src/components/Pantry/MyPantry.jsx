@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SET_INGREDIENT_SEARCH, SET_RECIPE_INFO } from "../../redux/types";
 import {
@@ -10,14 +10,31 @@ import { useNavigate } from "react-router-dom";
 import PantryItem from "./MyPantry/PantryItem";
 import PantrySortSelection from "./MyPantry/PantrySortSelection";
 import LoadingModal from "../Modal/LoadingModal";
+import { getUser } from "../../apiCalls/backendAPI";
 
 const MyPantry = ({ setSuggestions }) => {
   const dispatch = useDispatch();
   const [sort, setSort] = useState("");
   const [isLoaded, setIsLoaded] = useState(true);
   const pantryItems = useSelector((state) => state.pantryItems);
-  const userPreferences = useSelector((state) => state.user.preferences);
+  const token = useSelector((state) => state.token);
+  const [user, setUser] = useState(null);
+  const [userPreferences, setUserPreferences] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserPreferences = async () => {
+      try {
+        const userData = await getUser(token);
+        setUser(userData);
+        setUserPreferences(userData.preferences);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchUserPreferences();
+  }, [token]);
 
   // copy of pantry items to be used for sorting data
   let sortedData = [...pantryItems];

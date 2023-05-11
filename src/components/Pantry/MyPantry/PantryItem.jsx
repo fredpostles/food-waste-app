@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
@@ -13,11 +13,28 @@ import {
 import PantryItemImage from "./PantryItem/PantryItemImage";
 import PantryItemBody from "./PantryItem/PantryItemBody";
 import { checkUserPrefs } from "../../../utils";
+import { getUser } from "../../../apiCalls/backendAPI";
 
 const PantryItem = ({ item, setIsLoaded }) => {
   const dispatch = useDispatch();
-  const userPreferences = useSelector((state) => state.user.preferences);
+  const token = useSelector((state) => state.token);
+  const [user, setUser] = useState(null);
+  const [userPreferences, setUserPreferences] = useState(null);
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchUserPreferences = async () => {
+      try {
+        const userData = await getUser(token);
+        setUser(userData);
+        setUserPreferences(userData.preferences);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchUserPreferences();
+  }, [token]);
 
   const onDelete = () => {
     dispatch({ type: DELETE_PANTRY_ITEM, payload: item.id });

@@ -1,19 +1,26 @@
 import React from "react";
 
-const LoginForm = ({ onInput, userInput, errors }) => {
+const LoginForm = ({ onInput, userInput, errors, onLogin }) => {
+  const onEnter = (e) => {
+    if (e.key === "Enter") {
+      onLogin(e);
+    }
+  };
+
   return (
     <form onInput={onInput}>
       <div className="login email">
         <label htmlFor="email">Email:</label>
-        <input id="email" type="email" name="email" placeholder="Email" />
+        <input
+          id="email"
+          type="email"
+          name="email"
+          placeholder="Email"
+          onKeyUp={onEnter}
+        />
       </div>
       <div className="login errors email">
-        {userInput.email &&
-        userInput.email.length > 0 &&
-        errors &&
-        errors.email ? (
-          <p>{errors.email}</p>
-        ) : null}
+        {errors && errors.email ? <p>{errors.email}</p> : null}
       </div>
       <div className="login password">
         <label htmlFor="password">Password:</label>
@@ -22,15 +29,11 @@ const LoginForm = ({ onInput, userInput, errors }) => {
           type="password"
           name="password"
           placeholder="Password"
+          onKeyUp={onEnter}
         />
       </div>
       <div className="login errors password">
-        {userInput.password &&
-        userInput.password.length > 0 &&
-        errors &&
-        errors.password ? (
-          <p>{errors.password}</p>
-        ) : null}
+        {errors && errors.password ? <p>{errors.password}</p> : null}
       </div>
       <div className="login errors general">
         {errors && errors.general ? <p>{errors.general}</p> : null}

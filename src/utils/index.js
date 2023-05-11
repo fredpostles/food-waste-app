@@ -59,8 +59,18 @@ export const getUserIntolerances = (userPreferences) => {
 export const checkUserPrefs = (userPreferences, recipes) => {
   const preferences = userPreferences;
   console.log(recipes);
+  console.log(preferences);
   // if neither argument needed sent in, return
   if (!preferences || !recipes) return;
+
+  // Check if all preferences are false
+  const allFalse = Object.values(preferences).every((pref) => !pref);
+
+  // If all preferences are false, return all recipes
+  if (allFalse) {
+    console.log("All preferences are false, returning all recipes.");
+    return recipes;
+  }
 
   // array to put filtered recipes into
   let result = [];

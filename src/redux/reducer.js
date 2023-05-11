@@ -17,6 +17,7 @@ import {
   CLEAR_INGREDIENT_SEARCH,
   SET_RECIPE_INFO,
   ADD_TOKEN,
+  DELETE_TOKEN,
 } from "./types";
 import { storeItem, getItem } from "../localStorage";
 
@@ -45,7 +46,7 @@ export function reducer(state = getItem("store") || initialState, action) {
     }
 
     case DELETE_USER: {
-      const newState = { ...state, user: {} };
+      const newState = { ...state, user: null };
 
       storeItem("store", newState);
 
@@ -79,6 +80,14 @@ export function reducer(state = getItem("store") || initialState, action) {
 
     case ADD_TOKEN: {
       const newState = { ...state, token: action.payload };
+
+      storeItem("store", newState);
+
+      return newState;
+    }
+
+    case DELETE_TOKEN: {
+      const newState = { ...state, token: null };
 
       storeItem("store", newState);
 
