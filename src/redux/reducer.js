@@ -99,14 +99,12 @@ export function reducer(state = getItem("store") || initialState, action) {
 
       const item = {
         id: generateRandomID(12),
-        itemName: action.payload.name,
+        name: action.payload.name,
         image: action.payload.image,
         dateAdded: Date.now(),
       };
 
-      if (
-        pantryItems.some((element) => element.itemName === action.payload.name)
-      ) {
+      if (pantryItems.some((element) => element.name === action.payload.name)) {
         return state;
       } else {
         pantryItems.push(item);

@@ -1,6 +1,6 @@
 import React from "react";
 
-const LoginForm = ({ onInput, userInput, errors, onLogin }) => {
+const LoginForm = ({ onInput, errors, onLogin }) => {
   const onEnter = (e) => {
     if (e.key === "Enter") {
       onLogin(e);

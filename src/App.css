@@ -406,7 +406,7 @@ p.card__title {
   max-width: 56.4rem;
   height: fit-content;
   max-height: 75vh;
-  background-color: #f5f5f5;
+  background-color: white;
   border-radius: 0 0 1rem 1rem;
   filter: drop-shadow(0 0.1rem 0.2rem black);
   overflow: scroll;
@@ -678,7 +678,7 @@ p.sub-heading {
 }
 
 .modalBody .imageContainer {
-  width: 90%;
+  width: 60%;
   margin: 0 auto;
 }
 

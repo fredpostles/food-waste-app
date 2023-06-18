@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { updateUser } from "../../apiCalls/backendAPI";
 
-const Preferences = ({ user, setUserData, setPreferencesUpdated }) => {
-  // console.log(user);
+const Preferences = ({ user }) => {
   const [preferences, setPreferences] = useState(user.preferences);
   const token = useSelector((state) => state.token);
 
@@ -18,15 +17,7 @@ const Preferences = ({ user, setUserData, setPreferencesUpdated }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const result = await updateUser({ preferences: preferences }, token);
-    // .then(setPreferencesUpdated(true))
-    // .then(
-    //   setUserData((userData) => ({
-    //     ...userData,
-    //     preferences: { ...preferences },
-    //   }))
-    // );
     console.log("updateUser result from onSubmit in Preferences:", result);
-    // console.log("Result of updateUser query in front:", result);
   };
 
   return (

@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { validate } from "../validation";
 import { capitalizeFirstLetter } from "../utils";
 import Navigation from "./Navigation";
 import AccountInfo from "./Account/AccountInfo";
-import { UPDATE_USER } from "../redux/types";
 import Preferences from "./Account/Preferences";
 import { getUser, updateUser } from "../apiCalls/backendAPI";
 import LoadingModal from "./Modal/LoadingModal";
@@ -52,6 +51,7 @@ const Account = () => {
       } catch (error) {
         console.log("Error fetching user:", error);
         setIsLoaded(true);
+        console.log("error.response:", error.response);
         if (error.response) {
           switch (error.response.status) {
             case 401:
@@ -80,11 +80,12 @@ const Account = () => {
             "An error occurred. Please try again later or contact support."
           );
         }
+        alert(errorMessage);
         throw error;
       }
     };
     fetchUserData();
-  }, [token, preferencesUpdated]);
+  }, [token, preferencesUpdated, errorMessage]);
 
   // console.log("userData after being set", userData);
 
@@ -109,7 +110,7 @@ const Account = () => {
       alert("Could not update. Please check the errors below.");
     } else {
       const result = await updateUser({ ...userInput }, token);
-      // console.log("result of updateUser, account:", result);
+      console.log("result of updateUser, account:", result);
       setShowPasswordInput(false);
     }
   };

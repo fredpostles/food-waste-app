@@ -1,13 +1,20 @@
 import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { EDIT_QUANTITY } from "../../../../../redux/types";
+import { useSelector } from "react-redux";
+import { updatePantryItem } from "../../../../../apiCalls/backendAPI";
 import QuantityInputForm from "./ItemQuantity/QuantityInputForm";
 
-const ItemQuantity = ({ item }) => {
-  const dispatch = useDispatch();
-  const [state, setState] = useState({ quantity: { amount: 0, units: "" } });
+const ItemQuantity = ({
+  item,
+  pantryItems,
+  setPantryItems,
+  setPantryItemsChanged,
+}) => {
   const [showControls, setShowControls] = useState(false);
-  const pantryItems = useSelector((state) => state.pantryItems);
+  const [editedQuantity, setEditedQuantity] = useState({
+    amount: 0,
+    units: "",
+  });
+  const token = useSelector((state) => state.token);
 
   const indexOfItem = pantryItems.findIndex(
     (element) => element.id === item.id
@@ -17,28 +24,31 @@ const ItemQuantity = ({ item }) => {
     const target = e.target;
     const value = target.value;
     const name = target.name;
-    setState({
-      ...state,
+    setEditedQuantity((prevQuantity) => ({
+      ...prevQuantity,
       [name]: value,
-    });
+    }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch({
-      type: EDIT_QUANTITY,
-      payload: {
-        id: item.id,
-        quantity: { amount: state.amount, units: state.units },
-      },
-    });
+    try {
+      await updatePantryItem(token, item.id, editedQuantity);
+      // Update the pantryItems state to reflect the changes
+      const updatedPantryItems = [...pantryItems];
+      updatedPantryItems[indexOfItem].quantity = editedQuantity;
+      setPantryItems(updatedPantryItems);
+    } catch (error) {
+      console.log(">> error", error);
+    }
     setShowControls(!showControls);
+    setPantryItemsChanged(true);
   };
 
-  let qty = {};
-  pantryItems[indexOfItem].quantity
-    ? (qty = pantryItems[indexOfItem].quantity)
-    : (qty = state.quantity);
+  let qty =
+    pantryItems && pantryItems[indexOfItem]?.quantity
+      ? pantryItems[indexOfItem].quantity
+      : { amount: 0, units: "" };
 
   const onCancel = () => {
     setShowControls(!showControls);

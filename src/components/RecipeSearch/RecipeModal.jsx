@@ -43,8 +43,8 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
           <div className="recipeItem text_section">
             <div className="recipeInfo__container">
               <ul className="recipeInfo__list">
-                <li>Ready in {recipe.readyInMinutes} minutes</li>
-                <li>Serves {recipe.servings}</li>
+                <li>Ready in {recipeInfo.readyInMinutes} minutes</li>
+                <li>Serves {recipeInfo.servings}</li>
               </ul>
             </div>
             {recipe && ingredients ? (

@@ -1,19 +1,54 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Recipe from "./SavedRecipes/Recipe";
 import Navigation from "./Navigation";
 import SavedRecipeTemplate from "./SavedRecipes/SavedRecipeTemplate";
 import SavedRecipeModal from "./SavedRecipes/SavedRecipeModal";
+import LoadingModal from "./Modal/LoadingModal";
+import { getSavedRecipes, deleteSavedRecipe } from "../apiCalls/backendAPI";
 
 const SavedRecipes = () => {
-  const savedRecipes = useSelector((state) => state.savedRecipes);
   const [openModal, setOpenModal] = useState(false);
   const [showRecipeMethod, setShowRecipeMethod] = useState(false);
   const [modalContent, setModalContent] = useState({ undefined });
+  const [savedRecipes, setSavedRecipes] = useState([]);
+  const [isLoaded, setIsLoaded] = useState(true);
+  const [savedRecipeCounter, setSavedRecipeCounter] = useState(0);
+  const token = useSelector((state) => state.token);
+
+  useEffect(() => {
+    setIsLoaded(false);
+    const fetchSavedRecipes = async () => {
+      try {
+        const { savedRecipeResults } = await getSavedRecipes(token);
+        console.log("savedRecipeResults", savedRecipeResults);
+        setSavedRecipes(savedRecipeResults);
+        setIsLoaded(true);
+      } catch (error) {
+        console.log("error fetching saved recipes:", error);
+        setIsLoaded(true);
+      }
+    };
+
+    fetchSavedRecipes();
+  }, [savedRecipeCounter]);
+
+  const onDelete = async (recipe) => {
+    try {
+      await deleteSavedRecipe(token, recipe.id);
+      // Update the savedRecipes state
+      const updatedSavedRecipes = savedRecipes.filter(
+        (element) => element.id !== recipe.id
+      );
+      setSavedRecipes(updatedSavedRecipes);
+      setSavedRecipeCounter(savedRecipeCounter - 1);
+    } catch (error) {
+      console.log("onDelete error:", error);
+    }
+  };
 
   const getModalContent = (recipe) => {
     const item = savedRecipes.find((element) => element.id === recipe.id);
-
     setModalContent(item);
   };
 
@@ -30,12 +65,12 @@ const SavedRecipes = () => {
                   <Recipe
                     savedRecipe={savedRecipe}
                     key={savedRecipe.id}
-                    id={savedRecipe.id}
                     showRecipeMethod={showRecipeMethod}
                     setShowRecipeMethod={setShowRecipeMethod}
                     openModal={openModal}
                     setOpenModal={setOpenModal}
                     getModalContent={getModalContent}
+                    onDelete={onDelete}
                   />
                 );
               })
@@ -49,6 +84,7 @@ const SavedRecipes = () => {
           modalContent={modalContent}
         />
       ) : null}
+      {!isLoaded ? <LoadingModal /> : null}
     </>
   );
 };

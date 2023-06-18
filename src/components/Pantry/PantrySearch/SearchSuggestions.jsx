@@ -1,18 +1,42 @@
 import React, { useState } from "react";
 import NoResults from "./SearchSuggestions/NoResults";
 import SearchResult from "./SearchSuggestions/SearchResult";
-import { useDispatch } from "react-redux";
-import { ADD_PANTRY_ITEM } from "../../../redux/types";
+import { useSelector } from "react-redux";
 import ShowMoreButton from "../../Buttons/ShowMoreButton";
 import ShowLessButton from "../../Buttons/ShowLessButton";
+import { addToPantry } from "../../../apiCalls/backendAPI";
 
-const SearchSuggestions = ({ suggestions }) => {
-  const dispatch = useDispatch();
+const SearchSuggestions = ({
+  suggestions,
+  pantryItems,
+  setPantryItems,
+  setPantryItemsChanged,
+}) => {
   const [showMore, setShowMore] = useState(9);
+  const token = useSelector((state) => state.token);
 
-  const addPantryItem = (item) => {
+  const addPantryItem = async (item) => {
     console.log("pantry item", item);
-    dispatch({ type: ADD_PANTRY_ITEM, payload: item });
+
+    // if item already in pantry, return
+    if (
+      pantryItems.some(
+        (element) => element.name === item.name && element.image === item.image
+      )
+    ) {
+      console.log("Item already in pantry");
+      return;
+    } else {
+      try {
+        const result = await addToPantry(item, token);
+        console.log("result of addToPantry call:", result);
+        // Update pantry items state immediately
+        setPantryItems((prevPantryItems) => [...prevPantryItems, item]);
+      } catch (error) {
+        console.log("error adding pantry item:", error);
+      }
+      setPantryItemsChanged(true);
+    }
   };
 
   const onShowMore = () => {
@@ -38,7 +62,11 @@ const SearchSuggestions = ({ suggestions }) => {
               else
                 return (
                   <li className="suggestionItem" key={index}>
-                    <SearchResult item={item} addPantryItem={addPantryItem} />
+                    <SearchResult
+                      item={item}
+                      addPantryItem={addPantryItem}
+                      pantryItems={pantryItems}
+                    />
                   </li>
                 );
             })

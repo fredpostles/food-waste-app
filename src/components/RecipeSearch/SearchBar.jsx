@@ -20,14 +20,12 @@ const SearchBar = ({
 }) => {
   const dispatch = useDispatch();
   const token = useSelector((state) => state.token);
-  const [user, setUser] = useState(null);
   const [userPreferences, setUserPreferences] = useState(null);
 
   useEffect(() => {
     const fetchUserPreferences = async () => {
       try {
         const userData = await getUser(token);
-        setUser(userData);
         setUserPreferences(userData.preferences);
       } catch (error) {
         console.log(error);

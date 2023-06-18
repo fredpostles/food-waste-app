@@ -4,6 +4,7 @@ import NoResults from "./SearchResults/NoResults";
 import ShowResultsButtons from "./SearchResults/ShowResultsButtons";
 import SingleRecipeResult from "./SearchResults/SingleRecipeResult";
 import RecipeModal from "../RecipeSearch/RecipeModal";
+import LoadingModal from "../Modal/LoadingModal";
 
 const SearchResults = (props) => {
   const suggestions = props.suggestions;
@@ -13,6 +14,7 @@ const SearchResults = (props) => {
   const [showRecipeMethod, setShowRecipeMethod] = useState(false);
   const [modalContent, setModalContent] = useState({});
   const recipeInfo = useSelector((state) => state.recipeInfo);
+  const [isLoaded, setIsLoaded] = useState(true);
 
   const getModalContent = (recipe, info) => {
     let item;
@@ -38,21 +40,21 @@ const SearchResults = (props) => {
 
   return (
     <div className="searchResults__container">
+      {!isLoaded ? <LoadingModal /> : null}
       <ul className="recipeSearchResults__list">
         {suggestions
           ? suggestions?.map((recipe, index) => {
               if (index > showMore) return;
               return (
-                <li className="singleRecipe__container">
+                <li className="singleRecipe__container" key={recipe.id}>
                   <SingleRecipeResult
                     recipe={recipe}
-                    key={recipe.id}
-                    id={recipe.id}
                     showRecipeMethod={showRecipeMethod}
                     setShowRecipeMethod={setShowRecipeMethod}
                     openModal={openModal}
                     setOpenModal={setOpenModal}
                     getModalContent={getModalContent}
+                    setIsLoaded={setIsLoaded}
                   />
                 </li>
               );
@@ -71,6 +73,7 @@ const SearchResults = (props) => {
                       openModal={openModal}
                       setOpenModal={setOpenModal}
                       getModalContent={getModalContent}
+                      setIsLoaded={setIsLoaded}
                     />
                   </li>
                 );

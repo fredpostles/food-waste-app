@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { useDispatch } from "react-redux";
 import { DELETE_RECIPE } from "../../redux/types";
 import { capitalizeFirstLetter } from "../../utils";
@@ -10,13 +10,14 @@ const Recipe = ({
   openModal,
   setOpenModal,
   getModalContent,
+  onDelete,
 }) => {
   const recipe = savedRecipe;
   const dispatch = useDispatch();
 
-  const onDelete = () => {
-    dispatch({ type: DELETE_RECIPE, payload: recipe.id });
-  };
+  // const onDelete = () => {
+  //   // dispatch({ type: DELETE_RECIPE, payload: recipe.id });
+  // };
 
   const displayRecipeMethod = () => {
     setShowRecipeMethod(!showRecipeMethod);
@@ -48,7 +49,7 @@ const Recipe = ({
         <button onClick={displayRecipeMethod} className="seeMethodBtn">
           See method{" "}
         </button>
-        <button onClick={onDelete} className="deleteBtn">
+        <button onClick={() => onDelete(recipe)} className="deleteBtn">
           Delete recipe
         </button>
       </div>

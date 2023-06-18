@@ -16,6 +16,8 @@ const SavedRecipeModal = ({
     setOpenModal(false);
   };
 
+  console.log("recipe/modalContent", modalContent);
+
   const recipe = modalContent;
 
   const closeModal = () => {
