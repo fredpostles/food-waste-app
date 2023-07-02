@@ -27,6 +27,8 @@ const SingleRecipeResult = ({
     (element) => element.id === recipe.id
   );
 
+  const dietsArray = recipeInfo[indexOfItem].diets;
+
   useEffect(() => {
     setIsLoaded(false);
     const fetchSavedRecipes = async () => {
@@ -89,8 +91,25 @@ const SingleRecipeResult = ({
               <li>Ready in {recipeInfo[indexOfItem].readyInMinutes} minutes</li>
               <li>Serves {recipeInfo[indexOfItem].servings}</li>
             </ul>
+            <button
+              onClick={() => {
+                console.log(recipeInfo[indexOfItem]);
+              }}
+            >
+              Log recipeInfo
+            </button>
           </div>
         ) : null}
+        <div className="recipeInfo__list">
+          <li>
+            Suitable for the following diets:
+            <ol>
+              {recipeInfo[indexOfItem].diets.map((diet, index) => (
+                <li key={index}>{capitalizeFirstLetter(diet)}</li>
+              ))}
+            </ol>
+          </li>{" "}
+        </div>
         {recipe && recipe.usedIngredients && (
           <UsedIngredients recipe={recipe} />
         )}
