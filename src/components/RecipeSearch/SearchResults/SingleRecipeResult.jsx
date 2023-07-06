@@ -11,8 +11,6 @@ import {
 
 const SingleRecipeResult = ({
   recipe,
-  showRecipeMethod,
-  setShowRecipeMethod,
   openModal,
   setOpenModal,
   getModalContent,
@@ -27,31 +25,36 @@ const SingleRecipeResult = ({
     (element) => element.id === recipe.id
   );
 
-  const dietsArray = recipeInfo[indexOfItem].diets;
-
   useEffect(() => {
+    // start loading modal
     setIsLoaded(false);
+    // get saved recipe data
     const fetchSavedRecipes = async () => {
       try {
+        // make call to backend via API
         const { savedRecipeResults } = await getSavedRecipes(token);
-        console.log("savedRecipeResults", savedRecipeResults);
+        // set saved recipes to state
         setSavedRecipes(savedRecipeResults);
+        // end loading modal
         setIsLoaded(true);
       } catch (error) {
         console.log("error fetching saved recipes:", error);
+        // end loading modal if error
         setIsLoaded(true);
       }
     };
 
     fetchSavedRecipes();
-  }, [savedRecipeCounter]);
+  }, [savedRecipeCounter, setIsLoaded, token]);
 
   const onSaveRecipe = async () => {
     try {
+      // send recipe to DB and await response
       await saveRecipe(recipeInfo[indexOfItem], token);
       // update savedRecipes state
       const updatedSavedRecipes = [...savedRecipes, recipeInfo[indexOfItem]];
       setSavedRecipes(updatedSavedRecipes);
+      // increase counter
       setSavedRecipeCounter(savedRecipeCounter + 1);
     } catch (error) {
       console.log("onSaveRecipe error:", error);
@@ -60,20 +63,22 @@ const SingleRecipeResult = ({
 
   const onUnsaveRecipe = async () => {
     try {
+      // delete recipe from DB and await response
       await deleteSavedRecipe(token, recipe.id);
       // Update the savedRecipes state
       const updatedSavedRecipes = savedRecipes.filter(
         (element) => element.id !== recipe.id
       );
       setSavedRecipes(updatedSavedRecipes);
+      // decrease counter
       setSavedRecipeCounter(savedRecipeCounter - 1);
     } catch (error) {
       console.log("onUnsaveRecipe error:", error);
     }
   };
 
+  // when user clicks on show method, open modal and send it the right content
   const displayRecipeMethod = () => {
-    setShowRecipeMethod(!showRecipeMethod);
     setOpenModal(!openModal);
     getModalContent(recipe, recipeInfo[indexOfItem]);
   };
@@ -91,24 +96,24 @@ const SingleRecipeResult = ({
               <li>Ready in {recipeInfo[indexOfItem].readyInMinutes} minutes</li>
               <li>Serves {recipeInfo[indexOfItem].servings}</li>
             </ul>
-            <button
+            {/* <button
               onClick={() => {
                 console.log(recipeInfo[indexOfItem]);
               }}
             >
               Log recipeInfo
-            </button>
+            </button> */}
           </div>
         ) : null}
         <div className="recipeInfo__list">
-          <li>
-            Suitable for the following diets:
-            <ol>
-              {recipeInfo[indexOfItem].diets.map((diet, index) => (
-                <li key={index}>{capitalizeFirstLetter(diet)}</li>
-              ))}
-            </ol>
-          </li>{" "}
+          <p className="sub-heading"> Suitable for the following diets:</p>
+          <ul className="typographic">
+            {recipeInfo[indexOfItem].diets.map((diet, index) => (
+              <li key={index} className="diet">
+                {capitalizeFirstLetter(diet)}
+              </li>
+            ))}
+          </ul>
         </div>
         {recipe && recipe.usedIngredients && (
           <UsedIngredients recipe={recipe} />

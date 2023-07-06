@@ -83,6 +83,7 @@ export const checkUserPrefs = (userPreferences, recipes) => {
     }
     // for each key in preferences, filter matching recipes
     for (const key in preferences) {
+      if (preferences[key] === true && recipe[key] !== preferences[key]) return;
       if (preferences[key] === true && recipe[key] === preferences[key]) {
         result = recipes.filter((recipe) => recipe[key] === preferences[key]);
       }

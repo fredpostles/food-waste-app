@@ -1,10 +1,10 @@
 import React from "react";
-import { capitalizeFirstLetter } from "../../utils";
+import { capitalizeFirstLetter } from "../../../utils";
 import { useDispatch } from "react-redux";
-import { DELETE_RECIPE } from "../../redux/types";
-import CloseModalButton from "../Buttons/CloseModalButton";
+import { DELETE_RECIPE } from "../../../redux/types";
+import CloseModalButton from "../../Buttons/CloseModalButton";
 
-const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
+const RecipeModal = ({ setOpenModal, modalContent }) => {
   const dispatch = useDispatch();
 
   const recipe = { ...modalContent.item };
@@ -18,7 +18,6 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
 
   const closeModal = () => {
     setOpenModal(false);
-    setShowRecipeMethod(false);
   };
 
   const ingredients = recipeInfo.extendedIngredients;
@@ -80,6 +79,7 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
           <button onClick={closeModal} title="Return to Saved Recipes">
             Close
           </button>
+          <button>Save recipe</button>
           <button onClick={onDelete} title="Delete from Saved Recipes">
             Delete recipe
           </button>

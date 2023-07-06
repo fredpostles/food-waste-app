@@ -3,7 +3,7 @@ import { useSelector } from "react-redux";
 import NoResults from "./SearchResults/NoResults";
 import ShowResultsButtons from "./SearchResults/ShowResultsButtons";
 import SingleRecipeResult from "./SearchResults/SingleRecipeResult";
-import RecipeModal from "../RecipeSearch/RecipeModal";
+import RecipeModal from "./SearchResults/RecipeModal";
 import LoadingModal from "../Modal/LoadingModal";
 
 const SearchResults = (props) => {

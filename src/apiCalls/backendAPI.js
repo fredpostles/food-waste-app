@@ -181,7 +181,7 @@ export const getSavedRecipes = async (token) => {
       return { savedRecipeResults: [] };
     }
 
-    console.log("getSavedRecipes data:", data);
+    // console.log("getSavedRecipes data:", data);
     return data;
   } catch (error) {
     console.log("getSavedRecipes error:", error);

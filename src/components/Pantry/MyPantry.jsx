@@ -89,7 +89,13 @@ const MyPantry = ({
     setIsLoaded(false);
 
     // get string of pantry items to send to API to find matching recipes
-    const wholePantry = sortedData.map((item) => item.name).toString();
+    const wholePantry = sortedData
+      .map((item) => {
+        const itemName = item.name.replace(/\s+/g, "_"); // Replace spaces with underscores
+        return itemName;
+      })
+      .join(", ");
+    console.log("wholePantry", wholePantry);
 
     // send to API
     const result = await getRecipeByIngredient(wholePantry);

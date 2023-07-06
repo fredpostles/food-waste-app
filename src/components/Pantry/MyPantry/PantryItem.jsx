@@ -44,7 +44,9 @@ const PantryItem = ({
     setIsLoaded(false);
 
     // send item name to API to get matching recipes
-    const result = await getRecipeByIngredient(item.name);
+    const itemName = item.name.replace(/\s+/g, "_"); // Replace spaces with underscores
+    console.log("itemName:", itemName);
+    const result = await getRecipeByIngredient(itemName);
 
     // extract IDs from the recipes returned by API
     const idsToSearch = result.map((item) => item.id);

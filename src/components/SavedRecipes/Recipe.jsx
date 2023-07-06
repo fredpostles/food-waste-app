@@ -1,6 +1,4 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { DELETE_RECIPE } from "../../redux/types";
 import { capitalizeFirstLetter } from "../../utils";
 
 const Recipe = ({
@@ -13,11 +11,6 @@ const Recipe = ({
   onDelete,
 }) => {
   const recipe = savedRecipe;
-  const dispatch = useDispatch();
-
-  // const onDelete = () => {
-  //   // dispatch({ type: DELETE_RECIPE, payload: recipe.id });
-  // };
 
   const displayRecipeMethod = () => {
     setShowRecipeMethod(!showRecipeMethod);
@@ -40,10 +33,6 @@ const Recipe = ({
             <li>Serves {recipe.servings}</li>
           </ul>
         </div>
-        {/* Removed as Foodista links seems to redirect to spam websites */}
-        {/* <small>
-          <a href={recipe.sourceUrl}>Source</a>
-        </small> */}
       </div>
       <div className="savedRecipe__buttons">
         <button onClick={displayRecipeMethod} className="seeMethodBtn">
