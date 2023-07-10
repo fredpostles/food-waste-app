@@ -57,9 +57,13 @@ export const getUserIntolerances = (userPreferences) => {
 };
 
 export const checkUserPrefs = (userPreferences, recipes) => {
+  // turn preferences into a hash table for efficiency
+  // const preferences = new Map(Object.entries(userPreferences));
   const preferences = userPreferences;
+
   console.log(recipes);
   console.log(preferences);
+
   // if neither argument needed sent in, return
   if (!preferences || !recipes) return;
 
@@ -72,27 +76,43 @@ export const checkUserPrefs = (userPreferences, recipes) => {
     return recipes;
   }
 
-  // array to put filtered recipes into
-  let result = [];
+  // Set to put filtered recipes into
+  let result = new Set();
 
   // filter recipes to only return ones that match user's diet
   recipes.forEach((recipe) => {
+    // initiate match variable to true
+    let match = true;
+
     // if recipe already added, return
-    if (result.includes(recipe)) {
+    if (result.has(recipe)) {
       return;
     }
     // for each key in preferences, filter matching recipes
     for (const key in preferences) {
-      if (preferences[key] === true && recipe[key] !== preferences[key]) return;
-      if (preferences[key] === true && recipe[key] === preferences[key]) {
-        result = recipes.filter((recipe) => recipe[key] === preferences[key]);
+      // if recipe doesn't match preference, exit early
+      if (preferences[key] === true && recipe[key] !== preferences[key]) {
+        match = false;
+        break;
       }
+      // filter
+      // if (preferences[key] === true && recipe[key] === preferences[key]) {
+      //   result = recipes.filter((recipe) => recipe[key] === preferences[key]);
+      // }
+    }
+
+    // if recipe matches preferences, add to result Set
+    if (match) {
+      result.add(recipe);
     }
   });
 
+  // convert Set back to Array
+  const filteredRecipes = [...result];
+
   // console log filtered recipes
-  console.log("Filtered recipes (result)", result);
+  console.log("Filtered recipes (result)", filteredRecipes);
 
   // return only suitable recipes
-  return result;
+  return filteredRecipes;
 };

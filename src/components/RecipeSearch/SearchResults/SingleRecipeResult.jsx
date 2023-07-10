@@ -96,25 +96,21 @@ const SingleRecipeResult = ({
               <li>Ready in {recipeInfo[indexOfItem].readyInMinutes} minutes</li>
               <li>Serves {recipeInfo[indexOfItem].servings}</li>
             </ul>
-            {/* <button
-              onClick={() => {
-                console.log(recipeInfo[indexOfItem]);
-              }}
-            >
-              Log recipeInfo
-            </button> */}
           </div>
         ) : null}
-        <div className="recipeInfo__list">
-          <p className="sub-heading"> Suitable for the following diets:</p>
-          <ul className="typographic">
-            {recipeInfo[indexOfItem].diets.map((diet, index) => (
-              <li key={index} className="diet">
-                {capitalizeFirstLetter(diet)}
-              </li>
-            ))}
-          </ul>
-        </div>
+        {recipeInfo[indexOfItem].diets &&
+        recipeInfo[indexOfItem].diets.length > 0 ? (
+          <div className="recipeInfo__diets">
+            <p className="sub-heading"> Suitable for the following diets:</p>
+            <ul className="typographic">
+              {recipeInfo[indexOfItem].diets.map((diet, index) => (
+                <li key={index} className="diet">
+                  {capitalizeFirstLetter(diet)}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
         {recipe && recipe.usedIngredients && (
           <UsedIngredients recipe={recipe} />
         )}

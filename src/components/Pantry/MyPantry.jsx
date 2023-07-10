@@ -91,10 +91,10 @@ const MyPantry = ({
     // get string of pantry items to send to API to find matching recipes
     const wholePantry = sortedData
       .map((item) => {
-        const itemName = item.name.replace(/\s+/g, "_"); // Replace spaces with underscores
+        const itemName = item.name.replace(/\s+/g, "+"); // Replace spaces with plus sign
         return itemName;
       })
-      .join(", ");
+      .join(",");
     console.log("wholePantry", wholePantry);
 
     // send to API
@@ -139,6 +139,7 @@ const MyPantry = ({
       {pantryItems && pantryItems.length > 1 ? (
         <div className="wholePantrySearch__container">
           <button
+            data-testid="searchButton"
             onClick={onUsePantry}
             className="wholePantrySearchBtn"
             title="Search for recipes using as many pantry ingredients as possible"

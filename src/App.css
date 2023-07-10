@@ -807,7 +807,8 @@ h4 {
 .additionalIngredients__list,
 .usedIngredients__container,
 .recipeInfo__list,
-.ingredients__list {
+.ingredients__list,
+.recipeInfo__diets {
   padding: 1rem;
   color: #0f4c81;
   filter: drop-shadow(0.1rem 0.1rem 0.1rem black);
@@ -823,12 +824,9 @@ h4 {
   font-weight: 500;
 }
 
-.diet {
-  text-align: left;
-}
-
 .additionalIngredients__list p,
-.usedIngredients__container p {
+.usedIngredients__container p,
+.recipeInfo__diets p {
   margin: 0;
   margin-bottom: 0.25rem;
   font-size: 1.3rem;
@@ -836,7 +834,8 @@ h4 {
 }
 
 .additionalIngredients__list li,
-.usedIngredients__container li {
+.usedIngredients__container li,
+.recipeInfo__diets li {
   font-size: 1.2rem;
   font-weight: 500;
   text-align: left;
