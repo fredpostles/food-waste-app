@@ -39,6 +39,7 @@ const SavedRecipeModal = ({
         <div className="modalBody">
           <div className="imageContainer">
             <img
+              loading="lazy"
               src={recipe.image}
               alt={recipe.title}
               className="savedRecipes recipeImage"

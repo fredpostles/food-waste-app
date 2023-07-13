@@ -87,7 +87,12 @@ const SingleRecipeResult = ({
     <>
       <h2>{capitalizeFirstLetter(recipe.title)}</h2>
       <div className="recipeSearch imageContainer">
-        <img src={recipe.image} alt={recipe.title} className="recipeImage" />
+        <img
+          loading="lazy"
+          src={recipe.image}
+          alt={recipe.title}
+          className="recipeImage"
+        />
       </div>
       <div className="recipeItem text_section">
         {recipeInfo[indexOfItem] ? (

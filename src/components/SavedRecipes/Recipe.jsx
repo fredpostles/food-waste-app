@@ -22,6 +22,7 @@ const Recipe = ({
     <div className="singleRecipe__container">
       <h4>{capitalizeFirstLetter(recipe.title)}</h4>
       <img
+        loading="lazy"
         src={recipe.image}
         alt={recipe.name}
         className="savedRecipes recipeImage"

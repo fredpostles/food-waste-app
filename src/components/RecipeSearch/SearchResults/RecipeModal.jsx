@@ -3,6 +3,7 @@ import { capitalizeFirstLetter } from "../../../utils";
 import { useDispatch } from "react-redux";
 import { DELETE_RECIPE } from "../../../redux/types";
 import CloseModalButton from "../../Buttons/CloseModalButton";
+import { saveRecipe } from "../../../apiCalls/backendAPI";
 
 const RecipeModal = ({ setOpenModal, modalContent }) => {
   const dispatch = useDispatch();
@@ -34,6 +35,7 @@ const RecipeModal = ({ setOpenModal, modalContent }) => {
         <div className="modalBody">
           <div className="imageContainer">
             <img
+              loading="lazy"
               src={recipe.image}
               alt={recipe.title}
               className="savedRecipes recipeImage"
@@ -79,7 +81,6 @@ const RecipeModal = ({ setOpenModal, modalContent }) => {
           <button onClick={closeModal} title="Return to Saved Recipes">
             Close
           </button>
-          <button>Save recipe</button>
           <button onClick={onDelete} title="Delete from Saved Recipes">
             Delete recipe
           </button>

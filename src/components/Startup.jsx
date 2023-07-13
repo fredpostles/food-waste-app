@@ -6,6 +6,7 @@ const Startup = () => {
       <div className="startup__container">
         <h1>Make Food, Not Waste!</h1>
         <img
+          loading="lazy"
           className="appLogo"
           src="./assets/icons/16245.png"
           alt="Chopped vegetables scattered in the air"

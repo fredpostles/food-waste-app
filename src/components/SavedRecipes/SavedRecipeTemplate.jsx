@@ -5,6 +5,7 @@ const SavedRecipeTemplate = () => {
     <div className="savedRecipes__templateResult">
       <div className="savedRecipes imageContainer">
         <img
+          loading="lazy"
           src="/assets/images/imageTemplate.png"
           alt="Template"
           name="Template image"

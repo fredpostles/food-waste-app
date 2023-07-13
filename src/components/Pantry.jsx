@@ -1,11 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "./Navigation";
 import PantrySearch from "./Pantry/PantrySearch";
-import MyPantry from "./Pantry/MyPantry";
+// import MyPantry from "./Pantry/MyPantry";
 import PantryItemTemplate from "./Pantry/PantryItemTemplate";
 import LoadingModal from "./Modal/LoadingModal";
 import { getUser, getAllPantryitems } from "../apiCalls/backendAPI";
+
+const MyPantry = lazy(() => import("./Pantry/MyPantry"));
 
 const Pantry = () => {
   const [suggestions, setSuggestions] = useState();
@@ -20,9 +22,11 @@ const Pantry = () => {
       try {
         setIsLoaded(false);
 
+        // get user data from DB and set preferences to state
         const userData = await getUser(token);
         setUserPreferences(userData.preferences);
 
+        // get pantry items from DB
         const { pantryResults } = await getAllPantryitems(token);
         setPantryItems(pantryResults);
 
@@ -48,13 +52,15 @@ const Pantry = () => {
           setPantryItemsChanged={setPantryItemsChanged}
         />
         {pantryItems && pantryItems.length > 0 ? (
-          <MyPantry
-            setSuggestions={setSuggestions}
-            pantryItems={pantryItems}
-            setPantryItems={setPantryItems}
-            userPreferences={userPreferences}
-            setPantryItemsChanged={setPantryItemsChanged}
-          />
+          <Suspense fallback={<LoadingModal />}>
+            <MyPantry
+              setSuggestions={setSuggestions}
+              pantryItems={pantryItems}
+              setPantryItems={setPantryItems}
+              userPreferences={userPreferences}
+              setPantryItemsChanged={setPantryItemsChanged}
+            />
+          </Suspense>
         ) : (
           <PantryItemTemplate />
         )}

@@ -44,6 +44,7 @@ const SearchResult = ({ addPantryItem, item, pantryItems }) => {
           {!isAdded ? (
             <>
               <img
+                loading="lazy"
                 className="icons"
                 src="/assets/icons/plus.svg"
                 alt="Plus icon"
@@ -53,6 +54,7 @@ const SearchResult = ({ addPantryItem, item, pantryItems }) => {
           ) : (
             <>
               <img
+                loading="lazy"
                 className="icons"
                 src="/assets/icons/check.svg"
                 alt="Checkmark"

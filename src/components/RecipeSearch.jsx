@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import Navigation from "./Navigation";
 import SearchBar from "./RecipeSearch/SearchBar";
-import SearchResults from "./RecipeSearch/SearchResults";
 import { useSelector } from "react-redux";
 import RecipeTemplate from "./RecipeSearch/RecipeTemplate";
 import LoadingModal from "./Modal/LoadingModal";
+
+const SearchResults = lazy(() => import("./RecipeSearch/SearchResults"));
 
 const RecipeSearch = () => {
   const [searchTerm, setSearchterm] = useState("");
@@ -27,7 +28,9 @@ const RecipeSearch = () => {
             <RecipeTemplate />
           </div>
         ) : null}
-        <SearchResults suggestions={suggestions} />
+        <Suspense fallback={<LoadingModal />}>
+          <SearchResults suggestions={suggestions} />
+        </Suspense>
       </div>
       {loading ? <LoadingModal /> : null}
     </>

@@ -104,6 +104,7 @@ const SearchBar = ({
             <div className="searchBar__icons__container">
               <button onClick={onClick} className="clearBtn">
                 <img
+                  loading="lazy"
                   className="icons"
                   src="/assets/icons/cross.svg"
                   alt="Cross icon"
@@ -111,6 +112,7 @@ const SearchBar = ({
               </button>
               <button className="searchBtn" onClick={onSubmitSearch}>
                 <img
+                  loading="lazy"
                   className="icons"
                   src="/assets/icons/search.svg"
                   alt="Loupe icon"

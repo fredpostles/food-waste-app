@@ -3,6 +3,7 @@ import API_KEY from "../../src/config";
 
 const localCache = {};
 const CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour
+const MAX_CACHE_SIZE = 100;
 
 const fetchData = async (url, cacheKey) => {
   try {
@@ -11,10 +12,16 @@ const fetchData = async (url, cacheKey) => {
       data,
       timestamp: Date.now(),
     };
+    // check cache size
+    if (localCache.size > MAX_CACHE_SIZE) {
+      // Evict older entries when cache size limit is reached
+      const oldestKey = localCache.keys().next().value;
+      delete localCache[oldestKey];
+    }
     return data;
   } catch (error) {
     console.log("API error:", error);
-    throw error; // Throw the error to indicate the failure to the caller
+    throw error; // Throw the error to indicate the failure
   }
 };
 
@@ -23,6 +30,7 @@ const getCachedData = (cacheKey) => {
   if (cachedData && Date.now() - cachedData.timestamp < CACHE_EXPIRATION_TIME) {
     return cachedData.data;
   }
+  delete localCache[cacheKey]; // Remove stale or expired data
   return null;
 };
 
