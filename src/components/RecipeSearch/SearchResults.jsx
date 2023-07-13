@@ -1,10 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, lazy, Suspense } from "react";
 import { useSelector } from "react-redux";
 import NoResults from "./SearchResults/NoResults";
 import ShowResultsButtons from "./SearchResults/ShowResultsButtons";
-import SingleRecipeResult from "./SearchResults/SingleRecipeResult";
 import RecipeModal from "./SearchResults/RecipeModal";
 import LoadingModal from "../Modal/LoadingModal";
+
+const SingleRecipeResult = lazy(() =>
+  import("./SearchResults/SingleRecipeResult")
+);
 
 const SearchResults = (props) => {
   const suggestions = props.suggestions;
@@ -46,17 +49,19 @@ const SearchResults = (props) => {
           ? suggestions?.map((recipe, index) => {
               if (index > showMore) return;
               return (
-                <li className="singleRecipe__container" key={recipe.id}>
-                  <SingleRecipeResult
-                    recipe={recipe}
-                    showRecipeMethod={showRecipeMethod}
-                    setShowRecipeMethod={setShowRecipeMethod}
-                    openModal={openModal}
-                    setOpenModal={setOpenModal}
-                    getModalContent={getModalContent}
-                    setIsLoaded={setIsLoaded}
-                  />
-                </li>
+                <Suspense fallback={<LoadingModal />} key={recipe.id}>
+                  <li className="singleRecipe__container">
+                    <SingleRecipeResult
+                      recipe={recipe}
+                      showRecipeMethod={showRecipeMethod}
+                      setShowRecipeMethod={setShowRecipeMethod}
+                      openModal={openModal}
+                      setOpenModal={setOpenModal}
+                      getModalContent={getModalContent}
+                      setIsLoaded={setIsLoaded}
+                    />
+                  </li>
+                </Suspense>
               );
             })
           : null}
