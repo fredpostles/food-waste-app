@@ -8,16 +8,21 @@ const DeleteAccount = ({ token }) => {
 
   const onDeleteAccount = async () => {
     try {
-      await deleteUser(token)
-        .then(dispatch({ type: DELETE_USER }))
-        .then(dispatch({ type: DELETE_TOKEN, payload: token }));
+      await deleteUser(token);
+      console.log("DELETE_USER dispatch"); // Add this line
+      dispatch({ type: DELETE_USER });
+      dispatch({ type: DELETE_TOKEN, payload: token });
     } catch (error) {
       console.log("onDeleteAccount error", error);
     }
   };
 
   return (
-    <button className="deleteBtn" onClick={onDeleteAccount}>
+    <button
+      className="deleteBtn"
+      onClick={onDeleteAccount}
+      data-testid="deleteBtn"
+    >
       Delete Account
     </button>
   );

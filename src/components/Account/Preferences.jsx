@@ -32,6 +32,7 @@ const Preferences = ({ user }) => {
                 <input
                   type="checkbox"
                   name="vegan"
+                  id="vegan"
                   defaultChecked={preferences.vegan}
                 />
               </label>
@@ -42,6 +43,7 @@ const Preferences = ({ user }) => {
                 <input
                   type="checkbox"
                   name="vegetarian"
+                  id="vegetarian"
                   defaultChecked={preferences.vegetarian}
                 />
               </label>
@@ -52,6 +54,7 @@ const Preferences = ({ user }) => {
                 <input
                   type="checkbox"
                   name="glutenFree"
+                  id="glutenFree"
                   defaultChecked={preferences.glutenFree}
                 />
               </label>

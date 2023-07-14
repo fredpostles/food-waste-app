@@ -3,9 +3,10 @@ import React from "react";
 const AccountInfo = ({ onInput, errors, user, showPasswordInput }) => {
   return (
     <form>
-      <label htmlFor="email">
+      <label htmlFor="email" data-testid="emailLabel">
         Email:{" "}
         <input
+          data-testid="emailInput"
           id="email"
           type="email"
           name="email"
@@ -15,9 +16,10 @@ const AccountInfo = ({ onInput, errors, user, showPasswordInput }) => {
         />
       </label>
       <p>{errors && errors.email}</p>
-      <label htmlFor="name">
+      <label htmlFor="name" data-testid="nameLabel">
         Name:{" "}
         <input
+          data-testid="nameInput"
           type="text"
           name="name"
           placeholder="First name"
@@ -26,9 +28,10 @@ const AccountInfo = ({ onInput, errors, user, showPasswordInput }) => {
         />
       </label>
       <p>{errors && errors.name}</p>
-      <label htmlFor="surname">
+      <label htmlFor="surname" data-testid="surnameLabel">
         Surname:{" "}
         <input
+          data-testid="surnameInput"
           type="text"
           name="surname"
           placeholder="Surname"
