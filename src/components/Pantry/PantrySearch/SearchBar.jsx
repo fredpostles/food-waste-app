@@ -41,7 +41,7 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
       <div className="searchBar__icons__container">
         <button onClick={onClick} className="clearBtn">
           <img
-            loading="lazy"
+            preload
             className="icons"
             src="/assets/icons/cross.svg"
             alt="Cross icon"
@@ -49,7 +49,7 @@ const SearchBar = ({ searchTerm, setSearchterm, setSuggestions }) => {
         </button>
         <button className="searchBtn" onClick={onSubmitSearch}>
           <img
-            loading="lazy"
+            preload
             className="icons"
             src="/assets/icons/search.svg"
             alt="Loupe icon"

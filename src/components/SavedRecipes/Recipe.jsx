@@ -20,11 +20,11 @@ const Recipe = ({
 
   return (
     <div className="singleRecipe__container">
-      <h4>{capitalizeFirstLetter(recipe.title)}</h4>
+      <h2>{capitalizeFirstLetter(recipe.title)}</h2>
       <img
         loading="lazy"
         src={recipe.image}
-        alt={recipe.name}
+        alt={recipe.title}
         className="savedRecipes recipeImage"
       />
       <div className="recipeItem text_section">

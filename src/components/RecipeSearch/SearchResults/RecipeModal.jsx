@@ -35,7 +35,7 @@ const RecipeModal = ({ setOpenModal, modalContent }) => {
         <div className="modalBody">
           <div className="imageContainer">
             <img
-              loading="lazy"
+              preload
               src={recipe.image}
               alt={recipe.title}
               className="savedRecipes recipeImage"

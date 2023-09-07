@@ -18,7 +18,7 @@ const LoadingModal = () => {
         </div>
         <div className="modalBody">
           <img
-            loading="lazy"
+            preload
             src="/assets/gifs/icons8-loading-circle.gif"
             alt="Loading spinner"
           />

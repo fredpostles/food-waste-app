@@ -1,4 +1,4 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch } from "react-redux";
 import { SET_INGREDIENT_SEARCH, SET_RECIPE_INFO } from "../../redux/types";
 import {
@@ -9,8 +9,7 @@ import { checkUserPrefs } from "../../utils";
 import { useNavigate } from "react-router-dom";
 import PantrySortSelection from "./MyPantry/PantrySortSelection";
 import LoadingModal from "../Modal/LoadingModal";
-
-const PantryItem = lazy(() => import("./MyPantry/PantryItem"));
+import PantryItem from "./MyPantry/PantryItem";
 
 const MyPantry = ({
   setSuggestions,
@@ -153,17 +152,16 @@ const MyPantry = ({
         {sortedData &&
           sortedData.map((item) => {
             return (
-              <Suspense fallback={<LoadingModal />} key={item.id}>
-                <PantryItem
-                  item={item}
-                  setSuggestions={setSuggestions}
-                  setIsLoaded={setIsLoaded}
-                  pantryItems={pantryItems}
-                  setPantryItems={setPantryItems}
-                  userPreferences={userPreferences}
-                  setPantryItemsChanged={setPantryItemsChanged}
-                />
-              </Suspense>
+              <PantryItem
+                key={item.id}
+                item={item}
+                setSuggestions={setSuggestions}
+                setIsLoaded={setIsLoaded}
+                pantryItems={pantryItems}
+                setPantryItems={setPantryItems}
+                userPreferences={userPreferences}
+                setPantryItemsChanged={setPantryItemsChanged}
+              />
             );
           })}
       </div>

@@ -1,13 +1,11 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "./Navigation";
 import PantrySearch from "./Pantry/PantrySearch";
-// import MyPantry from "./Pantry/MyPantry";
+import MyPantry from "./Pantry/MyPantry";
 import PantryItemTemplate from "./Pantry/PantryItemTemplate";
 import LoadingModal from "./Modal/LoadingModal";
 import { getUser, getAllPantryitems } from "../apiCalls/backendAPI";
-
-const MyPantry = lazy(() => import("./Pantry/MyPantry"));
 
 const Pantry = () => {
   const [suggestions, setSuggestions] = useState();
@@ -52,15 +50,13 @@ const Pantry = () => {
           setPantryItemsChanged={setPantryItemsChanged}
         />
         {pantryItems && pantryItems.length > 0 ? (
-          <Suspense fallback={<LoadingModal />}>
-            <MyPantry
-              setSuggestions={setSuggestions}
-              pantryItems={pantryItems}
-              setPantryItems={setPantryItems}
-              userPreferences={userPreferences}
-              setPantryItemsChanged={setPantryItemsChanged}
-            />
-          </Suspense>
+          <MyPantry
+            setSuggestions={setSuggestions}
+            pantryItems={pantryItems}
+            setPantryItems={setPantryItems}
+            userPreferences={userPreferences}
+            setPantryItemsChanged={setPantryItemsChanged}
+          />
         ) : (
           <PantryItemTemplate />
         )}

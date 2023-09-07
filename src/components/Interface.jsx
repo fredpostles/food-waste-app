@@ -7,26 +7,25 @@ import RecipeSearch from "./RecipeSearch";
 import SavedRecipes from "./SavedRecipes";
 import { useSelector } from "react-redux";
 import Login from "./Login";
-import { getUser } from "../apiCalls/backendAPI";
 
-const Interface = () => {
-  const [user, setUser] = useState({});
+const Interface = ({ user }) => {
+  // const [user, setUser] = useState({ ...userData });
   const token = useSelector((state) => state.token);
   const [initialPage, setInitialPage] = useState("");
 
-  const fetchUserData = async () => {
-    try {
-      const userData = await getUser(token);
-      setUser(userData);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  // const fetchUserData = async () => {
+  //   try {
+  //     const userData = await getUser(token);
+  //     setUser(userData);
+  //   } catch (error) {
+  //     console.log(error);
+  //   }
+  // };
 
-  useEffect(() => {
-    fetchUserData();
-    console.log("fetchuserdata ran in Interface");
-  }, []);
+  // useEffect(() => {
+  //   fetchUserData();
+  //   console.log("fetchuserdata ran in Interface");
+  // }, []);
 
   useEffect(() => {
     const lastPage = localStorage.getItem("lastPage");

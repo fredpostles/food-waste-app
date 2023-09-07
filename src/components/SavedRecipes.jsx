@@ -1,12 +1,11 @@
-import React, { useState, useEffect, lazy, Suspense } from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import Navigation from "./Navigation";
 import SavedRecipeTemplate from "./SavedRecipes/SavedRecipeTemplate";
 import SavedRecipeModal from "./SavedRecipes/SavedRecipeModal";
 import LoadingModal from "./Modal/LoadingModal";
+import Recipe from "./SavedRecipes/Recipe";
 import { getSavedRecipes, deleteSavedRecipe } from "../apiCalls/backendAPI";
-
-const Recipe = lazy(() => import("./SavedRecipes/Recipe"));
 
 const SavedRecipes = () => {
   const [openModal, setOpenModal] = useState(false);
@@ -63,17 +62,16 @@ const SavedRecipes = () => {
           {savedRecipes && savedRecipes.length > 0
             ? savedRecipes.map((savedRecipe) => {
                 return (
-                  <Suspense fallback={<LoadingModal />} key={savedRecipe.id}>
-                    <Recipe
-                      savedRecipe={savedRecipe}
-                      showRecipeMethod={showRecipeMethod}
-                      setShowRecipeMethod={setShowRecipeMethod}
-                      openModal={openModal}
-                      setOpenModal={setOpenModal}
-                      getModalContent={getModalContent}
-                      onDelete={onDelete}
-                    />
-                  </Suspense>
+                  <Recipe
+                    key={savedRecipe.id}
+                    savedRecipe={savedRecipe}
+                    showRecipeMethod={showRecipeMethod}
+                    setShowRecipeMethod={setShowRecipeMethod}
+                    openModal={openModal}
+                    setOpenModal={setOpenModal}
+                    getModalContent={getModalContent}
+                    onDelete={onDelete}
+                  />
                 );
               })
             : null}

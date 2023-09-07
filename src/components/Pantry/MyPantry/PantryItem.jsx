@@ -32,7 +32,7 @@ const PantryItem = ({
       setPantryItems(updatedPantryItems);
       setPantryItemsChanged(true);
     } catch (error) {
-      console.log("deletePAntry error in PantryItem.jsx:", error);
+      console.log("deletePantry error in PantryItem.jsx:", error);
     }
 
     setPantryItemsChanged(true);
