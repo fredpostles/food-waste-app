@@ -2,9 +2,10 @@ import { useEffect, useState } from "react";
 import { createUser } from "../apiCalls/backendAPI";
 import { validate } from "../validation";
 import SignUpForm from "./Signup/SignUpForm";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [userInput, setUserInput] = useState({
     email: "",
     password: "",
@@ -28,6 +29,8 @@ const Signup = () => {
         const createdUser = await createUser(userInput);
         console.log(createdUser);
         setUserInput({});
+        // Redirect to the login page after successful signup
+        navigate("/login");
       } catch (error) {
         console.log(error);
         alert("Sign up failed. Please try again.");
