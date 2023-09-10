@@ -20,7 +20,9 @@ const App = () => {
       } catch (error) {
         console.log(error);
       }
-      setIsLoaded(true);
+      setTimeout(() => {
+        setIsLoaded(true);
+      }, 1500);
     };
 
     fetchUserData();

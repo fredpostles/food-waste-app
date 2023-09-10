@@ -1,5 +1,6 @@
 import axios from "axios";
-import API_KEY from "../../src/config";
+
+const API_KEY = process.env.REACT_APP_API_KEY;
 
 const localCache = {};
 const CACHE_EXPIRATION_TIME = 60 * 60 * 1000; // 1 hour

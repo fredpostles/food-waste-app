@@ -18,7 +18,7 @@ const LoadingModal = () => {
         </div>
         <div className="modalBody">
           <img
-            preload
+            preload="true"
             src="/assets/gifs/icons8-loading-circle.gif"
             alt="Loading spinner"
           />

@@ -1,6 +1,7 @@
 import axios from "axios";
 
-const API_URL = `http://localhost:6005`;
+const API_URL =
+  process.env.REACT_APP_BACKEND_API_URL || `http://localhost:6005`;
 
 export const createUser = async (user) => {
   // console.log(API_URL);
