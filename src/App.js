@@ -31,7 +31,6 @@ const App = () => {
 
   return (
     <Router>
-      <button onClick={() => localStorage.clear()}>Clear localStorage</button>
       <Routes>
         {isLoaded ? (
           <Route path="/*" element={<Interface user={user} />} />
