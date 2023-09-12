@@ -30,7 +30,7 @@ const App = () => {
   }, [token]);
 
   return (
-    <Router>
+    <Router basename="/">
       <Routes>
         {isLoaded ? (
           <Route path="/*" element={<Interface user={user} />} />

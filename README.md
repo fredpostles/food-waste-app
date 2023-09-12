@@ -17,7 +17,12 @@ Backend [here](https://github.com/fredpostles/mfnw-backend).
 
 ### To do:
 
+- :point_right: Add a landing page.
+- :point_right: Fix: reloading on any URL other than the root results in 404 error.
+- :point_right: Improve use of URL for state management, to improve user experience (e.g. when modals pop up, this should be reflected in URL, and user should be able to navigate back).
 - :point_right: Re-factor CSS to SASS and implement CSS modules.
 - :point_right: Add animation at startup.
 - :point_right: Add icons for search, user account, delete etc.
 - :point_right: Make the app PWA-compliant.
+
+
