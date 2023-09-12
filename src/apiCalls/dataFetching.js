@@ -55,7 +55,7 @@ export const getRecipeByIngredient = async (searchTerm) => {
     return cachedData;
   }
 
-  const url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${searchTerm}&number=25&ranking=1&apiKey=${API_KEY}`;
+  const url = `https://api.spoonacular.com/recipes/findByIngredients?ingredients=${searchTerm}&number=30&ranking=1&apiKey=${API_KEY}`;
   return fetchData(url, cacheKey);
 };
 
