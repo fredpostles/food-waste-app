@@ -1,6 +1,4 @@
-import React, { useState } from "react";
-import { useDispatch } from "react-redux";
-import { DELETE_RECIPE } from "../../redux/types";
+import React from "react";
 import { capitalizeFirstLetter } from "../../utils";
 
 const Recipe = ({
@@ -10,13 +8,9 @@ const Recipe = ({
   openModal,
   setOpenModal,
   getModalContent,
+  onDelete,
 }) => {
   const recipe = savedRecipe;
-  const dispatch = useDispatch();
-
-  const onDelete = () => {
-    dispatch({ type: DELETE_RECIPE, payload: recipe.id });
-  };
 
   const displayRecipeMethod = () => {
     setShowRecipeMethod(!showRecipeMethod);
@@ -26,10 +20,11 @@ const Recipe = ({
 
   return (
     <div className="singleRecipe__container">
-      <h4>{capitalizeFirstLetter(recipe.title)}</h4>
+      <h2>{capitalizeFirstLetter(recipe.title)}</h2>
       <img
+        loading="lazy"
         src={recipe.image}
-        alt={recipe.name}
+        alt={recipe.title}
         className="savedRecipes recipeImage"
       />
       <div className="recipeItem text_section">
@@ -39,16 +34,12 @@ const Recipe = ({
             <li>Serves {recipe.servings}</li>
           </ul>
         </div>
-        {/* Removed as Foodista links seems to redirect to spam websites */}
-        {/* <small>
-          <a href={recipe.sourceUrl}>Source</a>
-        </small> */}
       </div>
       <div className="savedRecipe__buttons">
         <button onClick={displayRecipeMethod} className="seeMethodBtn">
           See method{" "}
         </button>
-        <button onClick={onDelete} className="deleteBtn">
+        <button onClick={() => onDelete(recipe)} className="deleteBtn">
           Delete recipe
         </button>
       </div>

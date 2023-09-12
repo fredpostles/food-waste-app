@@ -1,11 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import {
-  DELETE_PANTRY_ITEM,
-  SET_INGREDIENT_SEARCH,
-  SET_RECIPE_INFO,
-} from "../../../redux/types";
+import { SET_INGREDIENT_SEARCH, SET_RECIPE_INFO } from "../../../redux/types";
 import {
   getRecipeByIngredient,
   getRecipeInformationBulk,
@@ -13,14 +9,33 @@ import {
 import PantryItemImage from "./PantryItem/PantryItemImage";
 import PantryItemBody from "./PantryItem/PantryItemBody";
 import { checkUserPrefs } from "../../../utils";
+import { deletePantryItem } from "../../../apiCalls/backendAPI";
 
-const PantryItem = ({ item, setIsLoaded }) => {
+const PantryItem = ({
+  item,
+  setIsLoaded,
+  pantryItems,
+  setPantryItems,
+  userPreferences,
+  setPantryItemsChanged,
+}) => {
   const dispatch = useDispatch();
-  const userPreferences = useSelector((state) => state.user.preferences);
   const navigate = useNavigate();
+  const token = useSelector((state) => state.token);
 
-  const onDelete = () => {
-    dispatch({ type: DELETE_PANTRY_ITEM, payload: item.id });
+  const onDelete = async () => {
+    try {
+      await deletePantryItem(token, item.id);
+      const updatedPantryItems = pantryItems.filter(
+        (pantryItem) => pantryItem.id !== item.id
+      );
+      setPantryItems(updatedPantryItems);
+      setPantryItemsChanged(true);
+    } catch (error) {
+      console.log("deletePantry error in PantryItem.jsx:", error);
+    }
+
+    setPantryItemsChanged(true);
   };
 
   // search for recipes using current pantry item
@@ -28,8 +43,12 @@ const PantryItem = ({ item, setIsLoaded }) => {
     // show loading modal
     setIsLoaded(false);
 
+    // format item name for API
+    const itemName = item.name.replace(/\s+/g, "+"); // Replace spaces with plus sign
+    console.log("itemName:", itemName);
+
     // send item name to API to get matching recipes
-    const result = await getRecipeByIngredient(item.itemName);
+    const result = await getRecipeByIngredient(itemName);
 
     // extract IDs from the recipes returned by API
     const idsToSearch = result.map((item) => item.id);
@@ -69,6 +88,9 @@ const PantryItem = ({ item, setIsLoaded }) => {
           item={item}
           onDelete={onDelete}
           onRecipeSearch={onRecipeSearch}
+          pantryItems={pantryItems}
+          setPantryItems={setPantryItems}
+          setPantryItemsChanged={setPantryItemsChanged}
         />
       </div>
     </>

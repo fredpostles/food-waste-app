@@ -2,7 +2,13 @@ import React, { useState } from "react";
 import SearchBar from "./PantrySearch/SearchBar";
 import SearchSuggestions from "./PantrySearch/SearchSuggestions";
 
-const PantrySearch = ({ suggestions, setSuggestions }) => {
+const PantrySearch = ({
+  suggestions,
+  setSuggestions,
+  pantryItems,
+  setPantryItems,
+  setPantryItemsChanged,
+}) => {
   const [searchTerm, setSearchterm] = useState("");
   return (
     <div className="pantrySearch__container">
@@ -16,7 +22,14 @@ const PantrySearch = ({ suggestions, setSuggestions }) => {
           setSearchterm={setSearchterm}
           setSuggestions={setSuggestions}
         />
-        {suggestions ? <SearchSuggestions suggestions={suggestions} /> : null}
+        {suggestions ? (
+          <SearchSuggestions
+            suggestions={suggestions}
+            pantryItems={pantryItems}
+            setPantryItems={setPantryItems}
+            setPantryItemsChanged={setPantryItemsChanged}
+          />
+        ) : null}
       </div>
     </div>
   );

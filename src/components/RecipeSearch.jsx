@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Navigation from "./Navigation";
 import SearchBar from "./RecipeSearch/SearchBar";
-import SearchResults from "./RecipeSearch/SearchResults";
 import { useSelector } from "react-redux";
 import RecipeTemplate from "./RecipeSearch/RecipeTemplate";
 import LoadingModal from "./Modal/LoadingModal";
+import SearchResults from "./RecipeSearch/SearchResults";
 
 const RecipeSearch = () => {
   const [searchTerm, setSearchterm] = useState("");

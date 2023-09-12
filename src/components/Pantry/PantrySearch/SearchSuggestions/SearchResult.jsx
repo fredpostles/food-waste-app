@@ -1,18 +1,19 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
 import { capitalizeFirstLetter } from "../../../../utils";
 
-const SearchResult = ({ addPantryItem, item }) => {
-  const pantryItems = useSelector((state) => state.pantryItems);
+const SearchResult = ({ addPantryItem, item, pantryItems }) => {
+  const [isAdded, setIsAdded] = useState(false);
 
-  let isAdded;
-  const checkIfAdded = (item) => {
-    if (pantryItems.some((element) => element.itemName === item.name)) {
-      isAdded = true;
-    } else isAdded = false;
-  };
+  useEffect(() => {
+    const checkIfAdded = () => {
+      const isItemAdded = pantryItems.some(
+        (element) => element.name === item.name
+      );
+      setIsAdded(isItemAdded);
+    };
 
-  checkIfAdded(item);
+    checkIfAdded();
+  }, [pantryItems, item]);
 
   const src = `https://spoonacular.com/cdn/ingredients_100x100/${item.image}`;
   return (
@@ -43,6 +44,7 @@ const SearchResult = ({ addPantryItem, item }) => {
           {!isAdded ? (
             <>
               <img
+                loading="lazy"
                 className="icons"
                 src="/assets/icons/plus.svg"
                 alt="Plus icon"
@@ -52,6 +54,7 @@ const SearchResult = ({ addPantryItem, item }) => {
           ) : (
             <>
               <img
+                loading="lazy"
                 className="icons"
                 src="/assets/icons/check.svg"
                 alt="Checkmark"

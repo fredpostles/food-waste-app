@@ -1,10 +1,10 @@
 import React from "react";
-import { capitalizeFirstLetter } from "../../utils";
+import { capitalizeFirstLetter } from "../../../utils";
 import { useDispatch } from "react-redux";
-import { DELETE_RECIPE } from "../../redux/types";
-import CloseModalButton from "../Buttons/CloseModalButton";
+import { DELETE_RECIPE } from "../../../redux/types";
+import CloseModalButton from "../../Buttons/CloseModalButton";
 
-const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
+const RecipeModal = ({ setOpenModal, modalContent }) => {
   const dispatch = useDispatch();
 
   const recipe = { ...modalContent.item };
@@ -18,7 +18,6 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
 
   const closeModal = () => {
     setOpenModal(false);
-    setShowRecipeMethod(false);
   };
 
   const ingredients = recipeInfo.extendedIngredients;
@@ -35,6 +34,7 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
         <div className="modalBody">
           <div className="imageContainer">
             <img
+              preload="true"
               src={recipe.image}
               alt={recipe.title}
               className="savedRecipes recipeImage"
@@ -43,8 +43,8 @@ const RecipeModal = ({ setShowRecipeMethod, setOpenModal, modalContent }) => {
           <div className="recipeItem text_section">
             <div className="recipeInfo__container">
               <ul className="recipeInfo__list">
-                <li>Ready in {recipe.readyInMinutes} minutes</li>
-                <li>Serves {recipe.servings}</li>
+                <li>Ready in {recipeInfo.readyInMinutes} minutes</li>
+                <li>Serves {recipeInfo.servings}</li>
               </ul>
             </div>
             {recipe && ingredients ? (

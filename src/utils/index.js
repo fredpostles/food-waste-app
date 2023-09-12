@@ -16,72 +16,52 @@ export function capitalizeFirstLetter(str) {
   } else return str.charAt(0).toUpperCase() + str.slice(1);
 }
 
-export const getUserDiet = (userPreferences) => {
-  // user diet prefs
-  const userDiet = [];
-
-  // if user identified as vegan
-  userPreferences.vegan &&
-    !userPreferences.vegetarian &&
-    userDiet.push("vegan");
-
-  // if user idenfitied as vegetarian only, or both vegan & vegetarian
-  (userPreferences.vegetarian ||
-    (userPreferences.vegan && userPreferences.vegetarian)) &&
-    userDiet.push("vegan, vegetarian");
-
-  // if user identified as gluten free
-  userPreferences.glutenFree && userDiet.push("glutenFree");
-
-  // if no diet preferences, clear the array
-  (!userPreferences.vegan || userPreferences.vegan === false) &&
-    (!userPreferences.vegetarian || userPreferences.vegetarian === false) &&
-    (!userPreferences.glutenFree || userPreferences.glutenFree === false) &&
-    userDiet.splice(0, userDiet.length);
-
-  return userDiet;
-};
-
-export const getUserIntolerances = (userPreferences) => {
-  // user intolerances
-  const userIntolerances = [];
-
-  // get intolerances, remove "no" & add to userIntolerances array
-  Object.entries(userPreferences).forEach((element) => {
-    if (element[0].includes("no") && element[1] === true) {
-      userIntolerances.push(element[0].slice(2));
-    } else return;
-  });
-
-  return userIntolerances;
-};
-
-export const checkUserPrefs = (userPreferences, recipes) => {
-  const preferences = userPreferences;
-  console.log(recipes);
+export const checkUserPrefs = (preferences, recipes) => {
   // if neither argument needed sent in, return
   if (!preferences || !recipes) return;
 
-  // array to put filtered recipes into
-  let result = [];
+  // Check if all preferences are false
+  const allFalse = Object.values(preferences).every((pref) => !pref);
+
+  // If all preferences are false, return all recipes
+  if (allFalse) {
+    console.log("All preferences are false, returning all recipes.");
+    return recipes;
+  }
+
+  // Set to put filtered recipes into
+  let result = new Set();
 
   // filter recipes to only return ones that match user's diet
   recipes.forEach((recipe) => {
+    // initiate match variable to true
+    let match = true;
+
     // if recipe already added, return
-    if (result.includes(recipe)) {
+    if (result.has(recipe)) {
       return;
     }
     // for each key in preferences, filter matching recipes
     for (const key in preferences) {
-      if (preferences[key] === true && recipe[key] === preferences[key]) {
-        result = recipes.filter((recipe) => recipe[key] === preferences[key]);
+      // if recipe doesn't match preference, exit early
+      if (preferences[key] === true && recipe[key] !== preferences[key]) {
+        match = false;
+        break;
       }
+    }
+
+    // if recipe matches preferences, add to result Set
+    if (match) {
+      result.add(recipe);
     }
   });
 
+  // convert Set back to Array
+  const filteredRecipes = [...result];
+
   // console log filtered recipes
-  console.log("Filtered recipes (result)", result);
+  console.log("Filtered recipes (result)", filteredRecipes);
 
   // return only suitable recipes
-  return result;
+  return filteredRecipes;
 };

@@ -1,11 +1,11 @@
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
 import { createUser } from "../apiCalls/backendAPI";
-import { ADD_USER } from "../redux/types";
 import { validate } from "../validation";
 import SignUpForm from "./Signup/SignUpForm";
+import { Link, useNavigate } from "react-router-dom";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [userInput, setUserInput] = useState({
     email: "",
     password: "",
@@ -19,7 +19,6 @@ const Signup = () => {
   });
   const [errors, setErrors] = useState();
   const [focusedInput, setFocusedInput] = useState("");
-  const dispatch = useDispatch();
 
   // validation on submit
   const onSubmit = async (e) => {
@@ -27,9 +26,11 @@ const Signup = () => {
     validateUserInput();
     if (!errors) {
       try {
-        // const createdUser = await createUser(userInput);
-        dispatch({ type: ADD_USER, payload: userInput });
+        const createdUser = await createUser(userInput);
+        console.log(createdUser);
         setUserInput({});
+        // Redirect to the login page after successful signup
+        navigate("/login");
       } catch (error) {
         console.log(error);
         alert("Sign up failed. Please try again.");
@@ -59,7 +60,7 @@ const Signup = () => {
     setUserInput(newInput);
   };
 
-  console.log("userInput after onInput", userInput);
+  // console.log("userInput after onInput", userInput);
 
   const onFocus = (e) => {
     setFocusedInput(e.target.name);
@@ -101,7 +102,7 @@ const Signup = () => {
           break;
       }
     }
-    console.log("Validate userinput result:", result);
+    // console.log("Validate userinput result:", result);
   };
 
   useEffect(() => {
@@ -122,6 +123,12 @@ const Signup = () => {
         <button className="signUp__button" onClick={onSubmit}>
           Sign Up
         </button>
+        <div className="signup__redirect">
+          <p>Already signed up?</p>
+          <button>
+            <Link to="/login">Login</Link>
+          </button>
+        </div>
       </div>
     </>
   );

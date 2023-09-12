@@ -5,6 +5,7 @@ const PantryItemTemplate = () => {
     <div className="pantry__templateResult">
       <div className="pantry imageContainer">
         <img
+          loading="lazy"
           src="/assets/images/imageTemplate.png"
           alt="Template"
           name="Template image"

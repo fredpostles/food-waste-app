@@ -1,6 +1,6 @@
 {
-  "short_name": "MLNW App",
-  "name": "Make Love, Not Waste! App",
+  "short_name": "Make Food, Not Waste",
+  "name": "Make Food, Not Waste: Save Food From Going To Waste",
   "icons": [
     {
       "src": "favicon.ico",
@@ -18,8 +18,11 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "scope": "/",
+  "id": "/?source=pwa",
+  "start_url": "/?source=pwa",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#519d87",
+  "background_color": "#519d87",
+  "description": "Save food from going to waste by making recipes from the food you have at home."
 }

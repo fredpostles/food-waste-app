@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getRecipeByIngredient,
@@ -10,6 +10,7 @@ import {
   SET_RECIPE_INFO,
 } from "../../redux/types";
 import { checkUserPrefs } from "../../utils";
+import { getUser } from "../../apiCalls/backendAPI";
 
 const SearchBar = ({
   searchTerm,
@@ -18,7 +19,21 @@ const SearchBar = ({
   setLoading,
 }) => {
   const dispatch = useDispatch();
-  const userPreferences = useSelector((state) => state.user.preferences);
+  const token = useSelector((state) => state.token);
+  const [userPreferences, setUserPreferences] = useState(null);
+
+  useEffect(() => {
+    const fetchUserPreferences = async () => {
+      try {
+        const userData = await getUser(token);
+        setUserPreferences(userData.preferences);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchUserPreferences();
+  }, [token]);
 
   const onSubmitSearch = async () => {
     // show loading modal
@@ -89,6 +104,7 @@ const SearchBar = ({
             <div className="searchBar__icons__container">
               <button onClick={onClick} className="clearBtn">
                 <img
+                  loading="lazy"
                   className="icons"
                   src="/assets/icons/cross.svg"
                   alt="Cross icon"
@@ -96,6 +112,7 @@ const SearchBar = ({
               </button>
               <button className="searchBtn" onClick={onSubmitSearch}>
                 <img
+                  loading="lazy"
                   className="icons"
                   src="/assets/icons/search.svg"
                   alt="Loupe icon"

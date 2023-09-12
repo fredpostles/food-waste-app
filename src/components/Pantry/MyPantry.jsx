@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useDispatch } from "react-redux";
 import { SET_INGREDIENT_SEARCH, SET_RECIPE_INFO } from "../../redux/types";
 import {
   getRecipeByIngredient,
@@ -7,17 +7,40 @@ import {
 } from "../../apiCalls/dataFetching";
 import { checkUserPrefs } from "../../utils";
 import { useNavigate } from "react-router-dom";
-import PantryItem from "./MyPantry/PantryItem";
 import PantrySortSelection from "./MyPantry/PantrySortSelection";
 import LoadingModal from "../Modal/LoadingModal";
+import PantryItem from "./MyPantry/PantryItem";
 
-const MyPantry = ({ setSuggestions }) => {
+const MyPantry = ({
+  setSuggestions,
+  pantryItems,
+  setPantryItems,
+  userPreferences,
+  setPantryItemsChanged,
+}) => {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [sort, setSort] = useState("");
   const [isLoaded, setIsLoaded] = useState(true);
-  const pantryItems = useSelector((state) => state.pantryItems);
-  const userPreferences = useSelector((state) => state.user.preferences);
-  const navigate = useNavigate();
+  // const pantryItems = useSelector((state) => state.pantryItems);
+  const [randomMessage, setRandomMessage] = useState("");
+
+  useEffect(() => {
+    // possible messages to display in "use pantry" buton
+    const messagesArray = [
+      "Use as many pantry items as possible",
+      "Use up my pantry!",
+      "What can I make with what I've got?",
+      "Find recipes using what I have",
+      "Show me recipes that use my pantry items",
+    ];
+
+    // get random index value
+    const randomIndex = Math.floor(Math.random() * messagesArray.length);
+
+    // set random message
+    setRandomMessage(messagesArray[randomIndex]);
+  }, []);
 
   // copy of pantry items to be used for sorting data
   let sortedData = [...pantryItems];
@@ -32,7 +55,7 @@ const MyPantry = ({ setSuggestions }) => {
     switch (sort) {
       case "azSort":
         sortedData.sort((a, b) => {
-          return a.itemName > b.itemName;
+          return a.name > b.name;
         });
         break;
 
@@ -66,7 +89,13 @@ const MyPantry = ({ setSuggestions }) => {
     setIsLoaded(false);
 
     // get string of pantry items to send to API to find matching recipes
-    const wholePantry = sortedData.map((item) => item.itemName).toString();
+    const wholePantry = sortedData
+      .map((item) => {
+        const itemName = item.name.replace(/\s+/g, "+"); // Replace spaces with plus sign
+        return itemName;
+      })
+      .join(",");
+    console.log("wholePantry", wholePantry);
 
     // send to API
     const result = await getRecipeByIngredient(wholePantry);
@@ -101,47 +130,37 @@ const MyPantry = ({ setSuggestions }) => {
     setIsLoaded(true);
   };
 
-  // possible messages to display in "use pantry" buton
-  const messagesArray = [
-    "Use as many pantry items as possible",
-    "Use up my pantry!",
-    "What can I make with what I've got?",
-    "Find recipes using what I have",
-    "Show me recipes that use my pantry items",
-  ];
-
-  // get random index value
-  const randomIndex = Math.floor(Math.random() * messagesArray.length);
-
-  // get random message
-  const message = messagesArray[randomIndex];
-
   return (
     <div className="myPantry__container">
       <h3>My Pantry Items:</h3>
-      {pantryItems.length > 1 && (
+      {pantryItems && pantryItems.length > 1 ? (
         <PantrySortSelection filterChange={filterChange} />
-      )}
-      {pantryItems.length > 1 && (
+      ) : null}
+      {pantryItems && pantryItems.length > 1 ? (
         <div className="wholePantrySearch__container">
           <button
+            data-testid="searchButton"
             onClick={onUsePantry}
             className="wholePantrySearchBtn"
             title="Search for recipes using as many pantry ingredients as possible"
           >
-            {message}
+            {randomMessage}
           </button>
         </div>
-      )}
+      ) : null}
       <div className="pantryItems__container">
         {sortedData &&
           sortedData.map((item) => {
             return (
               <PantryItem
+                key={item.id}
                 item={item}
                 setSuggestions={setSuggestions}
-                key={item.id}
                 setIsLoaded={setIsLoaded}
+                pantryItems={pantryItems}
+                setPantryItems={setPantryItems}
+                userPreferences={userPreferences}
+                setPantryItemsChanged={setPantryItemsChanged}
               />
             );
           })}

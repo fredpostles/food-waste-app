@@ -1,37 +1,84 @@
-import React, { useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { SAVE_RECIPE, UNSAVE_RECIPE } from "../../../redux/types";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import AdditionalIngredients from "./SingleRecipeResult/AdditionalIngredients";
 import UsedIngredients from "./SingleRecipeResult/UsedIngredients";
 import { capitalizeFirstLetter } from "../../../utils";
+import {
+  deleteSavedRecipe,
+  getSavedRecipes,
+  saveRecipe,
+} from "../../../apiCalls/backendAPI";
 
-const SingleRecipeResult = (props) => {
-  const {
-    recipe,
-    showRecipeMethod,
-    setShowRecipeMethod,
-    openModal,
-    setOpenModal,
-    getModalContent,
-  } = props;
-  const dispatch = useDispatch();
+const SingleRecipeResult = ({
+  recipe,
+  openModal,
+  setOpenModal,
+  getModalContent,
+  setIsLoaded,
+}) => {
   const recipeInfo = useSelector((state) => state.recipeInfo);
-  const savedRecipes = useSelector((state) => state.savedRecipes);
+  const token = useSelector((state) => state.token);
+  const [savedRecipes, setSavedRecipes] = useState([]);
+  const [savedRecipeCounter, setSavedRecipeCounter] = useState(0);
 
   const indexOfItem = recipeInfo.findIndex(
     (element) => element.id === recipe.id
   );
 
-  const onSaveRecipe = () => {
-    dispatch({ type: SAVE_RECIPE, payload: recipeInfo[indexOfItem] });
+  useEffect(() => {
+    // start loading modal
+    setIsLoaded(false);
+    // get saved recipe data
+    const fetchSavedRecipes = async () => {
+      try {
+        // make call to backend via API
+        const { savedRecipeResults } = await getSavedRecipes(token);
+        // set saved recipes to state
+        setSavedRecipes(savedRecipeResults);
+        // end loading modal
+        setIsLoaded(true);
+      } catch (error) {
+        console.log("error fetching saved recipes:", error);
+        // end loading modal if error
+        setIsLoaded(true);
+      }
+    };
+
+    fetchSavedRecipes();
+  }, [savedRecipeCounter, setIsLoaded, token]);
+
+  const onSaveRecipe = async () => {
+    try {
+      // send recipe to DB and await response
+      await saveRecipe(recipeInfo[indexOfItem], token);
+      // update savedRecipes state
+      const updatedSavedRecipes = [...savedRecipes, recipeInfo[indexOfItem]];
+      setSavedRecipes(updatedSavedRecipes);
+      // increase counter
+      setSavedRecipeCounter(savedRecipeCounter + 1);
+    } catch (error) {
+      console.log("onSaveRecipe error:", error);
+    }
   };
 
-  const onUnsaveRecipe = () => {
-    dispatch({ type: UNSAVE_RECIPE, payload: recipe.id });
+  const onUnsaveRecipe = async () => {
+    try {
+      // delete recipe from DB and await response
+      await deleteSavedRecipe(token, recipe.id);
+      // Update the savedRecipes state
+      const updatedSavedRecipes = savedRecipes.filter(
+        (element) => element.id !== recipe.id
+      );
+      setSavedRecipes(updatedSavedRecipes);
+      // decrease counter
+      setSavedRecipeCounter(savedRecipeCounter - 1);
+    } catch (error) {
+      console.log("onUnsaveRecipe error:", error);
+    }
   };
 
+  // when user clicks on show method, open modal and send it the right content
   const displayRecipeMethod = () => {
-    setShowRecipeMethod(!showRecipeMethod);
     setOpenModal(!openModal);
     getModalContent(recipe, recipeInfo[indexOfItem]);
   };
@@ -40,7 +87,12 @@ const SingleRecipeResult = (props) => {
     <>
       <h2>{capitalizeFirstLetter(recipe.title)}</h2>
       <div className="recipeSearch imageContainer">
-        <img src={recipe.image} alt={recipe.title} className="recipeImage" />
+        <img
+          loading="lazy"
+          src={recipe.image}
+          alt={recipe.title}
+          className="recipeImage"
+        />
       </div>
       <div className="recipeItem text_section">
         {recipeInfo[indexOfItem] ? (
@@ -51,46 +103,30 @@ const SingleRecipeResult = (props) => {
             </ul>
           </div>
         ) : null}
+        {recipeInfo[indexOfItem].diets &&
+        recipeInfo[indexOfItem].diets.length > 0 ? (
+          <div className="recipeInfo__diets">
+            <p className="sub-heading"> Suitable for the following diets:</p>
+            <ul className="typographic">
+              {recipeInfo[indexOfItem].diets.map((diet, index) => (
+                <li key={index} className="diet">
+                  {capitalizeFirstLetter(diet)}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ) : null}
         {recipe && recipe.usedIngredients && (
           <UsedIngredients recipe={recipe} />
         )}
         <AdditionalIngredients recipe={recipe} />
-        {/* {showRecipeMethod ? (
-          <div className="recipeMethod__container">
-            <h5>Method:</h5>
-            {recipeInfo[indexOfItem].analyzedInstructions.length === 0 &&
-            recipeInfo[indexOfItem].instructions ? (
-              <p>{recipeInfo[indexOfItem].instructions}</p>
-            ) : recipeInfo[indexOfItem].analyzedInstructions.length === 0 &&
-              !recipeInfo[indexOfItem].instructions ? (
-              <p>Oops! No method to show...</p>
-            ) : null}
-            {recipeInfo[indexOfItem].analyzedInstructions.length > 0 ? (
-              <ol>
-                {recipeInfo[indexOfItem].analyzedInstructions[0].steps.map(
-                  (element) => {
-                    return <li key={element.number}>{element.step}</li>;
-                  }
-                )}
-              </ol>
-            ) : null}
-          </div>
-        ) : null} */}
       </div>
-      {/* Remove source as Foodista links seem to redirect to spam websites*/}
-      {/* {recipeInfo[indexOfItem] ? (
-        <small>
-          <a href={recipeInfo[indexOfItem].sourceUrl}>Source</a>
-        </small>
-      ) : null} */}
       <div className="recipeButtons">
         <button onClick={displayRecipeMethod} className="seeMethodBtn">
           See method{" "}
         </button>
-        {/* <button onClick={() => console.log(recipeInfo[indexOfItem])}>
-          Console log info for this recipe
-        </button> */}
-        {savedRecipes.some((element) => element.id === recipe.id) ? (
+        {savedRecipes &&
+        savedRecipes.some((element) => element.id === recipe.id) ? (
           <button onClick={onUnsaveRecipe} className="unsaveRecipeBtn">
             Remove from saved recipes
           </button>

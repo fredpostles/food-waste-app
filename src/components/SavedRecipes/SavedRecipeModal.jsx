@@ -16,6 +16,8 @@ const SavedRecipeModal = ({
     setOpenModal(false);
   };
 
+  console.log("recipe/modalContent", modalContent);
+
   const recipe = modalContent;
 
   const closeModal = () => {
@@ -37,6 +39,7 @@ const SavedRecipeModal = ({
         <div className="modalBody">
           <div className="imageContainer">
             <img
+              loading="lazy"
               src={recipe.image}
               alt={recipe.title}
               className="savedRecipes recipeImage"

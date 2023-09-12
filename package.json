@@ -21,6 +21,7 @@
     "react-scripts": "^5.0.1",
     "redux": "^4.2.0",
     "sass": "^1.61.0",
+    "serve": "^14.2.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
@@ -48,6 +49,7 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-react-hooks": "^4.6.0"
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "redux-mock-store": "^1.5.4"
   }
 }
