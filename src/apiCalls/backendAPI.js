@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const API_URL =
-  process.env.REACT_APP_BACKEND_API_URL || `http://localhost:6005`;
+const API_URL = process.env.REACT_APP_BACKEND_API_URL;
 
 export const createUser = async (user) => {
   // console.log(API_URL);
@@ -66,7 +65,9 @@ export const updateUser = async (userInput, token) => {
 export const logoff = async (token) => {
   try {
     const result = await axios.delete(`${API_URL}/logoff`, {
-      headers: { token },
+      headers: {
+        token,
+      },
     });
     console.log("logoff result", result);
     if (result.status !== 204) {
@@ -81,7 +82,9 @@ export const logoff = async (token) => {
 export const deleteUser = async (token) => {
   try {
     const result = await axios.delete(`${API_URL}/users`, {
-      headers: { token },
+      headers: {
+        token,
+      },
     });
     console.log("deleteUser result", result);
     if (result.status === 204) {
