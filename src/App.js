@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import "./css/generics.css";
 import "./App.css";
 import { getUser } from "./apiCalls/backendAPI";
+import { createBrowserHistory } from 'history';
 
 const App = () => {
   const [isLoaded, setIsLoaded] = useState(false);
@@ -29,8 +30,10 @@ const App = () => {
     console.log("fetchUserData ran in App");
   }, [token]);
 
+  const customHistory = createBrowserHistory();
+
   return (
-    <Router basename="/">
+    <Router basename="/" history={customHistory}>
       <Routes>
         {isLoaded ? (
           <Route path="/*" element={<Interface user={user} />} />
